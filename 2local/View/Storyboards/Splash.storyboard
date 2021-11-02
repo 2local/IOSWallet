@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="fWa-A1-dot">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Splash View Controller-->
+        <scene sceneID="ubr-me-e9F">
+            <objects>
+                <viewController storyboardIdentifier="SplashViewController" id="fWa-A1-dot" customClass="SplashViewController" customModule="_local" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="4G3-nm-Yy4">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="tDg-WE-KgC">
+                                <rect key="frame" x="154" y="395" width="106" height="106"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="106" id="2nh-f9-ryE"/>
+                                    <constraint firstAttribute="width" secondItem="tDg-WE-KgC" secondAttribute="height" multiplier="1:1" id="BDt-OF-Acd"/>
+                                </constraints>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="Layer 2" translatesAutoresizingMaskIntoConstraints="NO" id="a2T-gQ-TNS">
+                                <rect key="frame" x="154" y="817" width="106" height="35"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="35" id="KsU-Bk-Kt3"/>
+                                    <constraint firstAttribute="width" constant="106" id="uJv-TO-zBv"/>
+                                </constraints>
+                            </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="My6-Fr-ztZ" customClass="MDCActivityIndicator">
+                                <rect key="frame" x="187" y="727" width="40" height="40"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="My6-Fr-ztZ" secondAttribute="height" multiplier="1:1" id="kEb-AI-hS3"/>
+                                    <constraint firstAttribute="height" constant="40" id="mEe-b0-kOE"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="FG8-x1-4mi"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="a2T-gQ-TNS" firstAttribute="top" secondItem="My6-Fr-ztZ" secondAttribute="bottom" constant="50" id="Ecw-KH-YNl"/>
+                            <constraint firstAttribute="bottom" secondItem="a2T-gQ-TNS" secondAttribute="bottom" constant="44" id="fsa-ck-S94"/>
+                            <constraint firstItem="a2T-gQ-TNS" firstAttribute="centerX" secondItem="4G3-nm-Yy4" secondAttribute="centerX" id="geP-TU-wHh"/>
+                            <constraint firstItem="My6-Fr-ztZ" firstAttribute="centerX" secondItem="a2T-gQ-TNS" secondAttribute="centerX" id="lUA-lW-Kau"/>
+                            <constraint firstItem="tDg-WE-KgC" firstAttribute="centerY" secondItem="4G3-nm-Yy4" secondAttribute="centerY" id="mSO-J0-LDB"/>
+                            <constraint firstItem="tDg-WE-KgC" firstAttribute="centerX" secondItem="4G3-nm-Yy4" secondAttribute="centerX" id="v5w-DI-Fzm"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="indicator" destination="My6-Fr-ztZ" id="dPB-cb-7V9"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="BKV-9k-Ok4" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="877" y="-1131"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="Layer 2" width="106.5" height="35.5"/>
+        <image name="logo" width="106" height="106"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

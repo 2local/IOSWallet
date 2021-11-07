@@ -8,7 +8,7 @@
 
 import UIKit
 import SkyFloatingLabelTextField
-import QRCode
+//import QRCode
 import KVNProgress
 class ReceiveViewController: BaseVC {
     
@@ -81,7 +81,7 @@ class ReceiveViewController: BaseVC {
     
     //MARK: - functions
     fileprivate func setupView() {
-        qrCodeIMG.image = QRCode.init(currentWallet.address)?.image
+        qrCodeIMG.image = generateQRCode(from: walletNumber)//QRCode.init(currentWallet.address)?.image
         self.scrollView.handleKeyboard()
         self.view.tapToDismissKeyboard()
         self.amountTXF.addTarget(self, action: #selector(amountCalculation), for: .editingChanged)

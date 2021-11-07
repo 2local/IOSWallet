@@ -8,12 +8,13 @@
 
 import UIKit
 import KVNProgress
-import QRCode
+//import QRCode
+
 class Buy2LCReceiptViewController: BaseVC {
  
     @IBOutlet var qrCode: UIImageView! {
         didSet {
-            qrCode.image = QRCode.init(walletNumber)?.image
+            qrCode.image = generateQRCode(from: walletNumber)//QRCode.init(walletNumber)?.image
         }
     }
     @IBOutlet var btcWalletNumberLabel: UILabel! {

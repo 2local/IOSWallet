@@ -7,13 +7,13 @@
 //
 
 import UIKit
-import QRCode
+//import QRCode
 
 class ReceiveReceiptViewController: BaseVC {
 
     @IBOutlet var qrCodeIMG: UIImageView! {
         didSet {
-            qrCodeIMG.image = QRCode.init(walletNumber)?.image
+            qrCodeIMG.image = generateQRCode(from: walletNumber)//QRCode.init(walletNumber)?.image
         }
     }
     

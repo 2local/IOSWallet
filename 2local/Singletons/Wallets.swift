@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Wallets {
+struct Wallets: Codable {
     var _name: Coins
     var _displayName: String?
     var _balance: String?

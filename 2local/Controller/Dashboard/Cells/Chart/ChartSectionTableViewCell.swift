@@ -52,9 +52,9 @@ class ChartSectionTableViewCell: UITableViewCell {
         for month in transactionsChart {
             for transfer in transfers {
                 if month.date == transfer.date?.prefix(7).description {
-                    if transfer.source == "out" || transfer.from == transfer.wallet {
+                    if transfer.source == "out" || transfer.from == transfer.wallet?.address {
                         month.expenses +=  Float(transfer.quantity ?? "0.0")!
-                    } else if transfer.source == "in" || transfer.to == transfer.wallet {
+                    } else if transfer.source == "in" || transfer.to == transfer.wallet?.address {
                         month.income +=  Float(transfer.quantity ?? "0.0")!
                     }
                 }

@@ -53,6 +53,29 @@ class TransactionHistoryTableViewCell: UITableViewCell {
             transactionAmountLabel.text = "\(prefixSign) \(amount) \(wallet.name.symbol())"
             transactionAmountLabel.textColor = isMine ? ._FE6C6C : ._shamrock
         }
+        
+        if let data = data as? Transfer {
+            guard let address = data.from else { return }
+            self.isMine = address == wallet.address.lowercased() ? true : false
+            
+            transactionDateLabel.text = data.date?.toMonth()
+            transactionAmountFiatLabel.isHidden = true
+            stateLabel.text = "Complete"
+            stateLabel.textColor = isMine ? ._FE6C6C : ._shamrock
+            
+            transactionTitleLabel.text = isMine ? TransactionType.sent.title() : TransactionType.received.title()
+            
+            let icon = isMine ? TransactionType.sent.icon() : TransactionType.received.icon()
+            transactionIconImageView.image = UIImage(named: icon)
+            
+            let p = pow(10, 18)
+            let value = Decimal(string: data.amount ?? "0")!
+            let amount = value/p
+            
+            let prefixSign = isMine ? "-" : "+"
+            transactionAmountLabel.text = "\(prefixSign) \(amount) \(wallet.name.symbol())"
+            transactionAmountLabel.textColor = isMine ? ._FE6C6C : ._shamrock
+        }
     }
 }
 

@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum Coins: String, CaseIterable {
+enum Coins: String, Codable, CaseIterable {
     case Bitcoin, Ethereum, Stellar, Binance
     case TLocal = "2local"
     

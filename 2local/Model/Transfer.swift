@@ -15,7 +15,7 @@ struct Transfer: Codable {
     var status: String?
     var quantity: String?
     var source: String?
-    var wallet: String?
+    var wallet: Wallets?
     var amount: String?
     var currency: String?
     var from: String?
@@ -40,7 +40,7 @@ struct Transfer: Codable {
         return transactions
     }
     
-    static func mapTransactions(_ histories: [TransactionHistoryModel], wallet: String, completion: @escaping (([Transfer]) -> Void)) {
+    static func mapTransactions(_ histories: [TransactionHistoryModel], wallet: Wallets, completion: @escaping (([Transfer]) -> Void)) {
         var transactions = [Transfer]()
         
         for history in histories {
@@ -48,19 +48,16 @@ struct Transfer: Codable {
             transfer.date = history.timeStamp
             transfer.from = history.from
             transfer.to = history.to
-            transfer.quantity = history.value
-            transfer.amount = history.gasPrice
+            transfer.quantity = "1"//history.value
+            transfer.amount = history.value
             transfer.currency = "$"
-            transfer.status = history.txreceiptStatus
+            transfer.status = ""//history.txreceiptStatus
             transfer.wallet = wallet
             transactions.append(transfer)
         }
-        
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-//        transactions = transactions.sorted(by: {($0.date ?? "0")!.compare($1.date ?? "0") == .orderedDescending })
-//        transactions = transactions.sorted(by: {
-//            dateFormatter.date(from: $0.date ?? "1999-01-01 00:00:00")!.compare(dateFormatter.date(from: $1.date ?? "1999-01-01 00:00:00")!) == .orderedDescending })
+        transactions.sort {
+            ($0.date ?? "0") > ($1.date ?? "0")
+        }
         completion(transactions)
     }
 }

@@ -47,8 +47,8 @@ extension DashboardVC {
     
     //MARK: - 2LC
     func get2localPublickey() -> String {
-//        guard let publicKey = DataProvider.shared.user?.publicKey else { return "" }
-        return ""
+        guard let publicKey = DataProvider.shared.user?.wallet else { return "" }
+        return publicKey
     }
     
     //MARK: - ETH

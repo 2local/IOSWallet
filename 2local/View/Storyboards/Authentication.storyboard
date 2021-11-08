@@ -182,7 +182,7 @@
                                                     <segue destination="Ye9-Rl-1rq" kind="show" id="kWB-3o-FeT"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OTI-yZ-NME">
+                                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OTI-yZ-NME">
                                                 <rect key="frame" x="353" y="24" width="45" height="45"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="45" id="1TH-YI-p6k"/>
@@ -905,28 +905,28 @@
     </scenes>
     <designables>
         <designable name="HWa-p2-bRf">
-            <size key="intrinsicContentSize" width="350" height="43.615234375"/>
+            <size key="intrinsicContentSize" width="71" height="22"/>
         </designable>
         <designable name="Ix5-Nl-fpd">
-            <size key="intrinsicContentSize" width="350" height="39.220703125"/>
+            <size key="intrinsicContentSize" width="32" height="34"/>
         </designable>
         <designable name="K7b-bf-aOR">
-            <size key="intrinsicContentSize" width="350" height="43.615234375"/>
+            <size key="intrinsicContentSize" width="40" height="23"/>
         </designable>
         <designable name="SHX-n2-HcD">
-            <size key="intrinsicContentSize" width="350" height="43.615234375"/>
+            <size key="intrinsicContentSize" width="40" height="23"/>
         </designable>
         <designable name="aga-yx-5By">
-            <size key="intrinsicContentSize" width="350" height="39.220703125"/>
+            <size key="intrinsicContentSize" width="32" height="34"/>
         </designable>
         <designable name="b7r-Xr-UU5">
-            <size key="intrinsicContentSize" width="350" height="39.220703125"/>
+            <size key="intrinsicContentSize" width="32" height="34"/>
         </designable>
         <designable name="d1M-MB-dAC">
-            <size key="intrinsicContentSize" width="350" height="43.615234375"/>
+            <size key="intrinsicContentSize" width="73" height="23"/>
         </designable>
         <designable name="qHm-8x-bwQ">
-            <size key="intrinsicContentSize" width="350" height="43.615234375"/>
+            <size key="intrinsicContentSize" width="71" height="22"/>
         </designable>
     </designables>
     <resources>

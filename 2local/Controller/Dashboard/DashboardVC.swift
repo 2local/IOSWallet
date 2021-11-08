@@ -29,6 +29,7 @@ class DashboardVC: BaseVC {
     var defaultSym: String = ""
     var totalfiatWithSymbol: String = "$0"
     var ethTransactionHistory: [TransactionHistoryModel] = []
+    var userData: User?
     
     //MARK: - View cycle
     override func viewDidLoad() {
@@ -64,6 +65,26 @@ class DashboardVC: BaseVC {
         setNavigation(title: "Total Balance", largTitle: true)
         
         settingsBarButtonItem()
+    }
+    
+    fileprivate func getWalletByPublicKey() {
+        guard let userData = DataProvider.shared.user else { return }
+        var wallets: [Wallets] = []
+        let tlc = Wallets(name: .TLocal,
+                          balance: "\(userData.balance2lc)",
+                          address: userData.wallet,
+                          mnemonic: "",
+                          displayName: Coins.TLocal.name())
+        wallets.append(tlc)
+        
+        let bnb = Wallets(name: .Binance,
+                          balance: "\(userData.balanceBnb)",
+                          address: userData.wallet,
+                          mnemonic: "",
+                          displayName: Coins.Binance.name())
+        wallets.append(bnb)
+        
+        refresfView(wallets)
     }
     
     func setupNotifications() {
@@ -103,9 +124,9 @@ class DashboardVC: BaseVC {
         maxExpense = transactionsChart.map({$0.expenses}).max()
     }
     
-    fileprivate func refresfView() {
+    fileprivate func refresfView(_ wallets: [Wallets]) {
         walletQueue.async {
-            self.getTotalFiat(self.wallets) { totalFiat in
+            self.getTotalFiat(wallets) { totalFiat in
                 self.totalfiatWithSymbol = self.defaultSym + "\(totalFiat)".convertToPriceType()
                 
                 DispatchQueue.main.async {
@@ -113,7 +134,7 @@ class DashboardVC: BaseVC {
                 }
             }
             
-            self.getTransactions(self.wallets) { transfers in
+            self.getTransactions(wallets) { transfers in
                 self.transfers = transfers
                 
                 DispatchQueue.main.async {
@@ -128,10 +149,14 @@ class DashboardVC: BaseVC {
     
     @objc func generateWalets() {
         wallets.removeAll()
-        wallets = DataProvider.shared.wallets
         defaultSym = DataProvider.shared.exchangeRate?.defaultSym ?? "$"
-        tableView.reloadData()
-        refresfView()
+        wallets = DataProvider.shared.wallets
+//        tableView.reloadData()
+        if wallets.count > 0 {
+            refresfView(wallets)
+        } else {
+            getWalletByPublicKey()
+        }
     }
     
     func indexPath(at row: Int) -> [IndexPath] {

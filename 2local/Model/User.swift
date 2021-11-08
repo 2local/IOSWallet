@@ -36,6 +36,10 @@ class User: Codable {
     var webSite: String?
     var hope: String?
     var balance: Double = 0
+    var wallet: String?
+    var balanceBnb: Double = 0
+    var balance2lc: Double = 0
+    var balanceLocked2lc: Double = 0
     
     enum CodingKeys : String , CodingKey {
         case id = "id"
@@ -64,13 +68,16 @@ class User: Codable {
         case notes = "notes"
         case webSite = "website"
         case hope = "hope"
+        case wallet = "wallet"
+        case balanceBnb = "balance_bnb"
+        case balance2lc = "balance_2lc"
+        case balanceLocked2lc = "balance_locked_2lc"
     }
     
 //    required init(from decoder: Decoder) throws {
 //        let container = try decoder.container(keyedBy: CodingKeys.self)
 //        
-//        let stringBalance = try? container.decode(String.self, forKey: .balance)
-//        let intBalance = try? container.decode(Int.self, forKey: .balance)
-//        self.balance = stringBalance ?? "\(intBalance ?? -1)"
+//        self.wallet = try? container.decodeIfPresent(String.self, forKey: .wallet)
+//        self.balance2lc = try? container.decodeIfPresent(String.self, forKey: .wallet)
 //    }
 }

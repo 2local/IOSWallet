@@ -28,14 +28,14 @@ class TransactionsViewController: BaseVC {
         didSet {
             self.transactionSegmentedControl.setTitles(
                 [NSAttributedString(string: "All", attributes: attributes)
-                    ,NSAttributedString(string: "Purchase", attributes: attributes)
-                    ,NSAttributedString(string: "Received", attributes: attributes)
-                    ,NSAttributedString(string: "Sent", attributes: attributes)]
+//                 ,NSAttributedString(string: "Purchase", attributes: attributes)
+                 ,NSAttributedString(string: "Received", attributes: attributes)
+                 ,NSAttributedString(string: "Sent", attributes: attributes)]
                 , selectedTitles:
-                [NSAttributedString(string: "All", attributes: selectedAttributes)
-                    ,NSAttributedString(string: "Purchase", attributes: selectedAttributes)
-                    ,NSAttributedString(string: "Received", attributes: selectedAttributes)
-                    ,NSAttributedString(string: "Sent", attributes: selectedAttributes)])
+                    [NSAttributedString(string: "All", attributes: selectedAttributes)
+//                     ,NSAttributedString(string: "Purchase", attributes: selectedAttributes)
+                     ,NSAttributedString(string: "Received", attributes: selectedAttributes)
+                     ,NSAttributedString(string: "Sent", attributes: selectedAttributes)])
             self.transactionSegmentedControl.delegate = self
             self.transactionSegmentedControl.selectionBoxStyle  = .default
             self.transactionSegmentedControl.selectionBoxColor = .clear
@@ -96,12 +96,12 @@ class TransactionsViewController: BaseVC {
         }
     }
     @IBOutlet weak var emptyBoxStack: UIStackView!
-
+    
     //MARK: - properties
     var index = 0
     let attributes : [NSAttributedString.Key : Any] = [NSAttributedString.Key.foregroundColor : UIColor._logan, NSAttributedString.Key.font : UIFont.TLFont(weight: .regular, size: 13)]
     let selectedAttributes : [NSAttributedString.Key : Any] = [NSAttributedString.Key.foregroundColor : UIColor._flamenco,NSAttributedString.Key.font : UIFont.TLFont(weight: .medium, size: 13)]
-    var transactions = [Transfer]()//DataProvider.shared.transfers
+    var transactions = [Transfer]()
     var allTransactions = [Transfer]()
     private var wallet: Wallets?
     
@@ -112,9 +112,13 @@ class TransactionsViewController: BaseVC {
     //MARK: - view cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("transactions-> \(transactions.first?.date)")
         setupTableView()
         setupView()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        getTransaction()
     }
     
     //MARK: - function
@@ -125,8 +129,10 @@ class TransactionsViewController: BaseVC {
     }
     
     fileprivate func getTransaction() {
-        allTransactions = Transfer.mapTransactions(transfers: transactions, orders: DataProvider.shared.orders)
-        self.transactions = allTransactions
+        self.allTransactions = transactions
+        allTransactions.sort {
+            ($0.date ?? "0") > ($1.date ?? "0")
+        }
         tableView.reloadData()
     }
 }
@@ -149,21 +155,21 @@ extension TransactionsViewController: SegmentedControlDelegate {
             }
         } else {
             switch selectedIndex {
-            case 0:
-                self.transactionSegmentedControl.selectionIndicatorEdgeInsets = UIEdgeInsets(top: 0, left: 32, bottom: 0, right: 31)
-                self.transactions = allTransactions
-            case 1:
-                self.transactionSegmentedControl.selectionIndicatorEdgeInsets = UIEdgeInsets(top: 0, left: 12, bottom: 0, right: 11)
-                self.transactions = []//allTransactions.filter{ $0.source == "Purchase"}
-            case 2:
-                self.transactionSegmentedControl.selectionIndicatorEdgeInsets = UIEdgeInsets(top: 0, left: 13, bottom: 0, right: 12)
-                    self.transactions = allTransactions.filter{ $0.to == $0.wallet }//allTransactions.filter{ $0.source == "in" }
-            case 3:
-                self.transactionSegmentedControl.selectionIndicatorEdgeInsets = UIEdgeInsets(top: 0, left: 27, bottom: 0, right: 26)
-                    self.transactions = allTransactions.filter{ $0.from == $0.wallet }//allTransactions.filter{ $0.source == "out" }
-                
-            default:
-                break
+                case 0:
+                    self.transactionSegmentedControl.selectionIndicatorEdgeInsets = UIEdgeInsets(top: 0, left: 32, bottom: 0, right: 31)
+                    self.transactions = allTransactions
+//                case 1:
+//                    self.transactionSegmentedControl.selectionIndicatorEdgeInsets = UIEdgeInsets(top: 0, left: 12, bottom: 0, right: 11)
+//                    self.transactions = []//allTransactions.filter{ $0.source == "Purchase"}
+                case 1:
+                    self.transactionSegmentedControl.selectionIndicatorEdgeInsets = UIEdgeInsets(top: 0, left: 13, bottom: 0, right: 12)
+                    self.transactions = allTransactions.filter{ $0.to?.lowercased() == $0.wallet?.address.lowercased() }
+                case 2:
+                    self.transactionSegmentedControl.selectionIndicatorEdgeInsets = UIEdgeInsets(top: 0, left: 27, bottom: 0, right: 26)
+                    self.transactions = allTransactions.filter{ $0.from?.lowercased() == $0.wallet?.address.lowercased() }
+                    
+                default:
+                    break
             }
             if selectedIndex < self.index {
                 tableView.reloadSections(IndexSet.init(integer: 0), with: .right)
@@ -188,7 +194,7 @@ extension TransactionsViewController: ChartViewDelegate {
         var lineChartDataSet = LineChartDataSet()
         let weeks = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
         
-        let allTransactions = self.allTransactions.filter{ source == "in" ? ($0.source == source || $0.source == "Purchase" || $0.to == $0.wallet) : $0.source == source }.filter{($0.status == "paid" || $0.status == "Complete" || $0.status == "completed" || $0.from == $0.wallet) }
+        let allTransactions = self.allTransactions.filter{ source == "in" ? ($0.source == source || $0.source == "Purchase" || $0.to?.lowercased() == $0.wallet?.address.lowercased()) : $0.source == source }.filter{($0.status == "paid" || $0.status == "Complete" || $0.status == "completed" || $0.from?.lowercased() == $0.wallet?.address.lowercased()) }
         var transfers = [Transfer]()
         let daysOfWeek = Date().getWeekDates()
         
@@ -251,8 +257,21 @@ extension TransactionsViewController: ChartViewDelegate {
 extension TransactionsViewController: UITableViewDelegate, UITableViewDataSource {
     
     func setupTableView() {
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = 100
+        
         tableView.register(TransactionHistoryTableViewCell.self)
         
+        tableView.backgroundColor = .clear
+        tableView.dataSource = self
+        tableView.delegate = self
+        tableView.showsVerticalScrollIndicator = true
+        tableView.showsHorizontalScrollIndicator = false
+        tableView.separatorInset.left = 16
+        tableView.separatorInset.right = 16
+        tableView.separatorStyle = .none
+        tableView.allowsSelection = false
+        tableView.tableFooterView = UIView()
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -269,16 +288,12 @@ extension TransactionsViewController: UITableViewDelegate, UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         let cell = tableView.dequeue(TransactionHistoryTableViewCell.self)
-        let data = transactions[indexPath.row]
-        let wallet = Wallets(name: .TLocal,
-                             balance: "",
-                             address: "",
-                             mnemonic: "",
-                             displayName: "2Local")
         
-        cell.fill(data, wallet: wallet)
+        if self.transactions.count > 0, let wallet = transactions[indexPath.row].wallet {
+            cell.fill(transactions[indexPath.row], wallet: wallet)
+        }
+        
         return cell
     }
 }

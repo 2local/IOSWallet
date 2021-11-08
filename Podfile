@@ -6,7 +6,6 @@ target '2local' do
   use_frameworks!
 
   pod 'KeychainSwift', '~> 16.0.1'
-  pod "QRCode"
   pod 'QRCodeReader.swift'
   pod 'SkyFloatingLabelTextField', '~> 3.7.0'
   pod 'SROTPView' , :git => 'https://github.com/sarojraut/SROTPView.git'

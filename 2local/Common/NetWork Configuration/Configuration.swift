@@ -67,8 +67,6 @@ class Configuration {
                         password = value["password"] as? String ?? ""
                         aesMode = value["aesMode"] as? String ?? ""
                         
-                        
-                        
                         return
                     }
                 }

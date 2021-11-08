@@ -10,8 +10,8 @@ import UIKit
 
 extension UIStoryboard {
     
-    class var main: UIStoryboard {
-        return self.init(name: "Main", bundle: nil)
+    class var buy: UIStoryboard {
+        return self.init(name: "BuyTokens", bundle: nil)
     }
     
     class var wallet: UIStoryboard {

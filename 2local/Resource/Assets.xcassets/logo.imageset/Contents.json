@@ -1,17 +1,15 @@
 {
   "images" : [
     {
-      "filename" : "2local_symbol-512px_margin.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "2local_symbol-512px_margin-1.png",
+      "filename" : "2local_symbol_circle_orange.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "2local_symbol-512px_margin-2.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

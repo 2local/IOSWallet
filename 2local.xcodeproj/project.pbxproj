@@ -86,7 +86,7 @@
 		4F3B449B2531F23100734886 /* AddCompanyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F3B449A2531F23100734886 /* AddCompanyViewController.swift */; };
 		4F4988AA23B786620015B2B8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4988A923B786620015B2B8 /* AppDelegate.swift */; };
 		4F4988AE23B786620015B2B8 /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4988AD23B786620015B2B8 /* SplashViewController.swift */; };
-		4F4988B123B786620015B2B8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4F4988AF23B786620015B2B8 /* Main.storyboard */; };
+		4F4988B123B786620015B2B8 /* BuyTokens.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4F4988AF23B786620015B2B8 /* BuyTokens.storyboard */; };
 		4F4988B323B786680015B2B8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4F4988B223B786680015B2B8 /* Assets.xcassets */; };
 		4F4988B623B786680015B2B8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4F4988B423B786680015B2B8 /* LaunchScreen.storyboard */; };
 		4F4988D223B79A3F0015B2B8 /* Roboto-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4F4988C023B79A3E0015B2B8 /* Roboto-Light.ttf */; };
@@ -299,7 +299,7 @@
 		4F4988A623B786620015B2B8 /* 2local.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = 2local.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F4988A923B786620015B2B8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4F4988AD23B786620015B2B8 /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
-		4F4988B023B786620015B2B8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		4F4988B023B786620015B2B8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/BuyTokens.storyboard; sourceTree = "<group>"; };
 		4F4988B223B786680015B2B8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4F4988B523B786680015B2B8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4F4988B723B786680015B2B8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -1103,7 +1103,7 @@
 				A501CBA0260A0ADF0050AF49 /* Authentication.storyboard */,
 				A501CB9D260A0ACA0050AF49 /* Home.storyboard */,
 				A501CBA6260A0B090050AF49 /* Intro.storyboard */,
-				4F4988AF23B786620015B2B8 /* Main.storyboard */,
+				4F4988AF23B786620015B2B8 /* BuyTokens.storyboard */,
 				A501CB8C260A09800050AF49 /* Marketplace.storyboard */,
 				03D7E11326B1686E0041E6C7 /* Notifications.storyboard */,
 				A501CB90260A09D80050AF49 /* Scan.storyboard */,
@@ -1458,7 +1458,7 @@
 				4F4988D223B79A3F0015B2B8 /* Roboto-Light.ttf in Resources */,
 				037EE0B5263198AA00A81AC1 /* TransactionHistoryTableViewCell.xib in Resources */,
 				03ECED942713318E00B2B532 /* ChartSectionTableViewCell.xib in Resources */,
-				4F4988B123B786620015B2B8 /* Main.storyboard in Resources */,
+				4F4988B123B786620015B2B8 /* BuyTokens.storyboard in Resources */,
 				4F4988E223B79A3F0015B2B8 /* Roboto-BoldItalic.ttf in Resources */,
 				4F4988DD23B79A3F0015B2B8 /* RobotoCondensed-Italic.ttf in Resources */,
 			);
@@ -1712,12 +1712,12 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		4F4988AF23B786620015B2B8 /* Main.storyboard */ = {
+		4F4988AF23B786620015B2B8 /* BuyTokens.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				4F4988B023B786620015B2B8 /* Base */,
 			);
-			name = Main.storyboard;
+			name = BuyTokens.storyboard;
 			sourceTree = "<group>";
 		};
 		4F4988B423B786680015B2B8 /* LaunchScreen.storyboard */ = {
@@ -1852,7 +1852,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = 2local/2local.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 85;
+				CURRENT_PROJECT_VERSION = 86;
 				DEVELOPMENT_TEAM = QL7FSZG34R;
 				ENABLE_BITCODE = NO;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
@@ -1862,7 +1862,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.4.1;
+				MARKETING_VERSION = 1.4.2;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -1939,8 +1939,6 @@
 					"\"OpenGLES\"",
 					"-framework",
 					"\"PromiseKit\"",
-					"-framework",
-					"\"QRCode\"",
 					"-framework",
 					"\"QRCodeReader\"",
 					"-framework",
@@ -1985,7 +1983,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = 2local/2local.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 85;
+				CURRENT_PROJECT_VERSION = 86;
 				DEVELOPMENT_TEAM = QL7FSZG34R;
 				ENABLE_BITCODE = NO;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
@@ -1995,7 +1993,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.4.1;
+				MARKETING_VERSION = 1.4.2;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -2072,8 +2070,6 @@
 					"\"OpenGLES\"",
 					"-framework",
 					"\"PromiseKit\"",
-					"-framework",
-					"\"QRCode\"",
 					"-framework",
 					"\"QRCodeReader\"",
 					"-framework",

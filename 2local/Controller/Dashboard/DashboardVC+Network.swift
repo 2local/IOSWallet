@@ -20,15 +20,19 @@ extension DashboardVC {
         wallets.forEach { wallet in
             let currentWallet = WalletFactory.getWallets(wallet: wallet)
             currentWallet.getTransactionHistory(by: currentWallet.address) { [ weak self] (transactions) in
-                guard self != nil else { return }
+                guard let self = self else { return }
                 guard let transactions = transactions else { return }
-                Transfer.mapTransactions(transactions, wallet: currentWallet.address) { [weak self] transfer in
-                    guard self != nil else { return }
-                    transfers.append(contentsOf: transfer)
+                Transfer.mapTransactions(transactions, wallet: currentWallet.wallet) { [weak self] transfer in
+                    guard let _ = self else { return }
+                    transfer.forEach { (result) in
+                        if result.amount ?? "0" != "0" {
+                            transfers.append(result)
+                        }
+                    }
+                    completion(transfers)
                 }
             }
         }
-        completion(transfers)
     }
     
     /// get total fiats
@@ -47,8 +51,8 @@ extension DashboardVC {
     
     //MARK: - 2LC
     func get2localPublickey() -> String {
-//        guard let publicKey = DataProvider.shared.user?.publicKey else { return "" }
-        return ""
+        guard let publicKey = DataProvider.shared.user?.wallet else { return "" }
+        return publicKey
     }
     
     //MARK: - ETH

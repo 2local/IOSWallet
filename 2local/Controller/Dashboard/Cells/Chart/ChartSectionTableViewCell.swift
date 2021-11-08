@@ -51,7 +51,7 @@ class ChartSectionTableViewCell: UITableViewCell {
         
         for month in transactionsChart {
             for transfer in transfers {
-                if month.date == i.toMonthAndYear() {
+                if month.date == transfer.date?.toMonthAndYear() {
                     if transfer.source == "out" || transfer.from?.lowercased() == transfer.wallet?.address.lowercased() {
                         month.expenses +=  Float(transfer.quantity ?? "0.0")!
                     } else if transfer.source == "in" || transfer.to?.lowercased() == transfer.wallet?.address.lowercased() {

@@ -732,10 +732,10 @@
     </scenes>
     <designables>
         <designable name="SBm-5H-GsJ">
-            <size key="intrinsicContentSize" width="295" height="40.9775390625"/>
+            <size key="intrinsicContentSize" width="47.5" height="20"/>
         </designable>
         <designable name="jXC-ej-UG0">
-            <size key="intrinsicContentSize" width="137.5" height="40.9775390625"/>
+            <size key="intrinsicContentSize" width="49.5" height="20"/>
         </designable>
     </designables>
     <resources>

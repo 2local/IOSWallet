@@ -73,6 +73,4 @@ class BalanceSectionTableViewCell: UITableViewCell {
         invisibleCallback?(self.invisible)
         UserDefaults.standard.set(invisible, forKey: "invisible")
     }
-    
-    
 }

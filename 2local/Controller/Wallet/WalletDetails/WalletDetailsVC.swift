@@ -158,7 +158,7 @@ class WalletDetailsVC: BaseVC {
     }
     
     @objc fileprivate func buyTapped() {
-        let vc = UIStoryboard.main.instantiate(viewController: Buy2LCViewController.self)
+        let vc = UIStoryboard.buy.instantiate(viewController: Buy2LCViewController.self)
         if let navigation = self.navigationController {
             navigation.pushViewController(vc, animated: true)
         }

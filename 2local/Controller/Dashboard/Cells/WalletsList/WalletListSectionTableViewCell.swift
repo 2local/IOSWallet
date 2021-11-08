@@ -85,7 +85,7 @@ extension WalletListSectionTableViewCell: UICollectionViewDelegate, UICollection
             
             cell.buyButtonCallback = { [weak self] in
                 guard let self = self else { return }
-                let vc = UIStoryboard.main.instantiate(viewController: Buy2LCViewController.self)
+                let vc = UIStoryboard.buy.instantiate(viewController: Buy2LCViewController.self)
                 if let navigation = self.viewController.navigationController {
                     navigation.pushViewController(vc, animated: true)
                 }
@@ -93,7 +93,7 @@ extension WalletListSectionTableViewCell: UICollectionViewDelegate, UICollection
             
             cell.receiveButtonCallback = { [weak self] in
                 guard let self = self else { return }
-                let vc = UIStoryboard.main.instantiate(viewController: ReceiveViewController.self)
+                let vc = UIStoryboard.home.instantiate(viewController: ReceiveViewController.self)
                 vc.initWith(wallet)
                 if let navigation = self.viewController.navigationController {
                     navigation.pushViewController(vc, animated: true)

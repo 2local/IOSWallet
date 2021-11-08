@@ -151,7 +151,7 @@ class DashboardVC: BaseVC {
         wallets.removeAll()
         defaultSym = DataProvider.shared.exchangeRate?.defaultSym ?? "$"
         wallets = DataProvider.shared.wallets
-//        tableView.reloadData()
+        tableView.reloadData()
         if wallets.count > 0 {
             refresfView(wallets)
         } else {

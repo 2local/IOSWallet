@@ -194,7 +194,7 @@ extension TransactionsViewController: ChartViewDelegate {
         var lineChartDataSet = LineChartDataSet()
         let weeks = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
         
-        let allTransactions = self.allTransactions.filter{ source == "in" ? ($0.source == source || $0.source == "Purchase" || $0.to == $0.wallet?.address) : $0.source == source }.filter{($0.status == "paid" || $0.status == "Complete" || $0.status == "completed" || $0.from == $0.wallet?.address) }
+        let allTransactions = self.allTransactions.filter{ source == "in" ? ($0.source == source || $0.source == "Purchase" || $0.to?.lowercased() == $0.wallet?.address.lowercased()) : $0.source == source }.filter{($0.status == "paid" || $0.status == "Complete" || $0.status == "completed" || $0.from?.lowercased() == $0.wallet?.address.lowercased()) }
         var transfers = [Transfer]()
         let daysOfWeek = Date().getWeekDates()
         

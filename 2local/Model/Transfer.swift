@@ -48,7 +48,7 @@ struct Transfer: Codable {
             transfer.date = history.timeStamp
             transfer.from = history.from
             transfer.to = history.to
-            transfer.quantity = "1"//history.value
+            transfer.quantity = Transfer.getQuantity(history.value ?? "0")
             transfer.amount = history.value
             transfer.currency = "$"
             transfer.status = ""//history.txreceiptStatus
@@ -59,5 +59,11 @@ struct Transfer: Codable {
             ($0.date ?? "0") > ($1.date ?? "0")
         }
         completion(transactions)
+    }
+    
+    static func getQuantity(_ value: String) -> String {
+        let p = pow(10, 18)
+        let value = Decimal(string: value)!
+        return "\(value/p)"
     }
 }

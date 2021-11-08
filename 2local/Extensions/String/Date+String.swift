@@ -85,6 +85,20 @@ class DateTime {
         return dateFormatter.string(from: date)
     }
     
+    class func yearMonthFormat(time: String) -> String {
+        
+        guard let unixTimestamp = Double(time) else { return "" }
+        
+        let date = Date(timeIntervalSince1970: unixTimestamp)
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.calendar = Calendar(identifier: .gregorian)
+
+        dateFormatter.dateFormat = "YYYY-MM"
+        
+        return dateFormatter.string(from: date)
+    }
+    
 }
 
 //-------------------------------------
@@ -109,6 +123,10 @@ extension String {
     
     func toAppFormat() -> String {
         return DateTime.appFormat(time: self)
+    }
+    
+    func toMonthAndYear() -> String {
+        return DateTime.yearMonthFormat(time: self)
     }
     
 }

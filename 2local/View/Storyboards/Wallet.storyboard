@@ -224,9 +224,10 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sXf-7G-UgF" customClass="SegmentedControl" customModule="_local" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="479.5" width="414" height="28"/>
+                                <rect key="frame" x="0.0" y="479.5" width="230" height="28"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
+                                    <constraint firstAttribute="width" constant="230" id="6Ye-eE-fBl"/>
                                     <constraint firstAttribute="height" constant="28" id="Q7m-aA-syY"/>
                                 </constraints>
                             </view>
@@ -261,7 +262,6 @@
                             <constraint firstItem="4iu-GI-91T" firstAttribute="leading" secondItem="6xU-Xy-3UH" secondAttribute="leading" constant="16" id="O2p-4C-4sn"/>
                             <constraint firstItem="lze-ie-hn2" firstAttribute="leading" secondItem="6xU-Xy-3UH" secondAttribute="leading" constant="16" id="R7u-Cn-xgD"/>
                             <constraint firstItem="4iu-GI-91T" firstAttribute="centerX" secondItem="0l5-Tg-so5" secondAttribute="centerX" id="Rgn-2q-ogR"/>
-                            <constraint firstItem="6xU-Xy-3UH" firstAttribute="trailing" secondItem="sXf-7G-UgF" secondAttribute="trailing" id="ce8-gb-K2i"/>
                             <constraint firstItem="lze-ie-hn2" firstAttribute="centerX" secondItem="y4y-nj-wpF" secondAttribute="centerX" id="fGh-xp-86Y"/>
                             <constraint firstItem="y4y-nj-wpF" firstAttribute="leading" secondItem="6xU-Xy-3UH" secondAttribute="leading" id="fht-GN-vvx"/>
                             <constraint firstItem="2J7-H0-9l6" firstAttribute="leading" secondItem="6xU-Xy-3UH" secondAttribute="leading" constant="32" id="fth-lR-Phs"/>
@@ -1009,7 +1009,7 @@ If you don't have access or lost your recovery phrase your wallet can't be recov
     </scenes>
     <designables>
         <designable name="4ON-DJ-R2d">
-            <size key="intrinsicContentSize" width="366" height="39.220703125"/>
+            <size key="intrinsicContentSize" width="32" height="34"/>
         </designable>
     </designables>
     <resources>

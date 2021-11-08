@@ -285,12 +285,12 @@ extension WalletDetailsVC: SegmentedControlDelegate {
     func setupSegmant() {
         self.transactionSegmentedControl.setTitles(
             [NSAttributedString(string: "All", attributes: attributes),
-             NSAttributedString(string: "Purchase", attributes: attributes),
+//             NSAttributedString(string: "Purchase", attributes: attributes),
              NSAttributedString(string: "Received", attributes: attributes),
              NSAttributedString(string: "Sent", attributes: attributes)],
             selectedTitles:
                 [NSAttributedString(string: "All", attributes: selectedAttributes),
-                 NSAttributedString(string: "Purchase", attributes: selectedAttributes),
+//                 NSAttributedString(string: "Purchase", attributes: selectedAttributes),
                  NSAttributedString(string: "Received", attributes: selectedAttributes),
                  NSAttributedString(string: "Sent", attributes: selectedAttributes)])
         self.transactionSegmentedControl.delegate = self
@@ -307,13 +307,13 @@ extension WalletDetailsVC: SegmentedControlDelegate {
             case 0:
                 self.transactionSegmentedControl.selectionIndicatorEdgeInsets = UIEdgeInsets(top: 0, left: 32, bottom: 0, right: 31)
                 self.transactionHistory = allTransactions
+            //case 1:
+              //  self.transactionSegmentedControl.selectionIndicatorEdgeInsets = UIEdgeInsets(top: 0, left: 12, bottom: 0, right: 11)
+                //self.transactionHistory = []
             case 1:
-                self.transactionSegmentedControl.selectionIndicatorEdgeInsets = UIEdgeInsets(top: 0, left: 12, bottom: 0, right: 11)
-                self.transactionHistory = []
-            case 2:
                 self.transactionSegmentedControl.selectionIndicatorEdgeInsets = UIEdgeInsets(top: 0, left: 13, bottom: 0, right: 12)
                 self.transactionHistory = allTransactions.filter{ $0.to == self.wallet!.address.lowercased() }
-            case 3:
+            case 2:
                 self.transactionSegmentedControl.selectionIndicatorEdgeInsets = UIEdgeInsets(top: 0, left: 27, bottom: 0, right: 26)
                 self.transactionHistory = allTransactions.filter{ $0.from == self.wallet!.address.lowercased() }
                 

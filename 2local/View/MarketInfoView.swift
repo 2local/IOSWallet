@@ -10,12 +10,8 @@ import UIKit
 
 class MarketInfoView: UIView {
     @IBOutlet weak var nameLabel: UILabel!
-    //@IBOutlet weak var callLabel: UILabel!
-    //@IBOutlet weak var addressLabel: UILabel!
-    //@IBOutlet weak var openTimeLabel: UILabel!
-    @IBOutlet weak var directionBTN: UIButton!
-    //@IBOutlet weak var callBTN: UIButton!
-    @IBOutlet weak var closeBTN: UIButton!
+    @IBOutlet weak var directionButton: UIButton!
+    @IBOutlet weak var closeButton: UIButton!
     @IBOutlet weak var websiteLabel: UILabel!
     
     var callNumber = ""
@@ -25,8 +21,10 @@ class MarketInfoView: UIView {
     override func awakeFromNib() {
         super.awakeFromNib()
         self.setShadow(color: UIColor._002CA4, opacity: 1, offset: CGSize(width: 0, height: 0), radius: 6)
-        self.directionBTN.setBorderWith(._flamenco, width: 1.2)
-//        self.callBTN.setBorderWith(._shamrock, width: 1.2)
+        self.directionButton.setBorderWith(._flamenco, width: 1.2)
+        
+        websiteLabel.numberOfLines = 0
+        nameLabel.numberOfLines = 0
     }
 
 }

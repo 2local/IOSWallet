@@ -9,7 +9,7 @@
 import UIKit
 import KVNProgress
 
-class MainViewController: BaseVC, MarketInfoDelegate {
+class MainViewController: BaseVC {
     
     //MARK: - Outlets
     @IBOutlet var tabBarView: TLTabBarView!
@@ -65,9 +65,8 @@ class MainViewController: BaseVC, MarketInfoDelegate {
         tabBarIMG.isHidden = true
         
         marketVC = self.children.last?.children.first as? MarketViewController
-        marketVC?.delegate = self
         self.marketInfoHeight.constant = 0
-        self.marketInfoView.closeBTN.addTarget(self, action: #selector(closeMarketInfoView), for: .touchUpInside)
+        self.marketInfoView.closeButton.addTarget(self, action: #selector(closeMarketInfoView), for: .touchUpInside)
         
         
     }
@@ -175,7 +174,7 @@ class MainViewController: BaseVC, MarketInfoDelegate {
         self.marketInfoView.lat = Double(DataProvider.shared.places[id].lat ?? "0.0")!
         self.marketInfoView.lng = Double(DataProvider.shared.places[id].lng ?? "0.0")!
         //self.marketInfoView.callBTN.addTarget(self, action: #selector(callMarket), for: .touchUpInside)
-        self.marketInfoView.directionBTN.addTarget(self, action: #selector(directionMarket), for: .touchUpInside)
+        self.marketInfoView.directionButton.addTarget(self, action: #selector(directionMarket), for: .touchUpInside)
         
         if marketInfoHeight.constant == 0 {
 //            if self.marketInfoView.superview == nil {

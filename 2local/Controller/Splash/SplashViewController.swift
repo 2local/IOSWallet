@@ -31,6 +31,7 @@ class SplashViewController: BaseVC {
         //        if LocalDataManager.shared.hasPassword {
         if LocalDataManager.shared.hasToken {
             getProfile()
+            getMarketplaces()
         } else {
             //                addWallets()
             goToOnboarding()
@@ -189,6 +190,32 @@ class SplashViewController: BaseVC {
         
         DispatchQueue.main.async {
             self.goToHome()
+        }
+    }
+    
+    func getMarketplaces() {
+        APIManager.shared.getMarketplaces { (data, response, error) in
+            let result = APIManager.processResponse(response: response, data: data)
+            if result.status {
+                do {
+                    guard let record = try JSONDecoder().decode(ResultData<Place>.self, from: data!).record?.companies else {
+                        DispatchQueue.main.async {
+                            KVNProgress.showError(withStatus: "Failed to parse marketplaces data\nPlease contact us.")
+                        }
+                        return
+                    }
+                    DataProvider.shared.places = record
+                }
+                catch {
+                    DispatchQueue.main.async {
+                        KVNProgress.showError(withStatus: "Failed to parse marketplaces data\nPlease contact us.")
+                    }
+                }
+            } else {
+                DispatchQueue.main.async {
+                    KVNProgress.showError(withStatus: "Failed to get marketplaces data\nPlease contact us.")
+                }
+            }
         }
     }
 }

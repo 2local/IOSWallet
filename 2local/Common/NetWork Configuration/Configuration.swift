@@ -34,6 +34,7 @@ class Configuration {
     var tokenContractAddress: String
     var password: String
     var aesMode: String
+    var marketplaceBaseURL: String
     
     
     init() {
@@ -66,6 +67,7 @@ class Configuration {
                         tokenContractAddress = value["tokenContractAddress"] as? String ?? ""
                         password = value["password"] as? String ?? ""
                         aesMode = value["aesMode"] as? String ?? ""
+                        marketplaceBaseURL = value["marketplaceBaseURL"] as? String ?? ""
                         
                         return
                     }

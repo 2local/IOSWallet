@@ -11,41 +11,83 @@ import GoogleMaps
 import GooglePlaces
 import CoreLocation
 import KVNProgress
-protocol MarketInfoDelegate:class {
-    func marketDidSelected(id:Int)
-}
 
-class MarketViewController: BaseVC, CLLocationManagerDelegate,GMSMapViewDelegate {
+
+class MarketViewController: BaseVC, CLLocationManagerDelegate, GMSMapViewDelegate {
     
+    //MARK: - outlets
     @IBOutlet var maps: GMSMapView!
     @IBOutlet weak var searchBar: UITextField!
-    weak var delegate : MarketInfoDelegate?
+    @IBOutlet var marketInfoView: MarketInfoView!
+    @IBOutlet var marketInfoHeight: NSLayoutConstraint!
+    
+    //MARK: - properties
     var locationManager = CLLocationManager()
     var currentLocation: CLLocation?
     var placesClient: GMSPlacesClient!
     var zoomLevel: Float = 15.0
     let userLocationMarker = GMSMarker()
     var markers = [GMSMarker]()
-    var buttomPadding = 0
+    
+    var places = [Companies]()
+    
+    var bottomPadding = 0
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         setupMapStyle()
-        setupMapMarkers(places: DataProvider.shared.places)
+        setupMapMarkers(places: places)
     }
     
+    //MARK: - life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupView()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        self.setPadding(inset: self.bottomPadding)
+    }
+    
+    //MARK: - functions
+    fileprivate func setupLocationManager() {
         locationManager = CLLocationManager()
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.requestWhenInUseAuthorization()
         locationManager.distanceFilter = 50
         locationManager.startUpdatingLocation()
         locationManager.delegate = self
+    }
+    
+    fileprivate func setupView() {
+        setupLocationManager()
         placesClient = GMSPlacesClient.shared()
         maps.delegate = self
         searchBar.delegate = self
         setupMapStyle()
-        setupMapMarkers(places: DataProvider.shared.places)
+        
+        getPlaces()
+        setupMapMarkers(places: self.places)
+        
+        self.marketInfoHeight.constant = 0
+        self.marketInfoView.closeButton.addTarget(self, action: #selector(closeMarketInfoView), for: .touchUpInside)
+    }
+    
+    fileprivate func getPlaces() {
+        let places = DataProvider.shared.places
+        let newPlaces = places.filter { place in
+            return place.lat != nil
+        }
+        self.places = newPlaces
+    }
+    
+    @objc func closeMarketInfoView() {
+        UIView.animate(withDuration: 0.4, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: [.curveEaseIn], animations: {
+            
+            self.marketInfoHeight.constant = 0
+            self.view.layoutIfNeeded()
+            self.setPadding(inset: self.bottomPadding)
+            self.clearMarkers()
+        }, completion: nil)
     }
     
     func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
@@ -56,7 +98,7 @@ class MarketViewController: BaseVC, CLLocationManagerDelegate,GMSMapViewDelegate
             marker.icon = #imageLiteral(resourceName: "maps-selected-marker")
             let camera = GMSCameraPosition.camera(withLatitude: marker.position.latitude,longitude: marker.position.longitude,zoom: 10)
             maps.animate(to: camera)
-            delegate?.marketDidSelected(id: Int(marker.title ?? "0")!)
+            marketDidSelected(id: Int(marker.title ?? "0")!)
             return true
         }
         return false
@@ -104,7 +146,9 @@ class MarketViewController: BaseVC, CLLocationManagerDelegate,GMSMapViewDelegate
             DispatchQueue.main.async {
                 marker.map = self.maps
             }
-            markers.append(marker)
+            if lat != 0, lng != 0 {
+                markers.append(marker)
+            }
         }
     }
     
@@ -151,6 +195,7 @@ class MarketViewController: BaseVC, CLLocationManagerDelegate,GMSMapViewDelegate
     }
 }
 
+//MARK: - textfield
 extension MarketViewController: UITextFieldDelegate {
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
@@ -166,7 +211,7 @@ extension MarketViewController: UITextFieldDelegate {
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        let places = DataProvider.shared.places
+//        let places = DataProvider.shared.places
         var isFound = false
         for place in places.enumerated() {
             if (place.element.name?.lowercased().contains(textField.text!.lowercased()))! {
@@ -175,7 +220,7 @@ extension MarketViewController: UITextFieldDelegate {
                 let camera = GMSCameraPosition(latitude: lat, longitude: lng, zoom: 10)
                 self.maps.animate(to: camera)
                 isFound = true
-                self.delegate?.marketDidSelected(id: place.offset)
+                marketDidSelected(id: place.offset)
                 break
             }
         }
@@ -187,4 +232,77 @@ extension MarketViewController: UITextFieldDelegate {
         self.view.endEditing(true)
         return true
     }
+}
+
+//MARK: - Marker view functions
+extension MarketViewController {
+    
+    func marketDidSelected(id: Int) {
+        let marketInfoViewHeight : CGFloat = 200.0
+        let mapPadding = 170
+        UIView.animate(withDuration: 0.2) {
+            self.marketInfoView.nameLabel.text = self.places[id].name
+            self.marketInfoView.websiteLabel.text = self.places[id].address
+        }
+        
+        self.marketInfoView.lat = Double(self.places[id].lat ?? "0.0")!
+        self.marketInfoView.lng = Double(self.places[id].lng ?? "0.0")!
+        self.marketInfoView.directionButton.addTarget(self, action: #selector(directionMarket), for: .touchUpInside)
+        
+        if marketInfoHeight.constant == 0 {
+//            if self.marketInfoView.superview == nil {
+//                self.marketInfoView.frame.origin = CGPoint(x: 0, y: self.view.frame.height - marketInfoViewHeight)
+//                self.view.addSubview(self.marketInfoView)
+//            }
+            if UIDevice.current.modelName == "iPhone X" || UIDevice.current.modelName == "iPhone XS" || UIDevice.current.modelName == "iPhone XS Max" || UIDevice.current.modelName == "iPhone XR" || UIDevice.current.modelName == "iPhone 11" || UIDevice.current.modelName == "iPhone 11 Pro" || UIDevice.current.modelName == "iPhone 11 Pro Max" || UIDevice.current.modelName == "Simulator"  {
+                
+                UIView.animate(withDuration: 0.4, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0.5, options: [.curveEaseOut], animations: {
+                    self.marketInfoHeight.constant = marketInfoViewHeight
+                    self.setPadding(inset: mapPadding)
+                    self.view.layoutIfNeeded()
+                }, completion: nil)
+            }
+            else {
+                UIView.animate(withDuration: 0.4, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0.5, options: [.curveEaseOut], animations: {
+                    self.marketInfoHeight.constant = marketInfoViewHeight
+                    self.setPadding(inset: mapPadding + 40)
+                    self.view.layoutIfNeeded()
+                }, completion: nil)
+            }
+        }
+    }
+    
+    @objc func callMarket() {
+        let numbers = self.marketInfoView.callNumber.split(separator: ",")
+        if let number = (numbers.randomElement()?.description)?.replacingOccurrences(of: " ", with: "") {
+            if let url = URL(string: "tel://\(number)"), UIApplication.shared.canOpenURL(url) {
+                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                
+            }
+        }
+    }
+    
+    @objc func directionMarket() {
+        
+        if (UIApplication.shared.canOpenURL(URL(string:"comgooglemaps://")!)) {
+            if let url = "comgooglemaps://?saddr=&daddr=\(self.marketInfoView.lat)),\(self.marketInfoView.lng))&directionsmode=driving".getCleanedURL() {
+                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+            }
+            else {
+                KVNProgress.showError(withStatus: "The coordinator is not valid")
+            }
+        }
+        else if let url = "http://maps.apple.com/maps?saddr=\(self.marketInfoView.lat),\(self.marketInfoView.lng)".getCleanedURL(), UIApplication.shared.canOpenURL(url) {
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        }
+        else {
+            KVNProgress.showError(withStatus: "You don't have any map in your device")
+        }
+        
+    }
+    
+    @objc fileprivate func tapOnAddress() {
+        openUrl("url", viewController: self)
+    }
+    
 }

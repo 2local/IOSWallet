@@ -29,11 +29,13 @@ class MarketViewController: BaseVC, CLLocationManagerDelegate, GMSMapViewDelegat
     let userLocationMarker = GMSMarker()
     var markers = [GMSMarker]()
     
+    var places = [Companies]()
+    
     var bottomPadding = 0
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         setupMapStyle()
-        setupMapMarkers(places: DataProvider.shared.places)
+        setupMapMarkers(places: places)
     }
     
     //MARK: - life cycle
@@ -62,11 +64,20 @@ class MarketViewController: BaseVC, CLLocationManagerDelegate, GMSMapViewDelegat
         maps.delegate = self
         searchBar.delegate = self
         setupMapStyle()
-        setupMapMarkers(places: DataProvider.shared.places)
         
+        getPlaces()
+        setupMapMarkers(places: self.places)
         
         self.marketInfoHeight.constant = 0
         self.marketInfoView.closeButton.addTarget(self, action: #selector(closeMarketInfoView), for: .touchUpInside)
+    }
+    
+    fileprivate func getPlaces() {
+        let places = DataProvider.shared.places
+        let newPlaces = places.filter { place in
+            return place.lat != nil
+        }
+        self.places = newPlaces
     }
     
     @objc func closeMarketInfoView() {
@@ -135,7 +146,9 @@ class MarketViewController: BaseVC, CLLocationManagerDelegate, GMSMapViewDelegat
             DispatchQueue.main.async {
                 marker.map = self.maps
             }
-            markers.append(marker)
+            if lat != 0, lng != 0 {
+                markers.append(marker)
+            }
         }
     }
     
@@ -198,7 +211,7 @@ extension MarketViewController: UITextFieldDelegate {
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        let places = DataProvider.shared.places
+//        let places = DataProvider.shared.places
         var isFound = false
         for place in places.enumerated() {
             if (place.element.name?.lowercased().contains(textField.text!.lowercased()))! {
@@ -228,12 +241,12 @@ extension MarketViewController {
         let marketInfoViewHeight : CGFloat = 200.0
         let mapPadding = 170
         UIView.animate(withDuration: 0.2) {
-            self.marketInfoView.nameLabel.text = DataProvider.shared.places[id].name
-            self.marketInfoView.websiteLabel.text = DataProvider.shared.places[id].websiteURL
+            self.marketInfoView.nameLabel.text = self.places[id].name
+            self.marketInfoView.websiteLabel.text = self.places[id].address
         }
         
-        self.marketInfoView.lat = Double(DataProvider.shared.places[id].lat ?? "0.0")!
-        self.marketInfoView.lng = Double(DataProvider.shared.places[id].lng ?? "0.0")!
+        self.marketInfoView.lat = Double(self.places[id].lat ?? "0.0")!
+        self.marketInfoView.lng = Double(self.places[id].lng ?? "0.0")!
         self.marketInfoView.directionButton.addTarget(self, action: #selector(directionMarket), for: .touchUpInside)
         
         if marketInfoHeight.constant == 0 {
@@ -286,6 +299,10 @@ extension MarketViewController {
             KVNProgress.showError(withStatus: "You don't have any map in your device")
         }
         
+    }
+    
+    @objc fileprivate func tapOnAddress() {
+        openUrl("url", viewController: self)
     }
     
 }

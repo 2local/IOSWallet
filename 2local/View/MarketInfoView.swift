@@ -25,6 +25,8 @@ class MarketInfoView: UIView {
         
         websiteLabel.numberOfLines = 0
         nameLabel.numberOfLines = 0
+        
+        websiteLabel.isUserInteractionEnabled = true
     }
 
 }

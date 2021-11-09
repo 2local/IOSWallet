@@ -14,6 +14,7 @@ class APIManager: NSObject,URLSessionDelegate {
     let baseURL = Configuration.shared.baseURL
     let apiKey = Configuration.shared.apiKey
     let bscScanToken = Configuration.shared.bscScanToken
+    let marketplaceBaseUrl = Configuration.shared.marketplaceBaseURL
      
     static func processResponse(response: URLResponse?, data: Data?) -> (status: Bool,statusCode: Int?, message: String?) {
         let httpResponse = response as? HTTPURLResponse
@@ -226,7 +227,7 @@ class APIManager: NSObject,URLSessionDelegate {
         var request = URLRequest(url: url!)
         request.httpMethod = HttpMethod.GET.rawValue
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.setValue(DataProvider.shared.keychain.get("act") ?? "nil", forHTTPHeaderField:  "Authorization")
+        request.setValue(LocalDataManager.shared.getTokenField(), forHTTPHeaderField:  "Authorization")
         URLSession.shared.dataTask(with: request , completionHandler: completion)
             .resume()
     }
@@ -236,7 +237,7 @@ class APIManager: NSObject,URLSessionDelegate {
         var request = URLRequest(url: url!)
         request.httpMethod = HttpMethod.GET.rawValue
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.setValue(DataProvider.shared.keychain.get("act") ?? "nil", forHTTPHeaderField:  "Authorization")
+        request.setValue(LocalDataManager.shared.getTokenField(), forHTTPHeaderField:  "Authorization")
         URLSession.shared.dataTask(with: request , completionHandler: completion)
             .resume()
     }
@@ -247,7 +248,7 @@ class APIManager: NSObject,URLSessionDelegate {
         var request = URLRequest(url: url!)
         request.httpMethod = HttpMethod.POST.rawValue
         request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
-        request.setValue(DataProvider.shared.keychain.get("act") ?? "nil", forHTTPHeaderField:  "Authorization")
+        request.setValue(LocalDataManager.shared.getTokenField(), forHTTPHeaderField:  "Authorization")
         let parameters = "user_id=\(userId)&quantity=\(quantity)&currency=\(currency)&requestor=mobile&amount=\(amount)&payment_type=\(paymentType)&ltwol_tokens=\(l2lQuantity)&status=\(status)&date=\(date)"
         request.httpBody = parameters.data(using: .utf8, allowLossyConversion: true)
         URLSession.shared.dataTask(with: request , completionHandler: completion)
@@ -260,7 +261,7 @@ class APIManager: NSObject,URLSessionDelegate {
         var request = URLRequest(url: url!)
         request.httpMethod = HttpMethod.POST.rawValue
         request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
-        request.setValue(DataProvider.shared.keychain.get("act") ?? "nil", forHTTPHeaderField:  "Authorization")
+        request.setValue(LocalDataManager.shared.getTokenField(), forHTTPHeaderField:  "Authorization")
         let parameters = "user_id=\(userId)&quantity=\(quantity)&currency=\(currency)&requestor=mobile&amount=\(amount)&payment_type=\(paymentType)&ltwol_tokens=\(l2lQuantity)"
         request.httpBody = parameters.data(using: .utf8, allowLossyConversion: true)
         URLSession.shared.dataTask(with: request , completionHandler: completion)
@@ -274,7 +275,7 @@ class APIManager: NSObject,URLSessionDelegate {
         var request = URLRequest(url: url!)
         request.httpMethod = HttpMethod.POST.rawValue
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.setValue(DataProvider.shared.keychain.get("act") ?? "nil", forHTTPHeaderField:  "Authorization")
+        request.setValue(LocalDataManager.shared.getTokenField(), forHTTPHeaderField:  "Authorization")
         request.httpBody = try? JSONSerialization.data(withJSONObject: ["account_id":publicKey,"issuer":issuer], options: .prettyPrinted)
         URLSession.shared.dataTask(with: request , completionHandler: completion)
             .resume()
@@ -286,7 +287,7 @@ class APIManager: NSObject,URLSessionDelegate {
         var request = URLRequest(url: url!)
         request.httpMethod = HttpMethod.POST.rawValue
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.setValue(DataProvider.shared.keychain.get("act") ?? "nil", forHTTPHeaderField:  "Authorization")
+        request.setValue(LocalDataManager.shared.getTokenField(), forHTTPHeaderField:  "Authorization")
         request.httpBody = try? JSONSerialization.data(withJSONObject: ["receiving_keys":walletNumber,"amount":amount,"source":"Out","status":"open","user_id":((DataProvider.shared.user?.id)!)], options: .prettyPrinted)
         URLSession.shared.dataTask(with: request , completionHandler: completion)
             .resume()
@@ -299,7 +300,7 @@ class APIManager: NSObject,URLSessionDelegate {
         var request = URLRequest(url: url!)
         request.httpMethod = HttpMethod.POST.rawValue
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.setValue(DataProvider.shared.keychain.get("act") ?? "nil", forHTTPHeaderField:  "Authorization")
+        request.setValue(LocalDataManager.shared.getTokenField(), forHTTPHeaderField:  "Authorization")
         request.httpBody = try? JSONSerialization.data(withJSONObject: ["public_key": publicKey, "email": email], options: .prettyPrinted)
         URLSession.shared.dataTask(with: request , completionHandler: completion)
             .resume()
@@ -311,7 +312,7 @@ class APIManager: NSObject,URLSessionDelegate {
         var request = URLRequest(url: url!)
         request.httpMethod = HttpMethod.POST.rawValue
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.setValue(DataProvider.shared.keychain.get("act") ?? "nil", forHTTPHeaderField:  "Authorization")
+        request.setValue(LocalDataManager.shared.getTokenField(), forHTTPHeaderField:  "Authorization")
         request.httpBody = try? JSONSerialization.data(withJSONObject: ["code":code,
                                                                         "user_id":("\(DataProvider.shared.user?.id ?? -1)")],
                                                        options: .prettyPrinted)
@@ -335,24 +336,24 @@ class APIManager: NSObject,URLSessionDelegate {
     }
     
     func addMarketplace(companyName:String,website:String,location:CLLocationCoordinate2D, completion: @escaping (Data?, URLResponse?,Error?) -> Void) {
-        let url = URL(string:baseURL + Endpoints.createCompany)
+        let url = URL(string: marketplaceBaseUrl + Endpoints.createCompany)
         print("\(url!)")
         var request = URLRequest(url: url!)
         request.httpMethod = HttpMethod.POST.rawValue
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.setValue(DataProvider.shared.keychain.get("act") ?? "nil", forHTTPHeaderField:  "Authorization")
+        request.setValue(LocalDataManager.shared.getTokenField(), forHTTPHeaderField:  "Authorization")
         request.httpBody = try? JSONSerialization.data(withJSONObject: ["company_name":companyName,"website_url":website,"latitude":location.latitude.description,"longitude":location.longitude.description,"status":"available","reserve":"reserve"], options: .prettyPrinted)
         URLSession.shared.dataTask(with: request , completionHandler: completion)
             .resume()
     }
     
     func getMarketplaces(completion: @escaping (Data?, URLResponse?,Error?) -> Void) {
-        var url = URL(string:baseURL + Endpoints.getCompany)
+        var url = URL(string: marketplaceBaseUrl + Endpoints.getCompany)
         print("\(url!)")
         var request = URLRequest(url: url!)
         request.httpMethod = HttpMethod.GET.rawValue
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.setValue(DataProvider.shared.keychain.get("act") ?? "nil", forHTTPHeaderField:  "Authorization")
+        request.setValue(LocalDataManager.shared.getTokenField(), forHTTPHeaderField:  "Authorization")
         URLSession.shared.dataTask(with: request , completionHandler: completion)
             .resume()
     }

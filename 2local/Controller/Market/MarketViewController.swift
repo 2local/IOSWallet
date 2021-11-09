@@ -11,7 +11,9 @@ import GoogleMaps
 import GooglePlaces
 import CoreLocation
 import KVNProgress
-protocol MarketInfoDelegate:class {
+
+
+protocol MarketInfoDelegate: AnyObject {
     func marketDidSelected(id:Int)
 }
 

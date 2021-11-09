@@ -13,15 +13,15 @@ struct Place: Codable {
 }
     
 struct Companies: Codable {
-    var id:Int?
-    var name:String?
-    var tel:String?
-    var address:String?
-    var lat:String?
-    var lng:String?
-    var websiteURL:String?
-    var status:String?
-    var reserve:String?
+    var id: Int?
+    var name: String?
+    var tel: String?
+    var address: String?
+    var lat: String?
+    var lng: String?
+    var websiteURL: String?
+    var status: Int?
+    var reserve: String?
     var apiId: Int?
     var location: String?
     var cci: String?
@@ -31,7 +31,7 @@ struct Companies: Codable {
     var createdAt: String?
     var updatedAt: String?
 
-    enum CodingKeys : String , CodingKey {
+    enum CodingKeys: String, CodingKey {
         case id = "id"
         case name = "company_name"
         case websiteURL = "website_url"

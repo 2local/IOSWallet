@@ -121,7 +121,6 @@
 		4F49890323B7FB880015B2B8 /* Lato-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4F4988FA23B7FB870015B2B8 /* Lato-Regular.ttf */; };
 		4F49890523B7FB880015B2B8 /* Lato-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4F4988FC23B7FB870015B2B8 /* Lato-Light.ttf */; };
 		4F49890823B7FB880015B2B8 /* Lato-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4F4988FF23B7FB880015B2B8 /* Lato-Medium.ttf */; };
-		4F4E4F0F23E6318100DC572B /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4E4F0E23E6318100DC572B /* MainViewController.swift */; };
 		4F58138C23BA92CF00672C8D /* HSLayoutHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F58138B23BA92CF00672C8D /* HSLayoutHelper.swift */; };
 		4F58138E23BA933A00672C8D /* DeviceHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F58138D23BA933900672C8D /* DeviceHelper.swift */; };
 		4F58139223BAB8A400672C8D /* MarketViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F58139123BAB8A400672C8D /* MarketViewController.swift */; };
@@ -336,7 +335,6 @@
 		4F4988FA23B7FB870015B2B8 /* Lato-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Regular.ttf"; sourceTree = "<group>"; };
 		4F4988FC23B7FB870015B2B8 /* Lato-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Light.ttf"; sourceTree = "<group>"; };
 		4F4988FF23B7FB880015B2B8 /* Lato-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Medium.ttf"; sourceTree = "<group>"; };
-		4F4E4F0E23E6318100DC572B /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		4F58138B23BA92CF00672C8D /* HSLayoutHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HSLayoutHelper.swift; sourceTree = "<group>"; };
 		4F58138D23BA933900672C8D /* DeviceHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceHelper.swift; sourceTree = "<group>"; };
 		4F58139123BAB8A400672C8D /* MarketViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketViewController.swift; sourceTree = "<group>"; };
@@ -961,7 +959,6 @@
 		4F9961CD23BA477D009F6486 /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				4F4E4F0E23E6318100DC572B /* MainViewController.swift */,
 				4F58139323BAC0D500672C8D /* PayByScan */,
 			);
 			path = Main;
@@ -1580,7 +1577,6 @@
 				4F86873623C4AF86008AF6D9 /* SettingsTableViewCell.swift in Sources */,
 				4F86873423C4A811008AF6D9 /* SettingsViewController.swift in Sources */,
 				4F9990D423C68A3A0096BE38 /* AddressBookFooterTableViewCell.swift in Sources */,
-				4F4E4F0F23E6318100DC572B /* MainViewController.swift in Sources */,
 				4F9961C123B94066009F6486 /* TLPageControl.swift in Sources */,
 				4FC24CDB23D89785009B81A3 /* Protocols.swift in Sources */,
 				A58646C726134B5E004D2CC7 /* WalletTableViewCell.swift in Sources */,

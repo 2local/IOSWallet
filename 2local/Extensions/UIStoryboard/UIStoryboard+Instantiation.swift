@@ -22,8 +22,8 @@ extension UIStoryboard {
         return self.init(name: "Marketplace", bundle: nil)
     }
     
-    class var home: UIStoryboard {
-        return self.init(name: "Home", bundle: nil)
+    class var dashboard: UIStoryboard {
+        return self.init(name: "Dashboard", bundle: nil)
     }
     
     class var intro: UIStoryboard {

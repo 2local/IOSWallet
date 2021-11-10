@@ -28,6 +28,7 @@ class DashboardVC: BaseVC {
     var walletBalance: String = "0"
     var defaultSym: String = ""
     var totalfiatWithSymbol: String = "$0"
+    var totalTokenWithSymbol: String = "0 2LC"
     var ethTransactionHistory: [TransactionHistoryModel] = []
     var userData: User?
     
@@ -62,7 +63,7 @@ class DashboardVC: BaseVC {
             self.invisible = false
         }
         tableView.reloadData()
-        setNavigation(title: "Total Balance", largTitle: true)
+        setNavigation(title: "Total 2LC Balance", largTitle: true)
         
         settingsBarButtonItem()
     }
@@ -128,7 +129,13 @@ class DashboardVC: BaseVC {
         walletQueue.async {
             self.getTotalFiat(wallets) { totalFiat in
                 self.totalfiatWithSymbol = self.defaultSym + "\(totalFiat)".convertToPriceType()
-                
+                DispatchQueue.main.async {
+                    self.tableView.reloadRows(at: self.indexPath(at: 0), with: .automatic)
+                }
+            }
+            
+            self.get2localBalance(wallets) { tlcBalance in
+                self.totalTokenWithSymbol = "\(tlcBalance)".convertToPriceType() + " 2LC"
                 DispatchQueue.main.async {
                     self.tableView.reloadRows(at: self.indexPath(at: 0), with: .automatic)
                 }
@@ -187,7 +194,7 @@ class DashboardVC: BaseVC {
     
     //MARK: - actions
     @IBAction func goToTransaction(_ sender: Any) {
-        let vc = UIStoryboard.home.instantiate(viewController: TransactionsViewController.self)
+        let vc = UIStoryboard.dashboard.instantiate(viewController: TransactionsViewController.self)
         vc.initWith(self.transfers)
         if let navigation = navigationController {
             navigation.pushViewController(vc, animated: true)

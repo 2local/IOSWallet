@@ -46,7 +46,7 @@ extension DashboardVC: UITableViewDelegate, UITableViewDataSource {
         switch row {
             case 0:
                 let cell = tableView.dequeue(BalanceSectionTableViewCell.self)
-                cell.fill(self.totalfiatWithSymbol, invisible: self.invisible)
+                cell.fill(self.totalfiatWithSymbol, tokenCount: self.totalTokenWithSymbol, invisible: self.invisible)
                 
                 cell.invisibleCallback = { [weak self] invisible in
                     guard let self = self else { return }

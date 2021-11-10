@@ -12,18 +12,24 @@ class BalanceSectionTableViewCell: UITableViewCell {
     
     //MARK: - outlets
     @IBOutlet weak var balanceLabel: UILabel!
+    @IBOutlet weak var tokenCountLabel: UILabel!
     @IBOutlet weak var hiddenButton: UIButton!
     
     //MARK: - properties
     var invisible = false
     private var totalfiatWithSymbol: String = "$0"
+    private var totalTokenWithSymbol: String = "0 2LC"
     var invisibleCallback: DataAction<Bool> = nil
     
     //MARK: - life cycle
     override func awakeFromNib() {
         super.awakeFromNib()
         balanceLabel.text = ""
-        balanceLabel.font = .TLFont(weight: .medium, size: 46, style: .body)
+        balanceLabel.font = .TLFont(weight: .regular, size: 22, style: .body)
+        
+        tokenCountLabel.text = ""
+        tokenCountLabel.font = .TLFont(weight: .medium, size: 40, style: .body)
+        tokenCountLabel.adjustsFontSizeToFitWidth = true
         
         hiddenButton.setTitle("", for: .normal)
         hiddenButton.setImage(UIImage(named: "eyeFill")?.tint(with: ._707070), for: .normal)
@@ -36,8 +42,9 @@ class BalanceSectionTableViewCell: UITableViewCell {
     }
     
     //MARK: - functions
-    func fill(_ balance: String, invisible: Bool) {
+    func fill(_ balance: String, tokenCount: String, invisible: Bool) {
         self.totalfiatWithSymbol = balance
+        totalTokenWithSymbol = tokenCount
         self.invisible = invisible
         invisibleAction()
     }
@@ -46,6 +53,7 @@ class BalanceSectionTableViewCell: UITableViewCell {
         if invisible {
             UIView.transition(with: self.balanceLabel, duration: 0.5, options: .transitionFlipFromTop, animations: {
                 self.balanceLabel.text = "******"
+                self.tokenCountLabel.text = "******"
             }, completion: nil)
             hiddenButton.setImage(UIImage(named: "eye1-selected")?.tint(with: ._707070), for: .normal)
             UIView.animate(withDuration: 0.2) {
@@ -56,6 +64,7 @@ class BalanceSectionTableViewCell: UITableViewCell {
             if self.balanceLabel.text != totalfiatWithSymbol {
                 UIView.transition(with: self.balanceLabel, duration: 0.5, options: .transitionFlipFromTop, animations: { [self] in
                     balanceLabel.text = totalfiatWithSymbol
+                    tokenCountLabel.text = totalTokenWithSymbol
                 }, completion: nil)
             }
             hiddenButton.setImage(UIImage(named: "eyeFill")?.tint(with: ._707070), for: .normal)

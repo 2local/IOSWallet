@@ -193,7 +193,7 @@
 		A501CB8D260A09800050AF49 /* Marketplace.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A501CB8C260A09800050AF49 /* Marketplace.storyboard */; };
 		A501CB91260A09D80050AF49 /* Scan.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A501CB90260A09D80050AF49 /* Scan.storyboard */; };
 		A501CB95260A0A290050AF49 /* String+Localized.swift in Sources */ = {isa = PBXBuildFile; fileRef = A501CB94260A0A290050AF49 /* String+Localized.swift */; };
-		A501CB9E260A0ACA0050AF49 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A501CB9D260A0ACA0050AF49 /* Home.storyboard */; };
+		A501CB9E260A0ACA0050AF49 /* Dashboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A501CB9D260A0ACA0050AF49 /* Dashboard.storyboard */; };
 		A501CBA1260A0ADF0050AF49 /* Authentication.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A501CBA0260A0ADF0050AF49 /* Authentication.storyboard */; };
 		A501CBA4260A0AEB0050AF49 /* Splash.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A501CBA3260A0AEB0050AF49 /* Splash.storyboard */; };
 		A501CBA7260A0B090050AF49 /* Intro.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A501CBA6260A0B090050AF49 /* Intro.storyboard */; };
@@ -408,7 +408,7 @@
 		A501CB8C260A09800050AF49 /* Marketplace.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Marketplace.storyboard; sourceTree = "<group>"; };
 		A501CB90260A09D80050AF49 /* Scan.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Scan.storyboard; sourceTree = "<group>"; };
 		A501CB94260A0A290050AF49 /* String+Localized.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Localized.swift"; sourceTree = "<group>"; };
-		A501CB9D260A0ACA0050AF49 /* Home.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
+		A501CB9D260A0ACA0050AF49 /* Dashboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Dashboard.storyboard; sourceTree = "<group>"; };
 		A501CBA0260A0ADF0050AF49 /* Authentication.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Authentication.storyboard; sourceTree = "<group>"; };
 		A501CBA3260A0AEB0050AF49 /* Splash.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Splash.storyboard; sourceTree = "<group>"; };
 		A501CBA6260A0B090050AF49 /* Intro.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Intro.storyboard; sourceTree = "<group>"; };
@@ -1093,7 +1093,7 @@
 			isa = PBXGroup;
 			children = (
 				A501CBA0260A0ADF0050AF49 /* Authentication.storyboard */,
-				A501CB9D260A0ACA0050AF49 /* Home.storyboard */,
+				A501CB9D260A0ACA0050AF49 /* Dashboard.storyboard */,
 				A501CBA6260A0B090050AF49 /* Intro.storyboard */,
 				4F4988AF23B786620015B2B8 /* BuyTokens.storyboard */,
 				A501CB8C260A09800050AF49 /* Marketplace.storyboard */,
@@ -1431,7 +1431,7 @@
 				4F4988D923B79A3F0015B2B8 /* RobotoCondensed-BoldItalic.ttf in Resources */,
 				031805E026B1654600649BFD /* Settings.storyboard in Resources */,
 				A501CB91260A09D80050AF49 /* Scan.storyboard in Resources */,
-				A501CB9E260A0ACA0050AF49 /* Home.storyboard in Resources */,
+				A501CB9E260A0ACA0050AF49 /* Dashboard.storyboard in Resources */,
 				4F74474123DE07D100FBF7E1 /* dark-style.json in Resources */,
 				A501CBA4260A0AEB0050AF49 /* Splash.storyboard in Resources */,
 				A501CAFB2609A9950050AF49 /* Configuration.plist in Resources */,

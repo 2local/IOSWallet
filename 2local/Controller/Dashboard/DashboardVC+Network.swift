@@ -40,6 +40,7 @@ extension DashboardVC {
         var totalFiat: Double = 0
         guard wallets.count > 0 else { return }
         wallets.forEach { (wallet) in
+            if wallet.name != Coins.TLocal { return }
             let currentWallet = WalletFactory.getWallets(wallet: wallet)
             let balance = Double(currentWallet.balance())
             currentWallet.fiat(from: balance) { (fiat) in
@@ -47,6 +48,16 @@ extension DashboardVC {
                 completion(totalFiat)
             }
         }
+    }
+    
+    func get2localBalance(_ wallets: [Wallets], completion: @escaping ((Double) -> Void)) {
+        guard let tlcWallet = wallets.filter({$0.name == .TLocal}).first else {
+            completion(0)
+            return
+        }
+        let wallet = WalletFactory.getWallets(wallet: tlcWallet)
+        let balance = (Double(wallet.balance()) ?? 0)
+        completion(balance)
     }
     
     //MARK: - 2LC

@@ -12,7 +12,6 @@ import GooglePlaces
 import CoreLocation
 import KVNProgress
 
-
 class MarketViewController: BaseVC, CLLocationManagerDelegate, GMSMapViewDelegate {
     
     //MARK: - outlets
@@ -126,7 +125,7 @@ class MarketViewController: BaseVC, CLLocationManagerDelegate, GMSMapViewDelegat
         
         userLocationMarker.icon = UIImage(named: "currentLocation")
         userLocationMarker.map = self.maps
-    
+        
     }
     
     
@@ -211,7 +210,7 @@ extension MarketViewController: UITextFieldDelegate {
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-//        let places = DataProvider.shared.places
+        //        let places = DataProvider.shared.places
         var isFound = false
         for place in places.enumerated() {
             if (place.element.name?.lowercased().contains(textField.text!.lowercased()))! {
@@ -228,7 +227,7 @@ extension MarketViewController: UITextFieldDelegate {
         if !isFound {
             KVNProgress.showError(withStatus: "No marketplace is found")
         }
-    
+        
         self.view.endEditing(true)
         return true
     }
@@ -250,10 +249,10 @@ extension MarketViewController {
         self.marketInfoView.directionButton.addTarget(self, action: #selector(directionMarket), for: .touchUpInside)
         
         if marketInfoHeight.constant == 0 {
-//            if self.marketInfoView.superview == nil {
-//                self.marketInfoView.frame.origin = CGPoint(x: 0, y: self.view.frame.height - marketInfoViewHeight)
-//                self.view.addSubview(self.marketInfoView)
-//            }
+            //            if self.marketInfoView.superview == nil {
+            //                self.marketInfoView.frame.origin = CGPoint(x: 0, y: self.view.frame.height - marketInfoViewHeight)
+            //                self.view.addSubview(self.marketInfoView)
+            //            }
             if UIDevice.current.modelName == "iPhone X" || UIDevice.current.modelName == "iPhone XS" || UIDevice.current.modelName == "iPhone XS Max" || UIDevice.current.modelName == "iPhone XR" || UIDevice.current.modelName == "iPhone 11" || UIDevice.current.modelName == "iPhone 11 Pro" || UIDevice.current.modelName == "iPhone 11 Pro Max" || UIDevice.current.modelName == "Simulator"  {
                 
                 UIView.animate(withDuration: 0.4, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0.5, options: [.curveEaseOut], animations: {

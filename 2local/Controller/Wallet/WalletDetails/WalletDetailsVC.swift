@@ -174,7 +174,7 @@ class WalletDetailsVC: BaseVC {
     }
     
     @objc fileprivate func receiveTapped() {
-        let vc = UIStoryboard.home.instantiate(viewController: ReceiveViewController.self)
+        let vc = UIStoryboard.dashboard.instantiate(viewController: ReceiveViewController.self)
         guard let wallet = self.wallet else { return }
         vc.initWith(wallet)
         if let navigation = self.navigationController {

@@ -47,7 +47,7 @@ class TabbarVC: UITabBarController {
         let topAndBottonInset: CGFloat = self.tabBar.hasHomeIndicator ? 0 : 0//7 : 0
         
         // HOME
-        let homeVC = UIStoryboard.home.instantiate(viewController: DashboardVC.self)
+        let homeVC = UIStoryboard.dashboard.instantiate(viewController: DashboardVC.self)
         let homeTabBar = UITabBarItem(title: "Home",
                                       image: UIImage(named: "home")?.tint(with: ._topaz),
                                       selectedImage: UIImage(named: "home")?.tint(with: ._flamenco))

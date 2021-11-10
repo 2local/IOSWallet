@@ -783,7 +783,7 @@
 				4F834CB723BD1B850029C9FA /* Home */,
 				03E3E6AB26F8B8BB0014B6B9 /* LocalAuth */,
 				4F9961CA23BA471B009F6486 /* Login */,
-				4F9961CD23BA477D009F6486 /* Main */,
+				4F58139323BAC0D500672C8D /* PayByScan */,
 				4F834CB823BD1B960029C9FA /* Market */,
 				03C4F8FF27030C7800BDEDB1 /* Notification */,
 				0302EA4A2703143C00E3B962 /* Onboarding */,
@@ -954,14 +954,6 @@
 				4F9961C623BA1B8B009F6486 /* LoginTFAViewController.swift */,
 			);
 			path = Login;
-			sourceTree = "<group>";
-		};
-		4F9961CD23BA477D009F6486 /* Main */ = {
-			isa = PBXGroup;
-			children = (
-				4F58139323BAC0D500672C8D /* PayByScan */,
-			);
-			path = Main;
 			sourceTree = "<group>";
 		};
 		4F9990D023C6109D0096BE38 /* AddressBook */ = {

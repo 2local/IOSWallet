@@ -20,7 +20,7 @@ jobs:
         ls /Applications | grep Xcode
         echo "Choosing Xcode_${{ matrix.xcode }}.app"
         sudo xcode-select -s /Applications/Xcode_${{ matrix.xcode }}.app
-        xcodebuild -version
+        xcodebuild --version
         swift --version
         swift package --version
     - name: Resolve

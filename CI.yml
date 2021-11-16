@@ -1,5 +1,4 @@
 name: CI
-
 on:
   push:
     branches: [ master ]
@@ -7,17 +6,39 @@ on:
     branches: [ master ]
 
 jobs:
-  build-and-test:
-
-    runs-on: macos-latest
-
+  run:
+    runs-on: macos-11
+    name: Xcode ${{ matrix.xcode }}
+    strategy:
+      matrix:
+        xcode: ["12.5.1", "13.0", "13.1"]
     steps:
-    - uses: actions/checkout@v2
-    
-    - name: Select Xcode
-      run: sudo xcode-select -switch /Applications/Xcode.app
-
-    - name: Build and test
-      run: xcodebuild clean build test -workspace App/2local.xcworkspace -scheme 2local -destination "${destination}" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO ONLY_ACTIVE_ARCH=NO
-bash <(curl -s https://codecov.io/bash)
-
+    - uses: actions/checkout@master
+    - name: Set Xcode
+      run: |
+        echo "Available Xcode versions:"
+        ls /Applications | grep Xcode
+        echo "Choosing Xcode_${{ matrix.xcode }}.app"
+        sudo xcode-select -s /Applications/Xcode_${{ matrix.xcode }}.app
+        xcodebuild -version
+        swift --version
+        swift package --version
+    - name: Resolve
+      run: swift package resolve
+    - name: Build
+      run: swift build
+    - name: Test
+      run: set -o pipefail && swift test 2>&1 | xcpretty
+    - name: Gen fixtures
+      run: scripts/gen-fixtures.sh
+    - name: Check fixtures
+      run: scripts/diff-fixtures.sh
+    - name: Build fixtures
+      run: scripts/build-fixtures.sh
+  run-linux:
+    runs-on: ubuntu-latest
+    name: Linux
+    steps:
+      - uses: actions/checkout@master
+      - name: Build and run tests
+        run: swift test --enable-test-discovery

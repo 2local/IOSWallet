@@ -17,6 +17,7 @@ target '2local' do
   pod 'Fabric'
   pod 'Crashlytics'
   pod 'Firebase/Analytics', '~> 8.0.0'
+  pod 'Firebase/RemoteConfig'
   pod 'Branch', '~> 0.37.0'
   pod 'web3swift'
   pod 'Alamofire', '~> 4.0'

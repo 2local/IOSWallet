@@ -32,10 +32,22 @@ class DashboardVC: BaseVC {
     var ethTransactionHistory: [TransactionHistoryModel] = []
     var userData: User?
     
+    var showInfo = false
+    var infoText = ""
+    let config = FBRemoteConfig.shared
+    
+    enum SectionNames: CaseIterable {
+        case info, balance, wallets, chart
+    }
+    
     //MARK: - View cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
+        if config.fetchComplete {
+            updateCloudData()
+        }
+        config.loadingDoneCallback = updateCloudData
         setupTable()
         setupNotifications()
         KVNProgress.show(withStatus: "", on: self.view)
@@ -56,6 +68,25 @@ class DashboardVC: BaseVC {
     }
     
     //MARK: - Functions
+    
+    func updateCloudData() {
+        let anouncementMessage = config.string(forKey: .anouncement_msg)
+        let showAnouncementMessage = config.bool(forKey: .show_anouncement)
+        
+        let maintenanceModeMessage = config.string(forKey: .maintenance_msg)
+        let maintenanceMode = config.bool(forKey: .maintenance_mode)
+        
+        if maintenanceMode {
+            showInfo = true
+            infoText = maintenanceModeMessage
+            tableView.reloadData()
+        } else if showAnouncementMessage {
+            showInfo = true
+            infoText = anouncementMessage
+            tableView.reloadData()
+        }
+    }
+    
     fileprivate func setupView() {
         if UserDefaults.standard.bool(forKey: "invisible") {
             self.invisible = true
@@ -99,7 +130,7 @@ class DashboardVC: BaseVC {
                                                name: Notification.Name.walletRemove,
                                                object: nil)
     }
-
+    
     func showTransfer(_ transfers: [Transfer]) {
         let months = Date().getLast12Month.1
         

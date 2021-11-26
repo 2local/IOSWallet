@@ -18,6 +18,7 @@ extension DashboardVC: UITableViewDelegate, UITableViewDataSource {
         tableView.register(BalanceSectionTableViewCell.self)
         tableView.register(ChartSectionTableViewCell.self)
         tableView.register(WalletListSectionTableViewCell.self)
+        tableView.register(InfoTableViewCell.self)
         
         tableView.backgroundColor = .clear
         tableView.dataSource = self
@@ -37,7 +38,7 @@ extension DashboardVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        3
+        return 4
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -45,6 +46,10 @@ extension DashboardVC: UITableViewDelegate, UITableViewDataSource {
         
         switch row {
             case 0:
+                let cell = tableView.dequeue(InfoTableViewCell.self)
+                cell.fill(infoText)
+                return cell
+            case 1:
                 let cell = tableView.dequeue(BalanceSectionTableViewCell.self)
                 cell.fill(self.totalfiatWithSymbol, tokenCount: self.totalTokenWithSymbol, invisible: self.invisible)
                 
@@ -56,7 +61,7 @@ extension DashboardVC: UITableViewDelegate, UITableViewDataSource {
                 }
                 
                 return cell
-            case 1:
+            case 2:
                 let cell = tableView.dequeue(WalletListSectionTableViewCell.self)
                 cell.fill(self, wallets: self.wallets, invisible: self.invisible)
                 return cell

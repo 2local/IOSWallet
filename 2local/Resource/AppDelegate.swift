@@ -11,11 +11,14 @@ import KVNProgress
 import GoogleMaps
 import GooglePlaces
 import Firebase
+import FirebaseRemoteConfig
 import Crashlytics
 import Branch
 import LocalAuthentication
 
 public let walletQueue = DispatchQueue.global(qos: .userInitiated)
+
+var remoteConfig = RemoteConfig.remoteConfig()
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -25,6 +28,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         FirebaseApp.configure()
+        
+        _ = FBRemoteConfig.shared
+        
         self.logUser()
         
         let googleApiKey = Constant.googleAPIKey

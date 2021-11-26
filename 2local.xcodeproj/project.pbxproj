@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		03016D592750F80400CB4966 /* FirebaseRemoteConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03016D582750F80400CB4966 /* FirebaseRemoteConfig.swift */; };
+		03016D5D2751327900CB4966 /* InfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03016D5B2751327900CB4966 /* InfoTableViewCell.swift */; };
+		03016D5E2751327900CB4966 /* InfoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 03016D5C2751327900CB4966 /* InfoTableViewCell.xib */; };
 		0307D3A126F9CFCD004497CC /* LAContext+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0307D3A026F9CFCD004497CC /* LAContext+Extension.swift */; };
 		03107B33266900CD008DC8B1 /* TransactionConfirmVC+Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03107B32266900CD008DC8B1 /* TransactionConfirmVC+Network.swift */; };
 		03128806261FAB2F006B0F95 /* CreateETHWalletVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03128805261FAB2F006B0F95 /* CreateETHWalletVC.swift */; };
@@ -221,6 +224,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		03016D582750F80400CB4966 /* FirebaseRemoteConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseRemoteConfig.swift; sourceTree = "<group>"; };
+		03016D5B2751327900CB4966 /* InfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoTableViewCell.swift; sourceTree = "<group>"; };
+		03016D5C2751327900CB4966 /* InfoTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InfoTableViewCell.xib; sourceTree = "<group>"; };
 		0307D3A026F9CFCD004497CC /* LAContext+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LAContext+Extension.swift"; sourceTree = "<group>"; };
 		03107B32266900CD008DC8B1 /* TransactionConfirmVC+Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TransactionConfirmVC+Network.swift"; sourceTree = "<group>"; };
 		03128805261FAB2F006B0F95 /* CreateETHWalletVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateETHWalletVC.swift; sourceTree = "<group>"; };
@@ -450,6 +456,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		03016D5A2751326400CB4966 /* Info */ = {
+			isa = PBXGroup;
+			children = (
+				03016D5B2751327900CB4966 /* InfoTableViewCell.swift */,
+				03016D5C2751327900CB4966 /* InfoTableViewCell.xib */,
+			);
+			path = Info;
+			sourceTree = "<group>";
+		};
 		0302EA482703142700E3B962 /* Common */ = {
 			isa = PBXGroup;
 			children = (
@@ -673,6 +688,7 @@
 		03ECED902713316700B2B532 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				03016D5A2751326400CB4966 /* Info */,
 				03ECED9F2713328300B2B532 /* BalanceSection */,
 				03ECED97271331C300B2B532 /* WalletsList */,
 				03ECED96271331BA00B2B532 /* Chart */,
@@ -1133,6 +1149,7 @@
 			isa = PBXGroup;
 			children = (
 				A501CAF92609A9610050AF49 /* NetWork Configuration */,
+				03016D582750F80400CB4966 /* FirebaseRemoteConfig.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -1403,6 +1420,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4F4988DC23B79A3F0015B2B8 /* Roboto-Thin.ttf in Resources */,
+				03016D5E2751327900CB4966 /* InfoTableViewCell.xib in Resources */,
 				4F4988E023B79A3F0015B2B8 /* Roboto-Italic.ttf in Resources */,
 				031288E62621D46A006B0F95 /* SeedPhraseCollectionViewCell.xib in Resources */,
 				4F4988D423B79A3F0015B2B8 /* Roboto-ThinItalic.ttf in Resources */,
@@ -1601,6 +1619,7 @@
 				4FBF60AE23BFA8AD00FC12D7 /* Buy2LCReceiptViewController.swift in Sources */,
 				03E049522713430600FB9ACE /* DashboardVC+Network.swift in Sources */,
 				03ECED8E2713305E00B2B532 /* DashboardVC+TableView.swift in Sources */,
+				03016D592750F80400CB4966 /* FirebaseRemoteConfig.swift in Sources */,
 				031288E52621D46A006B0F95 /* SeedPhraseCollectionViewCell.swift in Sources */,
 				4F4988EE23B79A780015B2B8 /* TwoVerification.swift in Sources */,
 				A501CB85260A08F00050AF49 /* UICollectionView+RegisterCell.swift in Sources */,
@@ -1692,6 +1711,7 @@
 				4F9990CF23C60F920096BE38 /* AddressBookTableViewCell.swift in Sources */,
 				031B9D212663A00E0060A7DA /* Date+String.swift in Sources */,
 				0385998A266E2A4200C99E27 /* TransactionReciptVC.swift in Sources */,
+				03016D5D2751327900CB4966 /* InfoTableViewCell.swift in Sources */,
 				A57C66AD261C375A00FF1240 /* NSObject+ClassName.swift in Sources */,
 				03A2AF8D26F1FA5900DEB826 /* String+Validation.swift in Sources */,
 				A501CB652609E5F60050AF49 /* TLFont.swift in Sources */,

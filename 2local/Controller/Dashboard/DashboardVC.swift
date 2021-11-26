@@ -34,6 +34,7 @@ class DashboardVC: BaseVC {
     
     var showInfo = false
     var infoText = ""
+    let config = FBRemoteConfig.shared
     
     enum SectionNames: CaseIterable {
         case info, balance, wallets, chart
@@ -43,7 +44,10 @@ class DashboardVC: BaseVC {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
-        updateCloudData()
+        if config.fetchComplete {
+            updateCloudData()
+        }
+        config.loadingDoneCallback = updateCloudData
         setupTable()
         setupNotifications()
         KVNProgress.show(withStatus: "", on: self.view)
@@ -66,11 +70,11 @@ class DashboardVC: BaseVC {
     //MARK: - Functions
     
     func updateCloudData() {
-        let anouncementMessage = FBRemoteConfig.shared.string(forKey: .anouncement_msg)
-        let showAnouncementMessage = FBRemoteConfig.shared.bool(forKey: .show_anouncement)
+        let anouncementMessage = config.string(forKey: .anouncement_msg)
+        let showAnouncementMessage = config.bool(forKey: .show_anouncement)
         
-        let maintenanceModeMessage = FBRemoteConfig.shared.string(forKey: .maintenance_msg)
-        let maintenanceMode = FBRemoteConfig.shared.bool(forKey: .maintenance_mode)
+        let maintenanceModeMessage = config.string(forKey: .maintenance_msg)
+        let maintenanceMode = config.bool(forKey: .maintenance_mode)
         
         if maintenanceMode {
             showInfo = true
@@ -81,7 +85,6 @@ class DashboardVC: BaseVC {
             infoText = anouncementMessage
             tableView.reloadData()
         }
-        
     }
     
     fileprivate func setupView() {
@@ -127,7 +130,7 @@ class DashboardVC: BaseVC {
                                                name: Notification.Name.walletRemove,
                                                object: nil)
     }
-
+    
     func showTransfer(_ transfers: [Transfer]) {
         let months = Date().getLast12Month.1
         

@@ -13,6 +13,9 @@ import FirebaseRemoteConfig
 class FBRemoteConfig {
     static let shared = FBRemoteConfig()
     
+    var loadingDoneCallback: (() -> Void)?
+    var fetchComplete = false
+    
     private init() {
         loadDefaultValues()
         fetchCloudValue()
@@ -21,10 +24,10 @@ class FBRemoteConfig {
     
     func loadDefaultValues() {
         let defaultValue: [String: Any?] = [
-            ValueKey.anouncement_msg.rawValue: "Due to a security breach we are replacing wallets, in the process balances will appear 0.",
+            ValueKey.anouncement_msg.rawValue: "",
             ValueKey.show_anouncement.rawValue: false,
-            ValueKey.maintenance_msg.rawValue: "Due to a security breach we are replacing wallets, in the process balances will appear 0.",
-            ValueKey.maintenance_mode.rawValue: true
+            ValueKey.maintenance_msg.rawValue: "",
+            ValueKey.maintenance_mode.rawValue: false
         ]
         remoteConfig.setDefaults(defaultValue as? [String: NSObject])
     }
@@ -37,41 +40,36 @@ class FBRemoteConfig {
     }
     
     func fetchCloudValue(){
-        
+        #if DEBUG
         activateDebugMode()
+        #endif
         
         remoteConfig.fetch { [weak self] _, error in
             guard let self = self else { return }
             if let error = error  {
                 print("Uh-oh. Got an error fetching remote values \(error)")
-                
                 return
             }
-            
             remoteConfig.activate { [weak self] _, _ in
                 guard let self = self else { return }
-                print("Retrieved values from the cloud!")
-                let msg = self.displayNewValues(.maintenance_msg)
-                print("maintenance_msg", msg)
+                self.fetchComplete = true
+                DispatchQueue.main.async {
+                    self.loadingDoneCallback?()
+                }
             }
         }
-    }
-    
-    func displayNewValues(_ key: ValueKey) -> String {
-        let newLabelText = remoteConfig.configValue(forKey: key.rawValue).stringValue ?? ""
-        return newLabelText
     }
     
     func bool(forKey key: ValueKey) -> Bool {
         remoteConfig[key.rawValue].boolValue
     }
-
+    
     func string(forKey key: ValueKey) -> String {
-      remoteConfig[key.rawValue].stringValue ?? ""
+        remoteConfig[key.rawValue].stringValue ?? ""
     }
 }
 
-//enum RemoteConfigs
+//enum value keys
 enum ValueKey: String {
     case anouncement_msg
     case show_anouncement

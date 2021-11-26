@@ -44,10 +44,6 @@ class DashboardVC: BaseVC {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
-        if config.fetchComplete {
-            updateCloudData()
-        }
-        config.loadingDoneCallback = updateCloudData
         setupTable()
         setupNotifications()
         KVNProgress.show(withStatus: "", on: self.view)
@@ -79,12 +75,11 @@ class DashboardVC: BaseVC {
         if maintenanceMode {
             showInfo = true
             infoText = maintenanceModeMessage
-            tableView.reloadData()
         } else if showAnouncementMessage {
             showInfo = true
             infoText = anouncementMessage
-            tableView.reloadData()
         }
+        tableView.reloadData()
     }
     
     fileprivate func setupView() {
@@ -93,6 +88,12 @@ class DashboardVC: BaseVC {
         } else {
             self.invisible = false
         }
+        
+        if config.fetchComplete {
+            updateCloudData()
+        }
+        config.loadingDoneCallback = updateCloudData
+        
         tableView.reloadData()
         setNavigation(title: "Total 2LC Balance", largTitle: true)
         

@@ -34,13 +34,18 @@ class FBRemoteConfig {
     
     private func activateDebugMode() {
         let settings = RemoteConfigSettings()
+        
         // WARNING: Don't actually do this in production!
         settings.minimumFetchInterval = 0
         remoteConfig.configSettings = settings
     }
     
+    // get data from cloud
     func fetchCloudValue(){
+        
+        
         #if DEBUG
+        //this function only works in Debug mode 
         activateDebugMode()
         #endif
         

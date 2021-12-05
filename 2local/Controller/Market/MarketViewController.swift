@@ -69,6 +69,14 @@ class MarketViewController: BaseVC, CLLocationManagerDelegate, GMSMapViewDelegat
         
         self.marketInfoHeight.constant = 0
         self.marketInfoView.closeButton.addTarget(self, action: #selector(closeMarketInfoView), for: .touchUpInside)
+        
+        var location: CLLocation = .init(latitude: 0, longitude: 0)
+        if places.count > 0, let plase = places.first, let lat = plase.lat, !lat.isEmpty, let lng = plase.lng, !lng.isEmpty {
+            location = .init(latitude: Double(lat)!, longitude: Double(lng)!)
+        }
+        
+        let camera = GMSCameraPosition.camera(withLatitude: location.coordinate.latitude,longitude: location.coordinate.longitude,zoom: 10)
+        maps.animate(to: camera)
     }
     
     fileprivate func getPlaces() {
@@ -110,10 +118,12 @@ class MarketViewController: BaseVC, CLLocationManagerDelegate, GMSMapViewDelegat
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let location: CLLocation = locations.last!
         print("Location: \(location)")
+        
+        /*
         let camera = GMSCameraPosition.camera(withLatitude: location.coordinate.latitude,longitude: location.coordinate.longitude,zoom: zoomLevel)
         
         self.userLocationMarker.position = location.coordinate
-        
+
         if maps.isHidden {
             maps.isHidden = false
             maps.camera = camera
@@ -122,10 +132,10 @@ class MarketViewController: BaseVC, CLLocationManagerDelegate, GMSMapViewDelegat
                 maps.animate(to: camera)
             }
         }
-        
+
         userLocationMarker.icon = UIImage(named: "currentLocation")
         userLocationMarker.map = self.maps
-        
+        */
     }
     
     
@@ -210,7 +220,6 @@ extension MarketViewController: UITextFieldDelegate {
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        //        let places = DataProvider.shared.places
         var isFound = false
         for place in places.enumerated() {
             if (place.element.name?.lowercased().contains(textField.text!.lowercased()))! {

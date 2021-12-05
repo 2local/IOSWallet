@@ -125,6 +125,18 @@
                                                     <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="Password"/>
                                                 </userDefinedRuntimeAttributes>
                                             </textField>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Sle-ej-rHC">
+                                                <rect key="frame" x="352" y="316" width="35" height="35"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="35" id="KRP-R2-EbZ"/>
+                                                    <constraint firstAttribute="width" constant="35" id="p1H-p7-Z12"/>
+                                                </constraints>
+                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                <state key="normal" image="eyeFill"/>
+                                                <connections>
+                                                    <action selector="showHidePasswordTapped:" destination="3mi-SV-12b" eventType="touchUpInside" id="C3M-Hd-32y"/>
+                                                </connections>
+                                            </button>
                                             <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hf1-Zq-99v" customClass="TLButton" customModule="_local" customModuleProvider="target">
                                                 <rect key="frame" x="32" y="391.5" width="350" height="50"/>
                                                 <color key="backgroundColor" red="0.93725490199999995" green="0.52941176469999995" blue="0.28627450980000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -208,12 +220,14 @@
                                             <constraint firstItem="hf1-Zq-99v" firstAttribute="top" secondItem="HWa-p2-bRf" secondAttribute="bottom" constant="40" id="K02-fR-7LC"/>
                                             <constraint firstItem="hf1-Zq-99v" firstAttribute="width" secondItem="HWa-p2-bRf" secondAttribute="width" id="MQ1-2a-RKY"/>
                                             <constraint firstItem="0pp-ZH-3TJ" firstAttribute="leading" secondItem="hf1-Zq-99v" secondAttribute="leading" id="McK-UC-dd8"/>
+                                            <constraint firstItem="Sle-ej-rHC" firstAttribute="top" secondItem="HWa-p2-bRf" secondAttribute="bottom" constant="-35.5" id="NLd-JZ-l2I"/>
                                             <constraint firstItem="HWa-p2-bRf" firstAttribute="width" secondItem="SHX-n2-HcD" secondAttribute="width" id="NmX-GB-zGT"/>
                                             <constraint firstItem="HWa-p2-bRf" firstAttribute="centerY" secondItem="iCt-cf-haB" secondAttribute="centerY" id="OGQ-fN-EgV"/>
                                             <constraint firstItem="bSo-3f-NiK" firstAttribute="centerY" secondItem="dd9-U0-CQ9" secondAttribute="centerY" id="PgO-Nd-ye2"/>
                                             <constraint firstItem="GZ4-oz-IOP" firstAttribute="centerY" secondItem="0pp-ZH-3TJ" secondAttribute="centerY" constant="0.5" id="TQz-Xv-WtP"/>
                                             <constraint firstAttribute="trailing" secondItem="SHX-n2-HcD" secondAttribute="trailing" constant="32" id="Tbo-ld-Bbz"/>
                                             <constraint firstAttribute="bottom" secondItem="dd9-U0-CQ9" secondAttribute="bottom" id="Tyc-Zu-NpY"/>
+                                            <constraint firstItem="Sle-ej-rHC" firstAttribute="leading" secondItem="HWa-p2-bRf" secondAttribute="trailing" constant="-30" id="Ulk-J3-iDZ"/>
                                             <constraint firstItem="Xtd-j7-Vpd" firstAttribute="bottom" secondItem="dd9-U0-CQ9" secondAttribute="bottom" id="c42-n0-1s7"/>
                                             <constraint firstItem="OTI-yZ-NME" firstAttribute="top" secondItem="iCt-cf-haB" secondAttribute="top" constant="24" id="jhC-w7-G8o"/>
                                             <constraint firstItem="AOD-fp-dTh" firstAttribute="leading" secondItem="iCt-cf-haB" secondAttribute="leading" constant="32" id="nTE-1x-xac"/>
@@ -253,6 +267,7 @@
                         <outlet property="fingerPrint" destination="Xtd-j7-Vpd" id="EBp-UN-mLX"/>
                         <outlet property="passwordTXF" destination="HWa-p2-bRf" id="XeH-fd-EiB"/>
                         <outlet property="scrollView" destination="yeW-U8-9hr" id="2x6-HY-GOW"/>
+                        <outlet property="showPasswordToggleButton" destination="Sle-ej-rHC" id="5F8-ly-uY4"/>
                         <segue destination="Td6-V1-Y8e" kind="presentation" identifier="goTo2FA" modalPresentationStyle="overFullScreen" modalTransitionStyle="crossDissolve" id="jme-GU-cTl"/>
                         <segue destination="pHO-aE-jbu" kind="unwind" identifier="goToSplash" unwindAction="unwindToSplashWithSegue:" id="A6Y-oh-k6h"/>
                     </connections>
@@ -905,34 +920,35 @@
     </scenes>
     <designables>
         <designable name="HWa-p2-bRf">
-            <size key="intrinsicContentSize" width="71" height="22"/>
+            <size key="intrinsicContentSize" width="350" height="43.615234375"/>
         </designable>
         <designable name="Ix5-Nl-fpd">
-            <size key="intrinsicContentSize" width="32" height="34"/>
+            <size key="intrinsicContentSize" width="350" height="39.220703125"/>
         </designable>
         <designable name="K7b-bf-aOR">
-            <size key="intrinsicContentSize" width="40" height="23"/>
+            <size key="intrinsicContentSize" width="350" height="43.615234375"/>
         </designable>
         <designable name="SHX-n2-HcD">
-            <size key="intrinsicContentSize" width="40" height="23"/>
+            <size key="intrinsicContentSize" width="350" height="43.615234375"/>
         </designable>
         <designable name="aga-yx-5By">
-            <size key="intrinsicContentSize" width="32" height="34"/>
+            <size key="intrinsicContentSize" width="350" height="39.220703125"/>
         </designable>
         <designable name="b7r-Xr-UU5">
-            <size key="intrinsicContentSize" width="32" height="34"/>
+            <size key="intrinsicContentSize" width="350" height="39.220703125"/>
         </designable>
         <designable name="d1M-MB-dAC">
-            <size key="intrinsicContentSize" width="73" height="23"/>
+            <size key="intrinsicContentSize" width="350" height="43.615234375"/>
         </designable>
         <designable name="qHm-8x-bwQ">
-            <size key="intrinsicContentSize" width="71" height="22"/>
+            <size key="intrinsicContentSize" width="350" height="43.615234375"/>
         </designable>
     </designables>
     <resources>
         <image name="back" width="45.5" height="17"/>
         <image name="checkFill" width="21" height="21"/>
         <image name="close" width="15" height="15"/>
+        <image name="eyeFill" width="21" height="21"/>
         <image name="faceid" width="25" height="25"/>
         <image name="fingerprint" width="22" height="25.5"/>
         <namedColor name="404040">

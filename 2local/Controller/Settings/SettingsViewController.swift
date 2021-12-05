@@ -74,6 +74,8 @@ class SettingsViewController: BaseVC {
             }
         }
         
+        NotificationCenter.default.post(name: .walletRemove, object: nil)
+        
         showLoginView(self)
     }
 }

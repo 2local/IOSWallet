@@ -13,6 +13,8 @@ import LocalAuthentication
 
 
 class LoginViewController: BaseVC, TwoVerificationDelegate {
+    
+    //MARK: - outlets
     @IBOutlet var scrollView: UIScrollView!
     @IBOutlet weak var fingerPrint: UIButton!
     @IBOutlet var emailTXF: SkyFloatingLabelTextField! {
@@ -31,14 +33,35 @@ class LoginViewController: BaseVC, TwoVerificationDelegate {
             passwordTXF.font = .TLFont()
         }
     }
-    var sp :String?
     
+    @IBOutlet weak var showPasswordToggleButton: UIButton!
+    
+    //MARK: - properties
+    var sp :String?
+    var hidePassword = true
+    let hidePasswordImage = UIImage(named: "eyeHide")?.tint(with: ._9796AE)
+    let showPasswordImage = UIImage(named: "eyeFill")?.tint(with: ._9796AE)
+    
+    //MARK: - view cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupView()
+    }
+    
+    
+    //MARK: - functions
+    fileprivate func setupView() {
         self.view.setShadow(color: UIColor._002CA4, opacity: 0.1, offset: CGSize(width: 0, height: -3), radius: 10)
         self.view.tapToDismissKeyboard()
+        
         self.scrollView.handleKeyboard()
+        
         fingerPrint.isHidden = true
+        
+        passwordTXF.isSecureTextEntry = hidePassword
+        
+        showPasswordToggleButton.setImage(showPasswordImage, for: .normal)
+        
     }
     
     @IBAction func fingerprint(_ sender: Any) {
@@ -90,14 +113,6 @@ class LoginViewController: BaseVC, TwoVerificationDelegate {
         }
         
         */
-    }
-    
-    @IBAction func login(_ sender: Any) {
-        self.login()
-    }
-    
-    @IBAction func closeTapped(_ sender: Any) {
-        dismiss(animated: true)
     }
     
     func login () {
@@ -188,6 +203,26 @@ class LoginViewController: BaseVC, TwoVerificationDelegate {
         if segue.identifier == "goTo2FA" {
             let destVC = segue.destination as! LoginTFAViewController
             destVC.delegate = self
+        }
+    }
+    
+    //MARK: - actions
+    @IBAction func login(_ sender: Any) {
+        self.login()
+    }
+    
+    @IBAction func closeTapped(_ sender: Any) {
+        dismiss(animated: true)
+    }
+    
+    @IBAction func showHidePasswordTapped(_ sender: Any) {
+        hidePassword.toggle()
+        passwordTXF.isSecureTextEntry = hidePassword
+        
+        if hidePassword {
+            showPasswordToggleButton.setImage(showPasswordImage, for: .normal)
+        } else {
+            showPasswordToggleButton.setImage(hidePasswordImage, for: .normal)
         }
     }
 }

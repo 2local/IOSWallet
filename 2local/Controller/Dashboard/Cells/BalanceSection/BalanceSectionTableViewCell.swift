@@ -55,7 +55,7 @@ class BalanceSectionTableViewCell: UITableViewCell {
                 self.balanceLabel.text = "******"
                 self.tokenCountLabel.text = "******"
             }, completion: nil)
-            hiddenButton.setImage(UIImage(named: "eye1-selected")?.tint(with: ._707070), for: .normal)
+            hiddenButton.setImage(UIImage(named: "eyeHide")?.tint(with: ._707070), for: .normal)
             UIView.animate(withDuration: 0.2) {
                 self.contentView.layoutSubviews()
                 self.contentView.layoutIfNeeded()

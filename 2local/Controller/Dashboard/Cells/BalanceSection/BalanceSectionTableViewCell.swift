@@ -20,6 +20,8 @@ class BalanceSectionTableViewCell: UITableViewCell {
     private var totalfiatWithSymbol: String = "$0"
     private var totalTokenWithSymbol: String = "0 2LC"
     var invisibleCallback: DataAction<Bool> = nil
+    let hideImage = UIImage(named: "eyeHide")?.tint(with: ._707070)
+    let showImage = UIImage(named: "eyeFill")?.tint(with: ._707070)
     
     //MARK: - life cycle
     override func awakeFromNib() {
@@ -32,7 +34,7 @@ class BalanceSectionTableViewCell: UITableViewCell {
         tokenCountLabel.adjustsFontSizeToFitWidth = true
         
         hiddenButton.setTitle("", for: .normal)
-        hiddenButton.setImage(UIImage(named: "eyeFill")?.tint(with: ._707070), for: .normal)
+        hiddenButton.setImage(hideImage, for: .normal)
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -55,7 +57,7 @@ class BalanceSectionTableViewCell: UITableViewCell {
                 self.balanceLabel.text = "******"
                 self.tokenCountLabel.text = "******"
             }, completion: nil)
-            hiddenButton.setImage(UIImage(named: "eyeHide")?.tint(with: ._707070), for: .normal)
+            hiddenButton.setImage(showImage, for: .normal)
             UIView.animate(withDuration: 0.2) {
                 self.contentView.layoutSubviews()
                 self.contentView.layoutIfNeeded()
@@ -67,7 +69,7 @@ class BalanceSectionTableViewCell: UITableViewCell {
                     tokenCountLabel.text = totalTokenWithSymbol
                 }, completion: nil)
             }
-            hiddenButton.setImage(UIImage(named: "eyeFill")?.tint(with: ._707070), for: .normal)
+            hiddenButton.setImage(hideImage, for: .normal)
             UIView.animate(withDuration: 0.2) {
                 self.contentView.layoutSubviews()
                 self.contentView.layoutIfNeeded()

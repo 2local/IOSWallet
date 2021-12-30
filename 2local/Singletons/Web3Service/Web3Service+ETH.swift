@@ -24,7 +24,7 @@ extension Web3Service {
     /// Get ETH balance
     /// - Parameter completion: ETH balance
     static func getETHBalance(completion: @escaping (String?) -> Void) {
-        let infura = Web3.InfuraMainnetWeb3()
+		let infura = Web3.InfuraMainnetWeb3(accessToken: Configuration.shared.infuraToken)
         
         guard let address = Web3Service.currentAddress else { return }
         let walletAddress = EthereumAddress(address)!

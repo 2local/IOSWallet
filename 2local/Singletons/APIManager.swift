@@ -395,7 +395,12 @@ class APIManager: NSObject,URLSessionDelegate {
     }
     
     func getFee(of symbol: String, completion: @escaping (Data?, URLResponse?, Error?) -> Void) {
-        let url = URL(string: "\(Configuration.shared.bitrueUrl)v1/ticker/price?symbol=\(symbol)USDT")
+		var stringUrl = "\(Configuration.shared.bitrueUrl)v1/ticker/price?symbol=\(symbol)USDT"
+		if symbol == Coins.TLocal.symbol() {
+			stringUrl = "\(Configuration.shared.laTokenBaseUrl)v2/ticker/\(Configuration.shared.tlcBaseCurrency)/\(Configuration.shared.tlcQuoteCurrency)"
+		}
+
+		let url = URL(string: stringUrl)
         print("\(url!)")
         var request = URLRequest(url: url!)
         request.httpMethod = HttpMethod.GET.rawValue

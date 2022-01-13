@@ -134,17 +134,21 @@ class BSCArrayResult<T: Codable>: Codable {
 class BITRUEResult<T: Codable>: Codable {
     var symbol: String?
     var price: String?
+	var lastPrice: String?
     
     enum CodingKeys: String, CodingKey {
         case symbol
         case price
+		case lastPrice
     }
     
     required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         let symbol = try? container.decode(String.self, forKey: .symbol)
         let price = try? container.decode(String.self, forKey: .price)
+		let lastPrice = try? container.decode(String.self, forKey: .lastPrice)
+		
         self.symbol = symbol
-        self.price = price
+        self.price = price ?? lastPrice
     }
 }

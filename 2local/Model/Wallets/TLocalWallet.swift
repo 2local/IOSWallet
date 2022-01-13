@@ -60,10 +60,10 @@ struct TLocalWallet: WalletProtocol {
         }
     }
     
-    func gasPrice(_ complertionHandler: @escaping (String, String, String) -> Void) {
+    func gasPrice(_ completionHandler: @escaping (String, String, String) -> Void) {
         Web3Service.shared.getBSCGasPrice { (gasPrice) in
             guard let gasPrice = gasPrice else { return }
-            complertionHandler(String(describing: gasPrice), String(describing: gasPrice), String(describing: gasPrice))
+            completionHandler(String(describing: gasPrice), String(describing: gasPrice), String(describing: gasPrice))
         }
     }
     

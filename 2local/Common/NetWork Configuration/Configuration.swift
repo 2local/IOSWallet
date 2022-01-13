@@ -35,6 +35,9 @@ class Configuration {
     var password: String
     var aesMode: String
     var marketplaceBaseURL: String
+	var tlcBaseCurrency: String
+	var tlcQuoteCurrency: String
+	var laTokenBaseUrl: String
     
     
     init() {
@@ -68,7 +71,11 @@ class Configuration {
                         password = value["password"] as? String ?? ""
                         aesMode = value["aesMode"] as? String ?? ""
                         marketplaceBaseURL = value["marketplaceBaseURL"] as? String ?? ""
-                        
+						
+						tlcBaseCurrency = value["tlcBaseCurrency"] as? String ?? ""
+						tlcQuoteCurrency = value["tlcQuoteCurrency"] as? String ?? ""
+						
+						laTokenBaseUrl = value["laTokenBaseUrl"] as? String ?? ""
                         return
                     }
                 }

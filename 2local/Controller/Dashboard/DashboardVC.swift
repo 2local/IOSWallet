@@ -26,8 +26,8 @@ class DashboardVC: BaseVC {
   
   var wallets: [Wallets] = []
   var walletBalance: String = "0"
-  var defaultSym: String = ""
-  var totalfiatWithSymbol: String = "$0"
+  var defaultSymbol: String = ""
+  var totalFiatWithSymbol: String = "$0"
   var totalTokenWithSymbol: String = "0 2LC"
   var ethTransactionHistory: [TransactionHistoryModel] = []
   var userData: User?
@@ -85,15 +85,32 @@ class DashboardVC: BaseVC {
     tableView.reloadData()
   }
   
-  func checkEnableInstruction() {
+  /// If balance == 0 and no wallet added, show a popup message to user
+  private func checkEnableInstruction(_ balance: Double) {
+    
     /// Instruction status and message
     let enableInstruction = config.bool(forKey: .enableInstructionWhenNoWalletAddedAndBalanceIsZero)
     let enableInstructionMessage = config.string(forKey: .enableInstructionWhenNoWalletAddedAndBalanceIsZeroMessage)
     
-    if wallets.isEmpty, walletBalance == "0", enableInstruction {
-      KVNProgress.show(withStatus: enableInstructionMessage)
+    if wallets.isEmpty,
+       balance == 0,
+       enableInstruction {
+      DispatchQueue.main.async {
+        self.showAlert(message: enableInstructionMessage.HTMLToString())
+      }
     }
   }
+  
+  private func showAlert(_ title: String? = nil, message: String) {
+    let alert = UIAlertController(title: title,
+                                  message: message,
+                                  preferredStyle: .alert)
+    
+    let OKAction = UIAlertAction(title: "OK", style: .default)
+    alert.addAction(OKAction)
+    present(alert, animated: true)
+  }
+  
   
   fileprivate func setupView() {
     if UserDefaults.standard.bool(forKey: "invisible") {
@@ -130,7 +147,7 @@ class DashboardVC: BaseVC {
                       displayName: Coins.Binance.name())
     wallets.append(bnb)
     
-    refresfView(wallets)
+    refreshView(wallets)
   }
   
   func setupNotifications() {
@@ -170,16 +187,17 @@ class DashboardVC: BaseVC {
     maxExpense = transactionsChart.map({$0.expenses}).max()
   }
   
-  fileprivate func refresfView(_ wallets: [Wallets]) {
+  fileprivate func refreshView(_ wallets: [Wallets]) {
     walletQueue.async {
       self.getTotalFiat(wallets) { totalFiat in
-        self.totalfiatWithSymbol = self.defaultSym + "\(totalFiat)".convertToPriceType()
+        self.totalFiatWithSymbol = self.defaultSymbol + "\(totalFiat)".convertToPriceType()
         DispatchQueue.main.async {
           self.tableView.reloadRows(at: self.indexPath(at: 0), with: .automatic)
         }
       }
       
       self.get2localBalance(wallets) { tlcBalance in
+        self.checkEnableInstruction(tlcBalance)
         self.totalTokenWithSymbol = "\(tlcBalance)".convertToPriceType() + " 2LC"
         DispatchQueue.main.async {
           self.tableView.reloadRows(at: self.indexPath(at: 0), with: .automatic)
@@ -201,11 +219,11 @@ class DashboardVC: BaseVC {
   
   @objc func generateWalets() {
     wallets.removeAll()
-    defaultSym = DataProvider.shared.exchangeRate?.defaultSym ?? "$"
+    defaultSymbol = DataProvider.shared.exchangeRate?.defaultSym ?? "$"
     wallets = DataProvider.shared.wallets
     tableView.reloadData()
     if wallets.count > 0 {
-      refresfView(wallets)
+      refreshView(wallets)
     } else {
       getWalletByPublicKey()
     }

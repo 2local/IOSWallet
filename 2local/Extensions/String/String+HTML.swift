@@ -11,14 +11,13 @@ import Foundation
 extension String {
   
   /// Convert the HTML string to string
-  func HTMLToString() -> NSAttributedString? {
+  func HTMLToString() -> String {
     let data = Data(self.utf8)
     if let attributedString = try? NSAttributedString(data: data,
                                                       options: [.documentType: NSAttributedString.DocumentType.html],
                                                       documentAttributes: nil) {
-        return attributedString
+      return attributedString.string
     }
-    return nil
+    return ""
   }
-  
 }

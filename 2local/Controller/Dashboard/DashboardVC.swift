@@ -66,11 +66,11 @@ class DashboardVC: BaseVC {
     //MARK: - Functions
     
     func updateCloudData() {
-        let anouncementMessage = config.string(forKey: .anouncement_msg)
-        let showAnouncementMessage = config.bool(forKey: .show_anouncement)
+        let anouncementMessage = config.string(forKey: .announcementMessage)
+        let showAnouncementMessage = config.bool(forKey: .showAnnouncement)
         
-        let maintenanceModeMessage = config.string(forKey: .maintenance_msg)
-        let maintenanceMode = config.bool(forKey: .maintenance_mode)
+        let maintenanceModeMessage = config.string(forKey: .maintenanceMessage)
+        let maintenanceMode = config.bool(forKey: .maintenanceMode)
         
         if maintenanceMode {
             showInfo = true

@@ -1131,6 +1131,7 @@
 				4F4988F523B79CA30015B2B8 /* Extensions.swift */,
 				A501CB9A260A0A480050AF49 /* Font */,
 				A501CBAE260A12AE0050AF49 /* HTTPMethods.swift */,
+				0307D3A026F9CFCD004497CC /* LAContext+Extension.swift */,
 				A57C66AB261C374400FF1240 /* NSobject */,
 				A501CB93260A0A190050AF49 /* String */,
 				03B3D35626AFED82000FCCFB /* Tabbar */,
@@ -1140,7 +1141,6 @@
 				A501CB87260A09050050AF49 /* UIStoryboard */,
 				A501CB76260A084B0050AF49 /* UITableView */,
 				A5D0A2862611FA1700229B3F /* UIView */,
-				0307D3A026F9CFCD004497CC /* LAContext+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";

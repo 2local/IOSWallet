@@ -66,8 +66,8 @@ class DashboardVC: BaseVC {
     //MARK: - Functions
     
     func updateCloudData() {
-        let anouncementMessage = config.string(forKey: .announcementMessage)
-        let showAnouncementMessage = config.bool(forKey: .showAnnouncement)
+        let announcementMessage = config.string(forKey: .announcementMessage)
+        let showAnnouncementMessage = config.bool(forKey: .showAnnouncement)
         
         let maintenanceModeMessage = config.string(forKey: .maintenanceMessage)
         let maintenanceMode = config.bool(forKey: .maintenanceMode)
@@ -75,9 +75,9 @@ class DashboardVC: BaseVC {
         if maintenanceMode {
             showInfo = true
             infoText = maintenanceModeMessage
-        } else if showAnouncementMessage {
+        } else if showAnnouncementMessage {
             showInfo = true
-            infoText = anouncementMessage
+            infoText = announcementMessage
         }
         tableView.reloadData()
     }
@@ -95,7 +95,7 @@ class DashboardVC: BaseVC {
         config.loadingDoneCallback = updateCloudData
         
         tableView.reloadData()
-        setNavigation(title: "Total 2LC Balance", largTitle: true)
+        setNavigation(title: "Total 2LC Balance", largeTitle: true)
         
         settingsBarButtonItem()
     }

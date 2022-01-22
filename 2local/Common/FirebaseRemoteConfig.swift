@@ -27,7 +27,9 @@ class FBRemoteConfig {
       ValueKey.announcementMessage.rawValue: "",
       ValueKey.showAnnouncement.rawValue: false,
       ValueKey.maintenanceMessage.rawValue: "",
-      ValueKey.maintenanceMode.rawValue: false
+      ValueKey.maintenanceMode.rawValue: false,
+      ValueKey.enableInstructionWhenNoWalletAddedAndBalanceIsZero.rawValue: false,
+      ValueKey.enableInstructionWhenNoWalletAddedAndBalanceIsZeroMessage.rawValue: ""
     ]
     remoteConfig.setDefaults(defaultValue as? [String: NSObject])
   }

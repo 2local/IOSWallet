@@ -65,18 +65,18 @@ class BaseVC: UIViewController {
         viewController.present(vc, animated: true)
     }
     
-    func setNavigation(title: String? = nil, largTitle: Bool = false, foregroundColor: UIColor = UIColor._606060) {
+    func setNavigation(title: String? = nil, largeTitle: Bool = false, foregroundColor: UIColor = UIColor._606060) {
         
         //        if title != nil {
         
         
         navigationItem.title = title
-        let fontSize: CGFloat = largTitle ? 24 : 16
+        let fontSize: CGFloat = largeTitle ? 24 : 16
         
         let attributes: [NSAttributedString.Key : Any] = [NSAttributedString.Key.foregroundColor: foregroundColor,
                                                           NSAttributedString.Key.font: UIFont.TLFont(weight: .medium, size: fontSize)]
         
-        self.navigationController?.navigationBar.prefersLargeTitles = largTitle
+        self.navigationController?.navigationBar.prefersLargeTitles = largeTitle
         self.navigationController?.navigationBar.largeTitleTextAttributes = attributes
         self.navigationController?.navigationBar.titleTextAttributes = attributes
         

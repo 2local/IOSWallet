@@ -56,7 +56,7 @@ class WalletsListVC: BaseVC {
     
     //MARK: - Functions
     fileprivate func setupView() {
-        setNavigation(title: "Wallets", largTitle: true)
+        setNavigation(title: "Wallets", largeTitle: true)
     }
     
     @objc fileprivate func refreshView() {

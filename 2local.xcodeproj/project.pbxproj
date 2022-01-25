@@ -35,6 +35,7 @@
 		03394B4F2625CEB9009098E0 /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03394B4E2625CEB9009098E0 /* App.swift */; };
 		03394B522625D058009098E0 /* ObjectSavable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03394B512625D058009098E0 /* ObjectSavable.swift */; };
 		03394B552625D2BE009098E0 /* UserDefaultsKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03394B542625D2BE009098E0 /* UserDefaultsKey.swift */; };
+		034695F0279AFACD00870FF7 /* String+HTML.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034695EF279AFACD00870FF7 /* String+HTML.swift */; };
 		03699DD82642BCC100B98E80 /* NotificationNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03699DD72642BCC100B98E80 /* NotificationNames.swift */; };
 		03699DDE2642C29700B98E80 /* Wallets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03699DDD2642C29700B98E80 /* Wallets.swift */; };
 		03699DE22643139E00B98E80 /* WalletProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03699DE12643139D00B98E80 /* WalletProtocol.swift */; };
@@ -252,6 +253,7 @@
 		03394B4E2625CEB9009098E0 /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
 		03394B512625D058009098E0 /* ObjectSavable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectSavable.swift; sourceTree = "<group>"; };
 		03394B542625D2BE009098E0 /* UserDefaultsKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsKey.swift; sourceTree = "<group>"; };
+		034695EF279AFACD00870FF7 /* String+HTML.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+HTML.swift"; sourceTree = "<group>"; };
 		03699DD72642BCC100B98E80 /* NotificationNames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationNames.swift; sourceTree = "<group>"; };
 		03699DDD2642C29700B98E80 /* Wallets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wallets.swift; sourceTree = "<group>"; };
 		03699DE12643139D00B98E80 /* WalletProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletProtocol.swift; sourceTree = "<group>"; };
@@ -1131,6 +1133,7 @@
 				4F4988F523B79CA30015B2B8 /* Extensions.swift */,
 				A501CB9A260A0A480050AF49 /* Font */,
 				A501CBAE260A12AE0050AF49 /* HTTPMethods.swift */,
+				0307D3A026F9CFCD004497CC /* LAContext+Extension.swift */,
 				A57C66AB261C374400FF1240 /* NSobject */,
 				A501CB93260A0A190050AF49 /* String */,
 				03B3D35626AFED82000FCCFB /* Tabbar */,
@@ -1140,7 +1143,6 @@
 				A501CB87260A09050050AF49 /* UIStoryboard */,
 				A501CB76260A084B0050AF49 /* UITableView */,
 				A5D0A2862611FA1700229B3F /* UIView */,
-				0307D3A026F9CFCD004497CC /* LAContext+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1230,6 +1232,7 @@
 				A501CB94260A0A290050AF49 /* String+Localized.swift */,
 				03D56D1626A2D3880070435F /* String+StripHexString.swift */,
 				03A2AF8C26F1FA5900DEB826 /* String+Validation.swift */,
+				034695EF279AFACD00870FF7 /* String+HTML.swift */,
 			);
 			path = String;
 			sourceTree = "<group>";
@@ -1671,6 +1674,7 @@
 				4F74473F23DE025E00FBF7E1 /* MarketInfoView.swift in Sources */,
 				A58646E226164FD7004D2CC7 /* UIImage+TintColor.swift in Sources */,
 				4F66678D2544F1B100DD0BE5 /* AddCompanyLocationViewController.swift in Sources */,
+				034695F0279AFACD00870FF7 /* String+HTML.swift in Sources */,
 				4FBD30E323BCBCCE0026810F /* ReceiveViewController.swift in Sources */,
 				03128806261FAB2F006B0F95 /* CreateETHWalletVC.swift in Sources */,
 				4F9990D823C785C30096BE38 /* ContactDetailViewController.swift in Sources */,
@@ -1864,7 +1868,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = 2local/2local.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 88;
+				CURRENT_PROJECT_VERSION = 89;
 				DEVELOPMENT_TEAM = QL7FSZG34R;
 				ENABLE_BITCODE = NO;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
@@ -1874,7 +1878,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.4.7;
+				MARKETING_VERSION = 1.4.8;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -1995,7 +1999,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = 2local/2local.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 88;
+				CURRENT_PROJECT_VERSION = 89;
 				DEVELOPMENT_TEAM = QL7FSZG34R;
 				ENABLE_BITCODE = NO;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
@@ -2005,7 +2009,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.4.7;
+				MARKETING_VERSION = 1.4.8;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",

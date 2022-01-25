@@ -69,7 +69,7 @@ class ScanViewController: BaseVC, QRScannerViewDelegate {
     fileprivate func setupView() {
         self.parent?.view.setShadow(color: UIColor._002CA4, opacity: 0.1, offset: CGSize(width: 0, height: -3), radius: 10)
         
-        setNavigation(title: "Scan", largTitle: false, foregroundColor: .white)
+        setNavigation(title: "Scan", largeTitle: false, foregroundColor: .white)
         
         createCloseBarButtonItem()
         

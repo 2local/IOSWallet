@@ -118,6 +118,7 @@ class EditWalletVC: BaseVC {
                
                 for index in 0..<wallets.count {
                     if wallets[index].name == wallet.name {
+                      //FIXME: remove ETH wallet
                         DataProvider.shared.wallets.remove(at: index)
                     }
                 }

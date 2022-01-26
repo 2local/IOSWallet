@@ -1,5 +1,5 @@
 //
-//  CreateETHWalletVC.swift
+//  CreateWalletVC.swift
 //  2local
 //
 //  Created by Ebrahim Hosseini on 4/9/21.
@@ -9,7 +9,7 @@
 import UIKit
 import web3swift
 
-class CreateETHWalletVC: BaseVC {
+class CreateWalletVC: BaseVC {
     
     //MARK: - Outlets
     @IBOutlet weak var continueButton: UIButton!

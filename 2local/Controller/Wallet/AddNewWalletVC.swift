@@ -56,7 +56,7 @@ class AddNewWalletVC: BaseVC {
     }
     
     @IBAction func createETHWallet(_ sender: UIButton) {
-        let vc = UIStoryboard.wallet.instantiate(viewController: CreateETHWalletVC.self)
+        let vc = UIStoryboard.wallet.instantiate(viewController: CreateWalletVC.self)
         vc.initWith(walletName: coins[index!.row])
         if let navigation = navigationController {
             navigation.pushViewController(vc, animated: true)

@@ -200,7 +200,7 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource  {
                         }
                     case 4:
                         if DataProvider.shared.user != nil {
-                            vc = UIStoryboard.settings.instantiate(viewController: AddCompanyViewController.self)
+                            vc = UIStoryboard.settings.instantiate(viewController: addMarketplaceVC.self)
                         } else {
                             showLoginView(self)
                         }

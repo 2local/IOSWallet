@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -1564,7 +1564,7 @@
         <!--Add Marketplace-->
         <scene sceneID="o4q-aR-aDb">
             <objects>
-                <viewController storyboardIdentifier="AddCompanyViewController" id="5uu-OC-RnU" customClass="AddCompanyViewController" customModule="_local" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="addMarketplaceVC" id="5uu-OC-RnU" customClass="addMarketplaceVC" customModule="_local" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="oec-er-uL8">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1713,7 +1713,6 @@
                                                 </userDefinedRuntimeAttributes>
                                                 <connections>
                                                     <action selector="addMarketPlaceTapped:" destination="5uu-OC-RnU" eventType="touchUpInside" id="abj-zv-TjJ"/>
-                                                    <segue destination="Id6-ap-Qhy" kind="show" identifier="goToMap" id="UJw-wO-yR4"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -1771,26 +1770,10 @@
             </objects>
             <point key="canvasLocation" x="16362" y="1421"/>
         </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="Cqj-5N-WCl">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Id6-ap-Qhy" customClass="TLNavigationController" customModule="_local" customModuleProvider="target" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationItem key="navigationItem" id="uTT-Do-EeA"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="UCn-WD-Vbp">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="gnq-bI-6B9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="16360.869565217392" y="2165.625"/>
-        </scene>
         <!--Add Location-->
         <scene sceneID="BRh-Rp-Ugq">
             <objects>
-                <viewController storyboardIdentifier="AddCompanyLocationViewController" id="Mmz-T2-Gi0" customClass="AddCompanyLocationViewController" customModule="_local" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AddMarketplaceLocationVC" id="Mmz-T2-Gi0" customClass="AddMarketplaceLocationVC" customModule="_local" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="fFp-R6-8JB">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1874,7 +1857,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fhj-0t-Ied" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="16360.869565217392" y="2903.5714285714284"/>
+            <point key="canvasLocation" x="17136" y="1421"/>
         </scene>
         <!--Send-->
         <scene sceneID="Tqt-Hw-Yid">
@@ -2982,64 +2965,64 @@
     </scenes>
     <designables>
         <designable name="6uP-Lo-C4C">
-            <size key="intrinsicContentSize" width="350" height="43.615234375"/>
+            <size key="intrinsicContentSize" width="127.5" height="22"/>
         </designable>
         <designable name="7x4-XJ-06a">
-            <size key="intrinsicContentSize" width="350" height="43.615234375"/>
+            <size key="intrinsicContentSize" width="126.5" height="23"/>
         </designable>
         <designable name="8Cn-tX-9M7">
-            <size key="intrinsicContentSize" width="311" height="43.615234375"/>
+            <size key="intrinsicContentSize" width="73" height="23"/>
         </designable>
         <designable name="Foo-Zu-oGc">
-            <size key="intrinsicContentSize" width="311" height="43.615234375"/>
+            <size key="intrinsicContentSize" width="77.5" height="23"/>
         </designable>
         <designable name="GGM-oN-pvO">
-            <size key="intrinsicContentSize" width="311" height="43.615234375"/>
+            <size key="intrinsicContentSize" width="55.5" height="23"/>
         </designable>
         <designable name="JDq-ck-TN9">
-            <size key="intrinsicContentSize" width="311" height="43.615234375"/>
+            <size key="intrinsicContentSize" width="86.5" height="23"/>
         </designable>
         <designable name="MK6-nD-Jg6">
-            <size key="intrinsicContentSize" width="311" height="43.615234375"/>
+            <size key="intrinsicContentSize" width="59" height="23"/>
         </designable>
         <designable name="O0I-X5-Cwe">
-            <size key="intrinsicContentSize" width="350" height="43.615234375"/>
+            <size key="intrinsicContentSize" width="107" height="22"/>
         </designable>
         <designable name="U1S-Ee-lYO">
-            <size key="intrinsicContentSize" width="311" height="43.615234375"/>
+            <size key="intrinsicContentSize" width="121" height="23"/>
         </designable>
         <designable name="ZSA-cp-4mO">
-            <size key="intrinsicContentSize" width="311" height="43.615234375"/>
+            <size key="intrinsicContentSize" width="130" height="23"/>
         </designable>
         <designable name="blZ-mY-7U8">
-            <size key="intrinsicContentSize" width="350" height="43.615234375"/>
+            <size key="intrinsicContentSize" width="160.5" height="22"/>
         </designable>
         <designable name="dcQ-6b-pMa">
-            <size key="intrinsicContentSize" width="311" height="43.615234375"/>
+            <size key="intrinsicContentSize" width="78.5" height="23"/>
         </designable>
         <designable name="evl-Cz-Juh">
-            <size key="intrinsicContentSize" width="350" height="43.615234375"/>
+            <size key="intrinsicContentSize" width="120.5" height="23"/>
         </designable>
         <designable name="hIi-3s-FJB">
-            <size key="intrinsicContentSize" width="311" height="43.615234375"/>
+            <size key="intrinsicContentSize" width="59" height="23"/>
         </designable>
         <designable name="hW0-J8-og5">
-            <size key="intrinsicContentSize" width="295" height="43.615234375"/>
+            <size key="intrinsicContentSize" width="107" height="23"/>
         </designable>
         <designable name="kMJ-2g-Z1d">
-            <size key="intrinsicContentSize" width="295" height="40.9775390625"/>
+            <size key="intrinsicContentSize" width="47.5" height="20"/>
         </designable>
         <designable name="l4S-RW-jki">
-            <size key="intrinsicContentSize" width="161" height="40.9775390625"/>
+            <size key="intrinsicContentSize" width="49.5" height="20"/>
         </designable>
         <designable name="spN-Hl-sFw">
-            <size key="intrinsicContentSize" width="350" height="43.615234375"/>
+            <size key="intrinsicContentSize" width="43" height="23"/>
         </designable>
         <designable name="t1J-wX-bKT">
-            <size key="intrinsicContentSize" width="311" height="43.615234375"/>
+            <size key="intrinsicContentSize" width="27.5" height="23"/>
         </designable>
         <designable name="yLS-QU-NWg">
-            <size key="intrinsicContentSize" width="311" height="43.615234375"/>
+            <size key="intrinsicContentSize" width="37.5" height="23"/>
         </designable>
     </designables>
     <inferredMetricsTieBreakers>

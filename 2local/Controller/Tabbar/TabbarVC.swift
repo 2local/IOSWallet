@@ -74,7 +74,7 @@ class TabbarVC: UITabBarController {
         let scannerNavigatioinController = TLNavigationController(rootViewController: scannerVC)
         
         // MARKETPLACE
-        let marketplaceVC = UIStoryboard.marketplace.instantiate(viewController: MarketViewController.self)
+        let marketplaceVC = UIStoryboard.marketplace.instantiate(viewController: MarketplaceVC.self)
         let marketplaceTabBar = UITabBarItem(title: "Marketplace",
                                              image: UIImage(named: "market")?.tint(with: ._topaz),
                                              selectedImage: UIImage(named: "market")?.tint(with: ._flamenco))

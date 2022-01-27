@@ -67,10 +67,10 @@ class MarketplaceVC: BaseVC {
     var location: CLLocation = .init(latitude: 0, longitude: 0)
     if places.count > 0,
        let plase = places.first,
-        let lat = plase.lat,
-        !lat.isEmpty,
-        let lng = plase.lng,
-        !lng.isEmpty {
+       let lat = plase.lat,
+       !lat.isEmpty,
+       let lng = plase.lng,
+       !lng.isEmpty {
       location = .init(latitude: Double(lat)!,
                        longitude: Double(lng)!)
     }
@@ -252,7 +252,7 @@ extension MarketplaceVC {
       } else {
         KVNProgress.showError(withStatus: "The coordinator is not valid")
       }
-    } else if let url = "http://maps.apple.com/maps?saddr=\(self.marketInfoView.lat),\(self.marketInfoView.lng)".getCleanedURL(),
+    } else if let url = "http://maps.apple.com/maps?daddr=\(self.marketInfoView.lat),\(self.marketInfoView.lng)".getCleanedURL(),
               UIApplication.shared.canOpenURL(url) {
       UIApplication.shared.open(url, options: [:], completionHandler: nil)
     } else {

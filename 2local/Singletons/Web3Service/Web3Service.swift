@@ -10,7 +10,6 @@ import Foundation
 import web3swift
 import BigInt
 import SwiftyJSON
-import Alamofire
 
 class Web3Service {
     static let shared = Web3Service()

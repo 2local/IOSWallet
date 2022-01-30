@@ -1520,7 +1520,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\"${PROJECT_DIR}/Pods/Fabric/run\"\n";
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\"${PODS_ROOT}/FirebaseCrashlytics/run\"\n";
 		};
 		75B4A381B90F0DA71106A128 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1910,13 +1910,9 @@
 					"-framework",
 					"\"CoreText\"",
 					"-framework",
-					"\"Crashlytics\"",
-					"-framework",
 					"\"CryptoSwift\"",
 					"-framework",
 					"\"FBLPromises\"",
-					"-framework",
-					"\"Fabric\"",
 					"-framework",
 					"\"FirebaseAnalytics\"",
 					"-framework",
@@ -2041,13 +2037,9 @@
 					"-framework",
 					"\"CoreText\"",
 					"-framework",
-					"\"Crashlytics\"",
-					"-framework",
 					"\"CryptoSwift\"",
 					"-framework",
 					"\"FBLPromises\"",
-					"-framework",
-					"\"Fabric\"",
 					"-framework",
 					"\"FirebaseAnalytics\"",
 					"-framework",

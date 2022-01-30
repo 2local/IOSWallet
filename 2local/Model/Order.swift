@@ -9,18 +9,18 @@
 import UIKit
 
 class Order: Codable {
-    var id:Int?
-    var userId:Int?
-    var paymentId:String?
-    var paymentType:String?
-    var quantity:String?
-    var requestor:String?
-    var status:String?
-    var date:String?
-    var tokens:Float?
-    var currency : String?
-    
-    enum CodingKeys : String , CodingKey {
+    var id: Int?
+    var userId: Int?
+    var paymentId: String?
+    var paymentType: String?
+    var quantity: String?
+    var requestor: String?
+    var status: String?
+    var date: String?
+    var tokens: Float?
+    var currency: String?
+
+    enum CodingKeys: String, CodingKey {
         case id = "id"
         case userId = "user_id"
         case paymentId = "payment_id"

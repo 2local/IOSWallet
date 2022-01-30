@@ -14,9 +14,9 @@ extension UIViewController {
         UINavigationBar.appearance().isTranslucent = true
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
-        
+
     }
-    
+
     func shadowNavigationBar() {
         self.navigationController?.navigationBar.layer.masksToBounds = false
         self.navigationController?.navigationBar.layer.shadowColor = UIColor.black.cgColor
@@ -27,13 +27,13 @@ extension UIViewController {
 }
 
 extension UIPageControl {
-    func customPageControl(dotFillColor:UIColor, dotBorderColor:UIColor, dotBorderWidth:CGFloat) {
+    func customPageControl(dotFillColor: UIColor, dotBorderColor: UIColor, dotBorderWidth: CGFloat) {
         for (pageIndex, dotView) in self.subviews.enumerated() {
             if self.currentPage == pageIndex {
-                
+
                 dotView.backgroundColor = dotFillColor
                 dotView.layer.cornerRadius = dotView.frame.size.height / 2
-            }else{
+            } else {
                 dotView.backgroundColor = .clear
                 dotView.layer.cornerRadius = dotView.frame.size.height / 2
                 dotView.layer.borderColor = dotBorderColor.cgColor
@@ -44,48 +44,47 @@ extension UIPageControl {
 }
 
 extension UIView {
-    func roundCorners(corners: UIRectCorner , radius: CGFloat ) {
-        
-        let maskPath1 = UIBezierPath(roundedRect: bounds,byRoundingCorners: corners,cornerRadii: CGSize(width: radius, height: radius))
+    func roundCorners(corners: UIRectCorner, radius: CGFloat ) {
+
+        let maskPath1 = UIBezierPath(roundedRect: bounds, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
         let maskLayer1 = CAShapeLayer()
         maskLayer1.frame = bounds
         maskLayer1.path = maskPath1.cgPath
         layer.mask = maskLayer1
-        
+
     }
-    
-    func setShadow(color:UIColor,opacity:Float,offset: CGSize,radius:CGFloat) {
+
+    func setShadow(color: UIColor, opacity: Float, offset: CGSize, radius: CGFloat) {
         self.layer.masksToBounds = false
         self.layer.shadowColor = color.cgColor
         self.layer.shadowOpacity = opacity
         self.layer.shadowOffset = offset
         self.layer.shadowRadius = radius
     }
-    
-    func roundCornersWithShadow(corners: UIRectCorner , radius:CGFloat,shadowColor:UIColor,shadowOpacity:Float,shadowOffset: CGSize,shadowRadius:CGFloat) {
-        
-        let maskPath = UIBezierPath(roundedRect: bounds,byRoundingCorners: corners,cornerRadii: CGSize(width: radius, height: radius))//.cgPath
+
+    func roundCornersWithShadow(corners: UIRectCorner, radius: CGFloat, shadowColor: UIColor, shadowOpacity: Float, shadowOffset: CGSize, shadowRadius: CGFloat) {
+
+        let maskPath = UIBezierPath(roundedRect: bounds, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))// .cgPath
         let myLayer = CAShapeLayer()
         myLayer.frame = bounds
         myLayer.path = maskPath.cgPath
         self.layer.mask = myLayer
-        
-        
+
         myLayer.shadowPath = myLayer.path
         myLayer.shadowColor = shadowColor.cgColor
         myLayer.shadowOffset = shadowOffset
         myLayer.shadowOpacity = shadowOpacity
         myLayer.shadowRadius = shadowRadius
-        
+
         layer.insertSublayer(myLayer, at: 0)
     }
-    
+
     func tapToDismissKeyboard() {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
         tapGesture.cancelsTouchesInView = false
         self.addGestureRecognizer(tapGesture)
     }
-    
+
     @objc func hideKeyboard() {
         self.endEditing(true)
     }
@@ -97,11 +96,11 @@ extension UICollectionView {
         let visibleCenterPositionOfScrollView = Float(self.contentOffset.x + (self.bounds.size.width / 2))
         var closestCellIndex = -1
         var closestDistance: Float = .greatestFiniteMagnitude
-        for i in 0..<self.visibleCells.count {
-            let cell = self.visibleCells[i]
+        for index in 0..<self.visibleCells.count {
+            let cell = self.visibleCells[index]
             let cellWidth = cell.bounds.size.width
             let cellCenter = Float(cell.frame.origin.x + cellWidth / 2)
-            
+
             // Now calculate closest cell
             let distance: Float = fabsf(visibleCenterPositionOfScrollView - cellCenter)
             if distance < closestDistance {
@@ -128,9 +127,8 @@ extension UICollectionView {
 }
 
 extension UIFont {
-    
-    func bold() -> UIFont
-    {
+
+    func bold() -> UIFont {
         var symTraits = fontDescriptor.symbolicTraits
         symTraits.insert([.traitBold])
         let fontDescriptorVar = fontDescriptor.withSymbolicTraits(symTraits)
@@ -154,8 +152,8 @@ extension Sequence {
 }
 
 extension UITextField {
-    func setPlaceholder(text:String,color:UIColor,font:UIFont) {
-        self.attributedPlaceholder = NSAttributedString(string: text,attributes: [NSAttributedString.Key.foregroundColor: color , NSAttributedString.Key.font : font])
+    func setPlaceholder(text: String, color: UIColor, font: UIFont) {
+        self.attributedPlaceholder = NSAttributedString(string: text, attributes: [NSAttributedString.Key.foregroundColor: color, NSAttributedString.Key.font: font])
     }
 }
 
@@ -165,24 +163,25 @@ extension UIScrollView {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     @objc func keyboardWillShow(notification: NSNotification) {
-        let keyboardFrame:CGRect = (notification.userInfo![UIResponder.keyboardFrameBeginUserInfoKey] as! NSValue).cgRectValue
-        var contentInset:UIEdgeInsets = self.contentInset
+      let keyboardFrame: CGRect = (notification.userInfo![UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?
+        .cgRectValue ?? .init(x: 0, y: 0, width: 0, height: 0)
+        var contentInset: UIEdgeInsets = self.contentInset
         contentInset.bottom = 50
         self.contentInset = contentInset
-        self.setContentOffset(CGPoint(x: 0, y: self.contentInset.bottom ) , animated: false)
-        UIView.animate(withDuration: 1 , animations: {
-            //self.layoutIfNeeded()
+        self.setContentOffset(CGPoint(x: 0, y: self.contentInset.bottom ), animated: false)
+        UIView.animate(withDuration: 1, animations: {
+            // self.layoutIfNeeded()
         }, completion: nil)
     }
-    
-    @objc func keyboardWillHide(notification: NSNotification){
+
+    @objc func keyboardWillHide(notification: NSNotification) {
         self.contentInset.bottom = CGFloat(0)
     }
-    
+
 }
 
 extension UITableView {
-    func setBackgroundView(imageName:UIImage,labelText:String,labelColor:UIColor) {
+    func setBackgroundView(imageName: UIImage, labelText: String, labelColor: UIColor) {
         DispatchQueue.main.async {
             let superView = UIView(frame: CGRect(x: 0, y: 0, width: self.bounds.size.width, height: self.bounds.size.height))
             let backgoundImage = UIImageView()
@@ -207,7 +206,7 @@ extension UITableView {
             }, completion: nil)
         }
     }
-    func setBackgroundImage(imageName:UIImage) {
+    func setBackgroundImage(imageName: UIImage) {
         DispatchQueue.main.async {
             let superView = UIView(frame: CGRect(x: 0, y: 0, width: self.bounds.size.width, height: self.bounds.size.height))
             let backgoundImage = UIImageView()
@@ -222,8 +221,8 @@ extension UITableView {
             }, completion: nil)
         }
     }
-    
-    func setBackgroundLabel(labelText:String,labelColor:UIColor,font:UIFont) {
+
+    func setBackgroundLabel(labelText: String, labelColor: UIColor, font: UIFont) {
         DispatchQueue.main.async {
             let superView = UIView(frame: CGRect(x: 0, y: 0, width: self.bounds.size.width, height: self.bounds.size.height))
             let backgroundLabel = UILabel()
@@ -241,7 +240,7 @@ extension UITableView {
             }, completion: nil)
         }
     }
-    
+
     func removeBackgroundView() {
         UIView.transition(with: self, duration: 0.2, options: [.transitionCrossDissolve], animations: {
             self.backgroundView = nil
@@ -250,7 +249,7 @@ extension UITableView {
 }
 
 extension UICollectionView {
-    func setBackgroundView(imageName:UIImage,labelText:String,labelColor:UIColor,font:UIFont) {
+    func setBackgroundView(imageName: UIImage, labelText: String, labelColor: UIColor, font: UIFont) {
         DispatchQueue.main.async {
             let superView = UIView(frame: CGRect(x: 0, y: 0, width: self.bounds.size.width, height: self.bounds.size.height))
             let backgoundImage = UIImageView()
@@ -274,7 +273,7 @@ extension UICollectionView {
             }, completion: nil)
         }
     }
-    func setBackgroundImage(imageName:UIImage,size: CGSize) {
+    func setBackgroundImage(imageName: UIImage, size: CGSize) {
         DispatchQueue.main.async {
             let superView = UIView(frame: CGRect(x: 0, y: 0, width: self.bounds.size.width, height: self.bounds.size.height))
             let backgoundImage = UIImageView()
@@ -289,8 +288,8 @@ extension UICollectionView {
             }, completion: nil)
         }
     }
-    
-    func setBackgroundLabel(labelText:String,labelColor:UIColor,font:UIFont) {
+
+    func setBackgroundLabel(labelText: String, labelColor: UIColor, font: UIFont) {
         DispatchQueue.main.async {
             let superView = UIView(frame: CGRect(x: 0, y: 0, width: self.bounds.size.width, height: self.bounds.size.height))
             let backgroundLabel = UILabel()
@@ -308,7 +307,7 @@ extension UICollectionView {
             }, completion: nil)
         }
     }
-    
+
     func removeBackgroundView() {
         UIView.transition(with: self, duration: 0.2, options: [.transitionCrossDissolve], animations: {
             self.backgroundView = nil
@@ -345,37 +344,36 @@ extension String {
         stringNumber = stringNumber.replacingOccurrences(of: " ", with: "")
         return stringNumber
     }
-    func weekdayFromDate(dateFormat:String) -> String {
+    func weekdayFromDate(dateFormat: String) -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = dateFormat
         if let date = dateFormatter.date(from: self) {
-            
+
             let weekDay = dateFormatter.weekdaySymbols[Calendar.current.component(.weekday, from: date) - 1]
             return weekDay
-        }
-        else {
+        } else {
             return "nil"
         }
     }
-    
+
     func dayNumberOfWeek() -> Int? {
         return Calendar.current.dateComponents([.weekday], from: self.toDate(format: "yyyy-MM-dd")).weekday
     }
-    
+
     var asDate: Date {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
         formatter.timeZone = TimeZone.init(abbreviation: "GMT")
         return formatter.date(from: self)!
     }
-    
-    func toDate(format:String) -> Date {
+
+    func toDate(format: String) -> Date {
         let formatter = DateFormatter()
         formatter.dateFormat = format
         formatter.timeZone = TimeZone.init(abbreviation: "GMT")
         return formatter.date(from: self)!
     }
-    
+
     func getCleanedURL() -> URL? {
         guard self.isEmpty == false else {
             return nil
@@ -383,13 +381,13 @@ extension String {
         if let url = URL(string: self) {
             return url
         } else {
-            if let urlEscapedString = self.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed) , let escapedURL = URL(string: urlEscapedString){
+            if let urlEscapedString = self.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed), let escapedURL = URL(string: urlEscapedString) {
                 return escapedURL
             }
         }
         return nil
     }
-    
+
     func convertToPriceType() -> String {
         let formatter = NumberFormatter()
         formatter.groupingSeparator = ","
@@ -397,12 +395,10 @@ extension String {
         if let number = formatter.number(from: self) {
             if let stringNumber = formatter.string(from: number) {
                 return stringNumber
-            }
-            else {
+            } else {
                 return self
             }
-        }
-        else {
+        } else {
             return self
         }
     }
@@ -412,7 +408,7 @@ extension String {
 }
 
 extension URL {
-    
+
     mutating func appending(_ queryItem: String, value: String?) {
         var urlComponents = URLComponents(string: absoluteString)
         var queryItems: [URLQueryItem] = urlComponents?.queryItems ??  []
@@ -424,15 +420,15 @@ extension URL {
 }
 
 extension UIApplication {
-    
-    var screenShot: UIImage?  {
+
+    var screenShot: UIImage? {
         return keyWindow?.layer.screenShot
     }
 }
 
 extension CALayer {
-    
-    var screenShot: UIImage?  {
+
+    var screenShot: UIImage? {
         let scale = UIScreen.main.scale
         UIGraphicsBeginImageContextWithOptions(frame.size, false, scale)
         if let context = UIGraphicsGetCurrentContext() {
@@ -446,36 +442,36 @@ extension CALayer {
 }
 
 extension Date {
-    func daysFrom(date:Date) -> Int? {
+    func daysFrom(date: Date) -> Int? {
         return Calendar.current.dateComponents([.day], from: date, to: self).day
     }
     func convertToTimeZone(initTimeZone: TimeZone, timeZone: TimeZone) -> Date {
         let delta = TimeInterval(timeZone.secondsFromGMT() - initTimeZone.secondsFromGMT())
         return addingTimeInterval(delta)
     }
-    
+
     func getWeekDates() -> [Date] {
         var arrThisWeek: [Date] = []
-        for i in 0..<7 {
-            arrThisWeek.append(Calendar.current.date(byAdding: .day, value: i, to: self.startOfWeek!)!)
+        for index in 0..<7 {
+            arrThisWeek.append(Calendar.current.date(byAdding: .day, value: index, to: self.startOfWeek!)!)
         }
         return arrThisWeek
     }
-    
-    var getLast12Month: ([String],[String]) {
-        let dates = (-11...0).compactMap{ Calendar.current.date(byAdding: .month, value: $0, to: self)}
+
+    var getLast12Month: ([String], [String]) {
+        let dates = (-11...0).compactMap { Calendar.current.date(byAdding: .month, value: $0, to: self)}
 
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MMM"
 
-        let months = dates.map{ dateFormatter.string(from: $0)}
-        
+        let months = dates.map { dateFormatter.string(from: $0)}
+
         dateFormatter.dateFormat = "yyyy-MM"
-        let finalDates = dates.map{ dateFormatter.string(from: $0)}
-        
-        return (months,finalDates)
+        let finalDates = dates.map { dateFormatter.string(from: $0)}
+
+        return (months, finalDates)
     }
-    
+
     var startOfWeek: Date? {
         let gregorian = Calendar(identifier: .gregorian)
         guard let sunday = gregorian.date(from: gregorian.dateComponents([.yearForWeekOfYear, .weekOfYear], from: self)) else { return nil }
@@ -490,7 +486,7 @@ extension Date {
 }
 
 extension Int {
-    
+
     func toPersianNumberWords() -> String {
         let formatter = NumberFormatter()
         formatter.numberStyle = .spellOut
@@ -500,14 +496,14 @@ extension Int {
         plainText = plainText.replacingOccurrences(of: "سهم", with: "سوم")
         return plainText
     }
-    
+
     func secondsToHoursMinutesSeconds() -> (Int, Int, Int) {
         return (self / 3600, (self % 3600) / 60, (self % 3600) % 60)
     }
 }
 
 extension UIDevice {
-    
+
     var modelName: String {
         var systemInfo = utsname()
         uname(&systemInfo)
@@ -516,7 +512,7 @@ extension UIDevice {
             guard let value = element.value as? Int8, value != 0 else { return identifier }
             return identifier + String(UnicodeScalar(UInt8(value)))
         }
-        
+
         switch identifier {
             case "iPod5,1":                                 return "iPod touch (5th generation)"
             case "iPod7,1":                                 return "iPod touch (6th generation)"
@@ -579,4 +575,3 @@ extension UIDevice {
         }
     }
 }
-

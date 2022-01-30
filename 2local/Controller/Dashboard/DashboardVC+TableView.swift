@@ -8,18 +8,18 @@
 
 import UIKit
 
-//MARK: - table view
+// MARK: - table view
 extension DashboardVC: UITableViewDelegate, UITableViewDataSource {
-    
+
     func setupTable() {
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 100
-        
+
         tableView.register(BalanceSectionTableViewCell.self)
         tableView.register(ChartSectionTableViewCell.self)
         tableView.register(WalletListSectionTableViewCell.self)
         tableView.register(InfoTableViewCell.self)
-        
+
         tableView.backgroundColor = .clear
         tableView.dataSource = self
         tableView.delegate = self
@@ -30,20 +30,20 @@ extension DashboardVC: UITableViewDelegate, UITableViewDataSource {
         tableView.separatorStyle = .none
         tableView.allowsSelection = false
         tableView.tableFooterView = UIView()
-        
+
         let refreshControll = UIRefreshControl()
         refreshControll.addTarget(self, action: #selector(generateWalets), for: .valueChanged)
         tableView.refreshControl = refreshControll
-        
+
     }
-    
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 4
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let row = indexPath.row
-        
+
         switch row {
             case 0:
                 let cell = tableView.dequeue(InfoTableViewCell.self)
@@ -52,14 +52,14 @@ extension DashboardVC: UITableViewDelegate, UITableViewDataSource {
             case 1:
                 let cell = tableView.dequeue(BalanceSectionTableViewCell.self)
                 cell.fill(self.totalFiatWithSymbol, tokenCount: self.totalTokenWithSymbol, invisible: self.invisible)
-                
+
                 cell.invisibleCallback = { [weak self] invisible in
                     guard let self = self else { return }
                     guard let invisible = invisible else { return }
                     self.invisible = invisible
                     self.tableView.reloadRows(at: self.indexPath(at: 1), with: .automatic)
                 }
-                
+
                 return cell
             case 2:
                 let cell = tableView.dequeue(WalletListSectionTableViewCell.self)
@@ -71,8 +71,8 @@ extension DashboardVC: UITableViewDelegate, UITableViewDataSource {
                 return cell
         }
     }
-    
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+
     }
 }

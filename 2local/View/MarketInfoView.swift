@@ -13,19 +13,19 @@ class MarketInfoView: UIView {
     @IBOutlet weak var directionButton: UIButton!
     @IBOutlet weak var closeButton: UIButton!
     @IBOutlet weak var websiteLabel: UILabel!
-    
+
     var callNumber = ""
     var lat = 0.0
     var lng = 0.0
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.setShadow(color: UIColor._002CA4, opacity: 1, offset: CGSize(width: 0, height: 0), radius: 6)
-        self.directionButton.setBorderWith(._flamenco, width: 1.2)
-        
+        self.setShadow(color: UIColor.color002CA4, opacity: 1, offset: CGSize(width: 0, height: 0), radius: 6)
+        self.directionButton.setBorderWith(.flamenco, width: 1.2)
+
         websiteLabel.numberOfLines = 0
         nameLabel.numberOfLines = 0
-        
+
         websiteLabel.isUserInteractionEnabled = true
     }
 

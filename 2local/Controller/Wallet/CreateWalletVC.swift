@@ -10,100 +10,100 @@ import UIKit
 import web3swift
 
 class CreateWalletVC: BaseVC {
-    
-    //MARK: - Outlets
+
+    // MARK: - Outlets
     @IBOutlet weak var continueButton: UIButton!
     @IBOutlet weak var checkBoxButton: UIButton!
     @IBOutlet weak var agreementLabel: UILabel!
     @IBOutlet weak var mnemonicLabel: UILabel!
     @IBOutlet weak var mnemonicContainerView: UIView!
-    
-    //MARK: - Properties
+
+    // MARK: - Properties
     private var walletName: Coins?
     private var agreement: Bool = false
     private var items: [String] = []
-    
+
     var wallet: Wallet!
     var mnemonics: String?
-    
+
     func initWith(walletName: Coins) {
         self.walletName = walletName
     }
-    
-    //MARK: - View cycle
+
+    // MARK: - View cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
         createETHCoin()
     }
-    
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
     }
-    
-    //MARK: - Functions
+
+    // MARK: - Functions
     fileprivate func setupView() {
         if let walletName = walletName?.rawValue {
             setNavigation(title: "Create \(walletName) wallet")
         }
-        
+
         continueButton.setCornerRadius(8)
         agreementLabel.isUserInteractionEnabled = true
         agreementLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(agreementCheckTapped(_:))))
-        
+
         updateAgreementStatus()
-        
+
         mnemonicLabel.text = ""
-        mnemonicContainerView.setBorderWith(._E0E0EB, width: 1)
+        mnemonicContainerView.setBorderWith(.e0e0eb, width: 1)
         mnemonicContainerView.setCornerRadius(8)
     }
-    
+
     fileprivate func updateAgreementStatus() {
         checkBoxButton.setCornerRadius(4)
         if agreement {
             checkBoxButton.setImage(UIImage(named: "check")?.tint(with: .white), for: .normal)
             checkBoxButton.setBorderWith(.clear, width: 1)
-            checkBoxButton.backgroundColor = ._EF8749
-            agreementLabel.textColor = ._303030
-            continueButton.backgroundColor = ._EF8749
+            checkBoxButton.backgroundColor = .EF8749
+            agreementLabel.textColor = .color303030
+            continueButton.backgroundColor = .EF8749
             continueButton.isEnabled = true
         } else {
             checkBoxButton.setImage(nil, for: .normal)
-            checkBoxButton.setBorderWith(._EBEBEB, width: 1)
+            checkBoxButton.setBorderWith(.ebebeb, width: 1)
             checkBoxButton.backgroundColor = .clear
-            agreementLabel.textColor = ._707070
+            agreementLabel.textColor = .color707070
             DispatchQueue.main.async {
-                self.continueButton.backgroundColor = UIColor._EF8749.withAlphaComponent(0.5)
+                self.continueButton.backgroundColor = UIColor.EF8749.withAlphaComponent(0.5)
             }
             continueButton.isEnabled = false
         }
     }
-    
+
     fileprivate func createETHCoin() {
-        self.mnemonics = try! BIP39.generateMnemonics(bitsOfEntropy: 128)!
-        
+        self.mnemonics = try? BIP39.generateMnemonics(bitsOfEntropy: 128)!
+
         guard let mnemonics = self.mnemonics else { return }
         mnemonicLabel.attributedText = getTextAttributeSpace(mnemonics)
         items = getArrayFrom(mnemonics)
         self.wallet = Wallet.init(type: .BIP39(mnemonic: mnemonics))
     }
-    
-    //MARK: - Actions
-    @objc @IBAction func agreementCheckTapped(_ sender: UIButton) {
+
+    // MARK: - Actions
+    @IBAction func agreementCheckTapped(_ sender: UIButton) {
         agreement.toggle()
         updateAgreementStatus()
     }
-    
+
     @IBAction func continueTapped(_ sender: UIButton) {
-        let vc = UIStoryboard.wallet.instantiate(viewController: VerifyRecoveryWalletVC.self)
+        let viewController = UIStoryboard.wallet.instantiate(viewController: VerifyRecoveryWalletVC.self)
         if (self.items.count > 0), let walletName = self.walletName, let mnemonics = self.mnemonics {
-            vc.initWith(walletName: walletName, items: items, mnemonics: mnemonics)
+            viewController.initWith(walletName: walletName, items: items, mnemonics: mnemonics)
             if let navigation = navigationController {
-                navigation.pushViewController(vc, animated: true)
+                navigation.pushViewController(viewController, animated: true)
             }
         }
     }

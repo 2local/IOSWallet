@@ -13,14 +13,14 @@ struct GasPriceModel: Codable {
     let safeGasPrice: String
     let proposeGasPrice: String
     let fastGasPrice: String
-    
+
     enum CodingKeys: String, CodingKey {
         case lastBlock = "LastBlock"
         case safeGasPrice = "SafeGasPrice"
         case proposeGasPrice = "ProposeGasPrice"
         case fastGasPrice = "FastGasPrice"
     }
-    
+
     init(safeGasPrice: String, proposeGasPrice: String, fastGasPrice: String, lastBlock: String) {
         self.safeGasPrice = safeGasPrice
         self.proposeGasPrice = proposeGasPrice

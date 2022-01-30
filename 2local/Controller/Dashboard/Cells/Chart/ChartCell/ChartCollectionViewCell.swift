@@ -9,8 +9,8 @@
 import UIKit
 
 class ChartCollectionViewCell: UICollectionViewCell {
-    
-    //MARK: - outlet
+
+    // MARK: - outlet
     @IBOutlet var monthLabel: UILabel!
     @IBOutlet var barView: UIView!
     @IBOutlet var incomeView: UIView!
@@ -19,11 +19,10 @@ class ChartCollectionViewCell: UICollectionViewCell {
     @IBOutlet var expenseHeightConst: NSLayoutConstraint!
     @IBOutlet var chartWidth: NSLayoutConstraint!
     @IBOutlet weak var indicatorView: UIView!
-    
-    //MARK: - properties
-    
-    
-    //MARK: - life cycle
+
+    // MARK: - properties
+
+    // MARK: - life cycle
     override func awakeFromNib() {
         super.awakeFromNib()
         incomeHeightConst.constant = 0
@@ -33,20 +32,20 @@ class ChartCollectionViewCell: UICollectionViewCell {
         expenseView.layer.cornerRadius = 3
         expenseView.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
     }
-    
+
     func fill(_ transactionsChart: TransactionChartModel, transferCount: Int, maxVal: CGFloat, month: String) {
-        
+
         monthLabel.text = month
-        
+
         let maxIncomeHeight: CGFloat = barView.frame.height / 2
         let maxExpenseHeight: CGFloat = barView.frame.height / 2
-        
+
         UIView.animate(withDuration: 0, animations: { [self] in
             incomeHeightConst.constant = 0
             expenseHeightConst.constant = 0
             barView.alpha = 0
             indicatorView.alpha = 1
-        }) { [self] (finish) in
+        }) { [self] (_) in
             barView.alpha = 1
             indicatorView.alpha = 0
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.2) {
@@ -55,7 +54,7 @@ class ChartCollectionViewCell: UICollectionViewCell {
                 UIView.animate(withDuration: 1, delay: 0, options: [.curveEaseInOut], animations: {
                     incomeHeightConst.constant = (CGFloat(transactionsChart.income) * maxIncomeHeight / maxVal)
                     expenseHeightConst.constant =  (CGFloat(transactionsChart.expenses) * maxExpenseHeight / maxVal)
-                    if ((0...1).contains(incomeHeightConst.constant) && (0...1).contains(expenseHeightConst.constant ) || transferCount == 0){
+                    if (0...1).contains(incomeHeightConst.constant) && (0...1).contains(expenseHeightConst.constant ) || transferCount == 0 {
                         barView.alpha = 0
                         indicatorView.alpha = 1
                     }
@@ -66,8 +65,8 @@ class ChartCollectionViewCell: UICollectionViewCell {
                         expenseHeightConst.constant = 4
                     }
                     barView.layoutIfNeeded()
-                }) { (finish) in
-                    
+                }) { (_) in
+
                 }
             }
         }

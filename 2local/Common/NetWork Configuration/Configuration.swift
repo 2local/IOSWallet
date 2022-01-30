@@ -8,11 +8,10 @@
 
 import Foundation
 
-
 class Configuration {
-    
+
     static let shared = Configuration()
-    
+
     var googleApiKey: String
     var baseURL: String
     var ethscanUrl: String
@@ -38,8 +37,7 @@ class Configuration {
 	var tlcBaseCurrency: String
 	var tlcQuoteCurrency: String
 	var laTokenBaseUrl: String
-    
-    
+
     init() {
         if let dictionary = Bundle.main.infoDictionary,
            let configuration = dictionary["Configuration"] as? String {
@@ -71,10 +69,10 @@ class Configuration {
                         password = value["password"] as? String ?? ""
                         aesMode = value["aesMode"] as? String ?? ""
                         marketplaceBaseURL = value["marketplaceBaseURL"] as? String ?? ""
-						
+
 						tlcBaseCurrency = value["tlcBaseCurrency"] as? String ?? ""
 						tlcQuoteCurrency = value["tlcQuoteCurrency"] as? String ?? ""
-						
+
 						laTokenBaseUrl = value["laTokenBaseUrl"] as? String ?? ""
                         return
                     }
@@ -84,5 +82,3 @@ class Configuration {
         fatalError("Error: Configuration file doesn't exist in project directory, please include it to be able to use this class")
     }
 }
-
-

@@ -16,7 +16,7 @@ protocol WalletProtocol {
     var name: String { get }
     var address: String { get }
     var symbol: String { get }
-    
+
     func gasPrice(_ complertionHandler: @escaping (String, String, String) -> Void)
     func balance() -> String
     func fiat(from balance: Double?, completionHandler: @escaping (String) -> Void)

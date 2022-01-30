@@ -8,23 +8,22 @@
 
 import Foundation
 
-
 @propertyWrapper
 struct Storage<T: Codable> {
-    
-    struct Wrapper<T>: Codable where T : Codable {
+
+    struct Wrapper<T>: Codable where T: Codable {
         let wrapper: T
     }
-    
+
     private let key: String
     private let defaultValue: T
     private let storage: UserDefaults = .standard
-    
+
     init(key: String, defaultValue: T) {
         self.key = key
         self.defaultValue = defaultValue
     }
-    
+
     var wrappedValue: T {
         get {
             // Read value from UserDefaults
@@ -32,12 +31,12 @@ struct Storage<T: Codable> {
                 // Return defaultValue when no data in UserDefaults
                 return defaultValue
             }
-            
+
             // Convert data to the desire data type
             let value = try? JSONDecoder().decode(Wrapper<T>.self, from: data)
             return value?.wrapper ?? defaultValue
         }
-        
+
         set {
             // Convert newValue to data
             do {
@@ -52,11 +51,11 @@ struct Storage<T: Codable> {
 }
 
 extension Storage where T: ExpressibleByNilLiteral {
-    
+
     init(key: String) {
         self.init(key: key, defaultValue: nil)
     }
-    
+
 }
 
 private protocol AnyOptional {

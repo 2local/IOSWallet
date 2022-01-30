@@ -12,9 +12,9 @@ class ChangePasswordResultViewController: BaseVC {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.parent?.view.setShadow(color: UIColor._002CA4, opacity: 0.1, offset: CGSize(width: 0, height: -3), radius: 10)
+        self.parent?.view.setShadow(color: UIColor.color002CA4, opacity: 0.1, offset: CGSize(width: 0, height: -3), radius: 10)
     }
-    
+
     @IBAction func close(_ sender: Any) {
         self.performSegue(withIdentifier: "goToSettings", sender: nil)
     }

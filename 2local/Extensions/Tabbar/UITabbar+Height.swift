@@ -14,12 +14,12 @@ extension UITabBar {
             return UIApplication.shared.delegate?.window??.safeAreaInsets.bottom ?? .zero > 0
         }
     }
-    
+
     override open func sizeThatFits(_ size: CGSize) -> CGSize {
         super.sizeThatFits(size)
         var sizeThatFits = super.sizeThatFits(size)
         sizeThatFits.height = hasHomeIndicator ? 89 : 70
         return sizeThatFits
     }
-    
+
 }

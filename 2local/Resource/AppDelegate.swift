@@ -22,73 +22,79 @@ var remoteConfig = RemoteConfig.remoteConfig()
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-  
-  var window : UIWindow?
+
+  var window: UIWindow?
   let context = LAContext()
-  
-  func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+
+  func application(_ application: UIApplication,
+                   didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
     FirebaseApp.configure()
-    
+
     self.logUser()
-    
+
     let googleApiKey = Constant.googleAPIKey
-    
+
     GMSServices.provideAPIKey(googleApiKey)
     GMSPlacesClient.provideAPIKey(googleApiKey)
-    
+
     setupProgressConfiguration()
-    
-    Branch.getInstance().initSession(launchOptions: launchOptions) { (params, error) in
+
+    Branch.getInstance().initSession(launchOptions: launchOptions) { (params, _) in
       // do stuff with deep link data (nav to page, display content, etc)
       print(params as? [String: AnyObject] ?? {})
     }
-    
+
     return true
   }
-  
-  func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+
+  func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool {
     return Branch.getInstance().application(app, open: url, options: options)
   }
-  
-  func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
+
+  func application(_ application: UIApplication,
+                   continue userActivity: NSUserActivity,
+                   restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
     // handler for Universal Links
     return Branch.getInstance().continue(userActivity)
   }
-  
-  func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+
+  func application(_ application: UIApplication,
+                   didReceiveRemoteNotification userInfo: [AnyHashable: Any],
+                   fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
     // handler for Push Notifications
     Branch.getInstance().handlePushNotification(userInfo)
   }
-  
+
   func logUser() {
     Crashlytics.crashlytics().setCrashlyticsCollectionEnabled(true)
     if let user = DataProvider.shared.user {
       Crashlytics.crashlytics().setUserID("\(user.id ?? 1)")
-      Crashlytics.crashlytics().setCustomValue("\(user.name ?? "no name") \(user.lastName ?? "no lastName")", forKey: "str_key")
+      Crashlytics.crashlytics().setCustomValue("\(user.name ?? "no name") \(user.lastName ?? "no lastName")",
+                                               forKey: "str_key")
     }
   }
-  
+
 }
 
-//MARK: - App life cycle
+// MARK: - App life cycle
 
 extension AppDelegate {
-  
+
   // Detects when the user returns to the Home screen, which will push the app into the background
   func applicationWillResignActive(_ application: UIApplication) {
     print("LIFECYCLE-> \(#function)")
   }
-  
+
   // Detects when an app, formerly in the background, reappears in the foreground once more
   func applicationDidBecomeActive(_ application: UIApplication) {
     print("LIFECYCLE-> \(#function)")
   }
-  
+
   // Detects when an app gets sent into the background
   func applicationDidEnterBackground(_ application: UIApplication) {
     print("LIFECYCLE-> \(#function)")
   }
-  
+
   // Detects when an app is about to be sent into the background
   func applicationWillEnterForeground(_ application: UIApplication) {
     print("LIFECYCLE-> \(#function)")
@@ -98,31 +104,31 @@ extension AppDelegate {
     //            goToCreatePassword()
     //        }
   }
-  
+
   // Detects when an app is about to stop running
   func applicationWillTerminate(_ application: UIApplication) {
     print("LIFECYCLE-> \(#function)")
   }
-  
+
   fileprivate func goToLoginView() {
-    let vc = UIStoryboard.authentication.instantiate(viewController: LocalLoginVC.self)
-    vc.modalPresentationStyle = .fullScreen
+    let viewController = UIStoryboard.authentication.instantiate(viewController: LocalLoginVC.self)
+    viewController.modalPresentationStyle = .fullScreen
     self.window = UIWindow(frame: UIScreen.main.bounds)
-    self.window?.rootViewController = vc
+    self.window?.rootViewController = viewController
     self.window?.makeKeyAndVisible()
   }
-  
+
   fileprivate func goToCreatePassword() {
-    let vc = UIStoryboard.authentication.instantiate(viewController: CreatePasswordVC.self)
-    vc.modalPresentationStyle = .fullScreen
+    let viewController = UIStoryboard.authentication.instantiate(viewController: CreatePasswordVC.self)
+    viewController.modalPresentationStyle = .fullScreen
     self.window = UIWindow(frame: UIScreen.main.bounds)
-    self.window?.rootViewController = vc
+    self.window?.rootViewController = viewController
     self.window?.makeKeyAndVisible()
   }
-  
+
 }
 
-//MARK: - Progress configuration
+// MARK: - Progress configuration
 
 extension AppDelegate {
   fileprivate func setupProgressConfiguration() {
@@ -132,13 +138,13 @@ extension AppDelegate {
     HSProgressConfiguration.minimumErrorDisplayTime = 3
     HSProgressConfiguration.minimumSuccessDisplayTime = 2.8
     HSProgressConfiguration.circleSize = 50
-    HSProgressConfiguration.circleStrokeForegroundColor = ._flamenco
-    HSProgressConfiguration.errorColor = ._flamenco
-    HSProgressConfiguration.successColor = ._flamenco
-    HSProgressConfiguration.statusColor = UIColor._404040
-    HSProgressConfiguration.stopColor = ._flamenco
+    HSProgressConfiguration.circleStrokeForegroundColor = .flamenco
+    HSProgressConfiguration.errorColor = .flamenco
+    HSProgressConfiguration.successColor = .flamenco
+    HSProgressConfiguration.statusColor = UIColor.color404040
+    HSProgressConfiguration.stopColor = .flamenco
     HSProgressConfiguration.backgroundType = .blurred
-    HSProgressConfiguration.backgroundTintColor = UIColor._EBEBEB
+    HSProgressConfiguration.backgroundTintColor = UIColor.ebebeb
     KVNProgress.setConfiguration(HSProgressConfiguration)
   }
 }

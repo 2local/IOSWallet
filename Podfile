@@ -21,4 +21,5 @@ target '2local' do
   pod 'web3swift', '~> 2.5.0'
   pod 'SwiftyJSON'
   pod 'IQKeyboardManager'
+  pod 'SwiftLint'
 end

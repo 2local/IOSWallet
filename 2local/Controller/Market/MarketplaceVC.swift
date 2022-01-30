@@ -13,57 +13,57 @@ import CoreLocation
 import KVNProgress
 
 class MarketplaceVC: BaseVC {
-  
-  //MARK: - outlets
+
+  // MARK: - outlets
   @IBOutlet var maps: GMSMapView!
   @IBOutlet weak var searchBar: UITextField!
   @IBOutlet var marketInfoView: MarketInfoView!
   @IBOutlet var marketInfoHeight: NSLayoutConstraint!
-  
-  //MARK: - properties
+
+  // MARK: - properties
   var locationManager = CLLocationManager()
   var currentLocation: CLLocation?
   var placesClient: GMSPlacesClient!
   var zoomLevel: Float = 15.0
   let userLocationMarker = GMSMarker()
   var markers = [GMSMarker]()
-  
+
   var places = [Companies]()
-  
+
   var bottomPadding = 0
-  
+
   override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
     setupMapStyle()
     setupMapMarkers(places: places)
   }
-  
-  //MARK: - life cycle
+
+  // MARK: - life cycle
   override func viewDidLoad() {
     super.viewDidLoad()
     setupView()
   }
-  
+
   override func viewDidAppear(_ animated: Bool) {
     self.setPadding(inset: self.bottomPadding)
   }
-  
-  //MARK: - functions
-  
+
+  // MARK: - functions
+
   fileprivate func setupView() {
     setupLocationManager()
     placesClient = GMSPlacesClient.shared()
     maps.delegate = self
     searchBar.delegate = self
     setupMapStyle()
-    
+
     getPlaces()
     setupMapMarkers(places: self.places)
-    
+
     self.marketInfoHeight.constant = 0
     self.marketInfoView.closeButton.addTarget(self,
                                               action: #selector(closeMarketInfoView),
                                               for: .touchUpInside)
-    
+
     var location: CLLocation = .init(latitude: 0, longitude: 0)
     if places.count > 0,
        let plase = places.first,
@@ -74,13 +74,13 @@ class MarketplaceVC: BaseVC {
       location = .init(latitude: Double(lat)!,
                        longitude: Double(lng)!)
     }
-    
+
     let camera = GMSCameraPosition.camera(withLatitude: location.coordinate.latitude,
                                           longitude: location.coordinate.longitude,
                                           zoom: 10)
     maps.animate(to: camera)
   }
-  
+
   fileprivate func getPlaces() {
     let places = DataProvider.shared.places
     let newPlaces = places.filter { place in
@@ -88,27 +88,27 @@ class MarketplaceVC: BaseVC {
     }
     self.places = newPlaces
   }
-  
+
   @objc func closeMarketInfoView() {
     UIView.animate(withDuration: 0.4,
                    delay: 0,
                    usingSpringWithDamping: 1,
                    initialSpringVelocity: 1,
                    options: [.curveEaseIn]) {
-      
+
       self.marketInfoHeight.constant = 0
       self.view.layoutIfNeeded()
       self.setPadding(inset: self.bottomPadding)
       self.clearMarkers()
     }
   }
-  
-  func setupMapMarkers(places:[Companies]) {
+
+  func setupMapMarkers(places: [Companies]) {
     for marker in markers {
       marker.map = nil
     }
     markers.removeAll()
-    
+
     for place in places.enumerated() {
       let marker: GMSMarker = GMSMarker()
       marker.icon = #imageLiteral(resourceName: "maps-marker")
@@ -125,14 +125,14 @@ class MarketplaceVC: BaseVC {
       }
     }
   }
-  
+
   func clearMarkers() {
     for marker in markers {
       marker.icon = #imageLiteral(resourceName: "maps-marker")
     }
   }
-  
-  func setPadding(inset:Int) {
+
+  func setPadding(inset: Int) {
     if maps != nil {
       maps.padding = UIEdgeInsets(top: 0,
                                   left: 0,
@@ -142,21 +142,21 @@ class MarketplaceVC: BaseVC {
   }
 }
 
-//MARK: - textfield
+// MARK: - textfield
 extension MarketplaceVC: UITextFieldDelegate {
-  
+
   func textFieldDidBeginEditing(_ textField: UITextField) {
     UIView.animate(withDuration: 0.3, animations: {
       textField.alpha = 1
     }, completion: nil)
   }
-  
+
   func textFieldDidEndEditing(_ textField: UITextField) {
     UIView.animate(withDuration: 0.3, animations: {
       textField.alpha = 0.6
     }, completion: nil)
   }
-  
+
   func textFieldShouldReturn(_ textField: UITextField) -> Bool {
     var isFound = false
     for place in places.enumerated() {
@@ -172,33 +172,33 @@ extension MarketplaceVC: UITextFieldDelegate {
         break
       }
     }
-    
+
     if !isFound {
       KVNProgress.showError(withStatus: "No marketplace is found")
     }
-    
+
     self.view.endEditing(true)
     return true
   }
 }
 
-//MARK: - Marker view functions
+// MARK: - Marker view functions
 extension MarketplaceVC {
-  
+
   func marketDidSelected(id: Int) {
-    let marketInfoViewHeight : CGFloat = 200.0
+    let marketInfoViewHeight: CGFloat = 200.0
     let mapPadding = 170
     UIView.animate(withDuration: 0.2) {
       self.marketInfoView.nameLabel.text = self.places[id].name
       self.marketInfoView.websiteLabel.text = self.places[id].address
     }
-    
+
     self.marketInfoView.lat = Double(self.places[id].lat ?? "0.0")!
     self.marketInfoView.lng = Double(self.places[id].lng ?? "0.0")!
     self.marketInfoView.directionButton.addTarget(self,
                                                   action: #selector(directionMarket),
                                                   for: .touchUpInside)
-    
+
     if marketInfoHeight.constant == 0 {
       if UIDevice.current.modelName == "iPhone X" ||
           UIDevice.current.modelName == "iPhone XS" ||
@@ -208,7 +208,7 @@ extension MarketplaceVC {
           UIDevice.current.modelName == "iPhone 11 Pro" ||
           UIDevice.current.modelName == "iPhone 11 Pro Max" ||
           UIDevice.current.modelName == "Simulator" {
-        
+
         UIView.animate(withDuration: 0.4,
                        delay: 0,
                        usingSpringWithDamping: 1,
@@ -231,7 +231,7 @@ extension MarketplaceVC {
       }
     }
   }
-  
+
   @objc
   func callMarket() {
     let numbers = self.marketInfoView.callNumber.split(separator: ",")
@@ -243,10 +243,10 @@ extension MarketplaceVC {
       }
     }
   }
-  
+
   @objc
   func directionMarket() {
-    if (UIApplication.shared.canOpenURL(URL(string:"comgooglemaps://")!)) {
+    if UIApplication.shared.canOpenURL(URL(string: "comgooglemaps://")!) {
       if let url = "comgooglemaps://?saddr=&daddr=\(self.marketInfoView.lat),\(self.marketInfoView.lng)&directionsmode=driving".getCleanedURL() {
         UIApplication.shared.open(url, options: [:], completionHandler: nil)
       } else {
@@ -258,16 +258,16 @@ extension MarketplaceVC {
     } else {
       KVNProgress.showError(withStatus: "You don't have any map in your device")
     }
-    
+
   }
-  
+
   @objc fileprivate func tapOnAddress() {
     openUrl("url", viewController: self)
   }
-  
+
 }
 
-//MARK: - Map view controller
+// MARK: - Map view controller
 extension MarketplaceVC: GMSMapViewDelegate {
   func setupMapStyle() {
     do {
@@ -295,13 +295,12 @@ extension MarketplaceVC: GMSMapViewDelegate {
           NSLog("Unable to find style.json")
         }
       }
-      
-    }
-    catch {
+
+    } catch {
       NSLog("One or more of the map styles failed to load. \(error)")
     }
   }
-  
+
   func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
     if marker != self.userLocationMarker {
       for marker in markers {
@@ -317,15 +316,14 @@ extension MarketplaceVC: GMSMapViewDelegate {
     }
     return false
   }
-  
+
   func mapView(_ mapView: GMSMapView, didChange position: GMSCameraPosition) {
     self.view.endEditing(true)
   }
-  
+
 }
 
-
-//MARK: - Location manager
+// MARK: - Location manager
 extension MarketplaceVC: CLLocationManagerDelegate {
   fileprivate func setupLocationManager() {
     locationManager = CLLocationManager()
@@ -335,7 +333,7 @@ extension MarketplaceVC: CLLocationManagerDelegate {
     locationManager.startUpdatingLocation()
     locationManager.delegate = self
   }
-  
+
   func locationManager(_ manager: CLLocationManager,
                        didUpdateLocations locations: [CLLocation]) {
     let location: CLLocation = locations.last!

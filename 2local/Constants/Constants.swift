@@ -14,6 +14,6 @@ internal struct SelectionIndicator {
 
 internal struct Constant {
     static let defaultSelectionHorizontalPadding: CGFloat = 15
-    
+
     static let googleAPIKey = Configuration.shared.googleApiKey
 }

@@ -1564,7 +1564,7 @@
         <!--Add Marketplace-->
         <scene sceneID="o4q-aR-aDb">
             <objects>
-                <viewController storyboardIdentifier="addMarketplaceVC" id="5uu-OC-RnU" customClass="addMarketplaceVC" customModule="_local" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AddMarketplaceVC" id="5uu-OC-RnU" customClass="AddMarketplaceVC" customModule="_local" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="oec-er-uL8">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

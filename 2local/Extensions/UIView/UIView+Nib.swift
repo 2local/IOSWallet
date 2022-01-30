@@ -9,16 +9,16 @@
 import UIKit
 
 extension UIView {
-    
+
     class func fromNib(nibNameOrNil: String? = nil) -> Self {
         return fromNib(nibNameOrNil: nibNameOrNil, type: self)
     }
-    
+
     class func fromNib<T: UIView>(nibNameOrNil: String? = nil, type: T.Type) -> T {
         let view: T? = fromNib(nibNameOrNil: nibNameOrNil, type: T.self)
         return view!
     }
-    
+
     class func fromNib<T: UIView>(nibNameOrNil: String? = nil, type: T.Type) -> T? {
         var view: T?
         let name: String
@@ -28,17 +28,16 @@ extension UIView {
             // Most nibs are demangled by practice, if not, just declare string explicitly
             name = String(describing: T.self)
         }
-        
+
         let nibViews = Bundle.main.loadNibNamed(name, owner: nil, options: nil)
-        
+
         nibViews?.forEach({ (nibView) in
             if let tog = nibView as? T {
                 view = tog
             }
         })
-        
+
         return view
     }
-    
-}
 
+}

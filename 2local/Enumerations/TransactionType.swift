@@ -10,7 +10,7 @@ import Foundation
 
 enum TransactionType {
     case sent, received, purchase, pending, faild
-    
+
     func icon() -> String {
         switch self {
         case .sent:
@@ -25,7 +25,7 @@ enum TransactionType {
             return "pendingTransaction"
         }
     }
-    
+
     func title() -> String {
         switch self {
         case .sent:

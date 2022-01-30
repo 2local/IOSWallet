@@ -9,11 +9,11 @@
 import Foundation
 
 extension String {
-    ///Mac address validator
+    /// Mac address validator
     func isValidPrivatekey() -> Bool {
         let macRegEx = "^0[x][0-9A-Za-z]{64}"
 
-        let macPred = NSPredicate(format:"SELF MATCHES %@", macRegEx)
+        let macPred = NSPredicate(format: "SELF MATCHES %@", macRegEx)
         return macPred.evaluate(with: self)
     }
 }

@@ -149,6 +149,7 @@ PODS:
   - SkyFloatingLabelTextField (3.7.0)
   - SROTPView (0.1.2)
   - Starscream (4.0.4)
+  - SwiftLint (0.46.2)
   - SwiftyJSON (5.0.1)
   - web3swift (2.5.0):
     - BigInt (~> 5.2.0)
@@ -172,6 +173,7 @@ DEPENDENCIES:
   - QRCodeReader.swift
   - SkyFloatingLabelTextField (~> 3.7.0)
   - SROTPView (from `https://github.com/sarojraut/SROTPView.git`)
+  - SwiftLint
   - SwiftyJSON
   - web3swift (~> 2.5.0)
 
@@ -208,6 +210,7 @@ SPEC REPOS:
     - secp256k1.c
     - SkyFloatingLabelTextField
     - Starscream
+    - SwiftLint
     - SwiftyJSON
     - web3swift
 
@@ -253,9 +256,10 @@ SPEC CHECKSUMS:
   SkyFloatingLabelTextField: 4b46db0ab1ccde0919cded29c656e6b4805eda04
   SROTPView: 253e443d6e182376aa84fa11fce1032a952840aa
   Starscream: 5178aed56b316f13fa3bc55694e583d35dd414d9
+  SwiftLint: 6bc52a21f0fd44cab9aa2dc8e534fb9f5e3ec507
   SwiftyJSON: 2f33a42c6fbc52764d96f13368585094bfd8aa5e
   web3swift: 31ecb7a7da543f851344cdd64badea94c439b0d9
 
-PODFILE CHECKSUM: 1fa89d071fc338da9e74bd967adf546f49c553f4
+PODFILE CHECKSUM: ac532106d38852511598cc835918a92072799c4b
 
 COCOAPODS: 1.11.2

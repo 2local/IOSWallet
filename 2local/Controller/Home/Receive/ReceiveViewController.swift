@@ -26,7 +26,6 @@ class ReceiveViewController: BaseVC {
       walletNumberTXF.placeholderFont = .TLFont()
       walletNumberTXF.font = .TLFont(weight: .regular,
                                      size: 14)
-      walletNumberTXF.text = currentWallet.address
     }
   }
   @IBOutlet var amountTXF: SkyFloatingLabelTextField! {
@@ -38,20 +37,8 @@ class ReceiveViewController: BaseVC {
                                size: 14)
     }
   }
-  @IBOutlet var balanceLabel: UILabel! {
-    didSet {
-      walletQueue.async {
-        DispatchQueue.main.async { [self] in
-          balanceLabel.text = "Available: \(currentWallet.balance()) \(currentWallet.symbol)"
-        }
-      }
-    }
-  }
-  @IBOutlet var currencyLabel: UILabel! {
-    didSet {
-      currencyLabel.text = DataProvider.shared.defaultEx
-    }
-  }
+  @IBOutlet var balanceLabel: UILabel!
+  @IBOutlet var currencyLabel: UILabel!
   @IBOutlet var costLabel: UILabel!
   @IBOutlet weak var requestButton: UIButton!
 
@@ -77,11 +64,13 @@ class ReceiveViewController: BaseVC {
       guard let fee = fee else { return }
       self.fee = Double(fee)!
     }
+
+    getWalletData()
   }
 
   // MARK: - functions
   fileprivate func setupView() {
-    qrCodeIMG.image = generateQRCode(from: currentWallet.address)
+    KVNProgress.show()
     qrCodeIMG.setCornerRadius(5)
     self.scrollView.handleKeyboard()
     self.view.tapToDismissKeyboard()
@@ -90,13 +79,25 @@ class ReceiveViewController: BaseVC {
     setNavigation(title: "Receive")
   }
 
+  fileprivate func getWalletData() {
+    let address = currentWallet.address
+    walletNumberTXF.text = address
+    qrCodeIMG.image = generateQRCode(from: address)
+    balanceLabel.text = "Available: \(currentWallet.balance()) \(currentWallet.symbol)"
+    currencyLabel.text = DataProvider.shared.defaultEx ?? "USD"
+
+    KVNProgress.dismiss()
+  }
+
   @objc func amountCalculation() {
     guard let amount = self.amountTXF.text, let doubleAmount = Double(amount) else {
       self.costLabel.text = ""
       return
     }
     let cost = doubleAmount * fee
-    UIView.transition(with: self.costLabel, duration: 0.3, options: .transitionFlipFromTop) { [self] in
+    UIView.transition(with: self.costLabel,
+                      duration: 0.3,
+                      options: .transitionFlipFromTop) { [self] in
       self.costLabel.text = String(cost).convertToPriceType()
     }
   }

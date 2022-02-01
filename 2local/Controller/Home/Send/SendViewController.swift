@@ -22,7 +22,6 @@ class SendViewController: BaseVC, ScanWalletNumberDelegate, UIGestureRecognizerD
       walletNumberTXF.placeholderFont = .TLFont()
       walletNumberTXF.font = .TLFont(weight: .regular,
                                      size: 14)
-      walletNumberTXF.text = walletNumber
     }
   }
   @IBOutlet var amountTXF: SkyFloatingLabelTextField! {
@@ -35,20 +34,8 @@ class SendViewController: BaseVC, ScanWalletNumberDelegate, UIGestureRecognizerD
     }
   }
   @IBOutlet var costLabel: UILabel!
-  @IBOutlet var currencyLabel: UILabel! {
-    didSet {
-      currencyLabel.text = DataProvider.shared.defaultEx ?? "USD"
-    }
-  }
-  @IBOutlet var balanceLabel: UILabel! {
-    didSet {
-      walletQueue.async { [self] in
-        DispatchQueue.main.async {
-          balanceLabel.text = "Available: \(currentWallet.balance()) \(currentWallet.symbol)"
-        }
-      }
-    }
-  }
+  @IBOutlet var currencyLabel: UILabel!
+  @IBOutlet var balanceLabel: UILabel!
 
   @IBOutlet weak var walletSymbolLabel: UILabel! {
     didSet {
@@ -116,7 +103,18 @@ class SendViewController: BaseVC, ScanWalletNumberDelegate, UIGestureRecognizerD
   // MARK: - view cycle
   override func viewDidLoad() {
     super.viewDidLoad()
+    setupView()
+  }
 
+  override func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(animated)
+    getFee()
+    getWalletData()
+  }
+
+  // MARK: - Actions
+  fileprivate func setupView() {
+    KVNProgress.show()
     self.walletNumberTXF.addTarget(self, action: #selector(handleClearBTN), for: .editingChanged)
     self.amountTXF.addTarget(self, action: #selector(amountCalculation), for: .editingChanged)
     self.amountTXF.delegate = self
@@ -133,13 +131,13 @@ class SendViewController: BaseVC, ScanWalletNumberDelegate, UIGestureRecognizerD
     }
   }
 
-  override func viewDidAppear(_ animated: Bool) {
-    super.viewDidAppear(animated)
-
-    getFee()
+  fileprivate func getWalletData() {
+    walletNumberTXF.text = walletNumber
+    balanceLabel.text = "Available: \(currentWallet.balance()) \(currentWallet.symbol)"
+    currencyLabel.text = DataProvider.shared.defaultEx ?? "USD"
+    KVNProgress.dismiss()
   }
-
-  // MARK: - Actions
+  
   @IBAction func more(_ sender: Any) {
     if self.scanBTN.alpha == 0 {
       self.walletNumberTXF.text = ""

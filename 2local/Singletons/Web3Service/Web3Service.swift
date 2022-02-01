@@ -10,17 +10,16 @@ import Foundation
 import web3swift
 import BigInt
 import SwiftyJSON
-import Alamofire
 
 class Web3Service {
     static let shared = Web3Service()
-    
+
     var infuraUrl: String!
     var tokenContractAddress = Configuration.shared.tokenContractAddress
     var password = Configuration.shared.password
     var aesMode = Configuration.shared.aesMode
     var web3Manager: web3!
-    
+
     init() {
         let userDir = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
         let keystoreManager = KeystoreManager.managerForPath(userDir + "/keystore")
@@ -30,39 +29,40 @@ class Web3Service {
         self.web3Manager = web3(provider: provider)
         self.web3Manager.addKeystoreManager(keystoreManager)
     }
-    
+
     func isMainnet() -> Bool {
         return self.infuraUrl.contains("https://bsc-dataseed1.binance.org:443")
     }
-    
-    func writeToFile(fileName : String , keystore : Data){
+
+    func writeToFile(fileName: String, keystore: Data) {
         let userDir = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
-        FileManager.default.createFile(atPath: userDir + "/keystore/" + fileName.lowercased() +  ".json", contents: keystore, attributes: nil)
+        FileManager.default.createFile(atPath: userDir + "/keystore/" + fileName.lowercased() +  ".json",
+                                       contents: keystore, attributes: nil)
     }
-    
-    func findKeystoreMangerByAddress(walletAddress : String) -> EthereumKeystoreV3? {
+
+    func findKeystoreMangerByAddress(walletAddress: String) -> EthereumKeystoreV3? {
         let bnbWalletAddress = EthereumAddress(walletAddress)
         let userDir = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
         let keystoreManager = KeystoreManager.managerForPath(userDir + "/keystore")
-        for i in keystoreManager?.keystores ?? [] {
-            if (i.getAddress()?.address.lowercased() == bnbWalletAddress?.address.lowercased()){
-                return i
+        for keyStore in keystoreManager?.keystores ?? [] {
+            if keyStore.getAddress()?.address.lowercased() == bnbWalletAddress?.address.lowercased() {
+                return keyStore
             }
         }
         return nil
     }
-    
+
 }
 
-//MARK: - get token fee
+// MARK: - get token fee
 extension Web3Service {
-    
+
     /// Get fee from symbols
     /// - Parameters:
     ///   - coin: Coins (2LC, BNB, ...)
     ///   - completionHandler: return a price in string type
-    func getFee(of coin: Coins, completionHandler: @escaping (String?) -> ()) {
-        APIManager.shared.getFee(of: coin.symbol()) { (data, response, error) in
+    func getFee(of coin: Coins, completionHandler: @escaping (String?) -> Void) {
+        APIManager.shared.getFee(of: coin.symbol()) { (data, _, _) in
             guard let data = data else {
                 completionHandler("0")
                 return
@@ -78,9 +78,9 @@ extension Web3Service {
             }
         }
     }
-    
+
     func getBSCTransactionHistory(by address: String, contractAddress: String, action: String = "tokentx", completionHandler: @escaping ([TransactionHistoryModel]?) -> Void) {
-        APIManager.shared.getBSCTransaction(address: address, contractAddress: contractAddress, action: action) { (data, response, error) in
+        APIManager.shared.getBSCTransaction(address: address, contractAddress: contractAddress, action: action) { (data, _, _) in
             do {
                 guard let data = data else {
                     completionHandler(nil)

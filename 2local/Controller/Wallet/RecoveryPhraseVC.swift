@@ -11,8 +11,8 @@ import web3swift
 import KVNProgress
 
 class RecoveryPhraseVC: BaseVC {
-    
-    //MARK: - Outlets
+
+    // MARK: - Outlets
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var recoveryTextView: UITextView!
     @IBOutlet weak var submitButton: UIButton!
@@ -20,54 +20,53 @@ class RecoveryPhraseVC: BaseVC {
     @IBOutlet weak var errorLabel: UILabel!
     @IBOutlet weak var dividerView: UIView!
     @IBOutlet weak var scanButton: UIButton!
-    
-    
-    //MARK: - Properties
+
+    // MARK: - Properties
     private var placeholderText = "Recovery words"
-    private var placeholderColor = UIColor._blueHaze
+    private var placeholderColor = UIColor.blueHaze
     private var coin: Coins?
-    
+
     func initWith(_ coin: Coins) {
         self.coin = coin
     }
-    
-    //MARK: - View cycle
+
+    // MARK: - View cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
     }
-    
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
     }
-    
-    //MARK: - Functions
+
+    // MARK: - Functions
     fileprivate func setupView() {
-        let title = coin == Coins.TLocal ? "Enter Private Key" : "Enter Recovery Phrase"
-        
-        placeholderText = coin == Coins.TLocal ? "Private key" : "Recovery words"
-        
-        titleLabel.text = coin == Coins.TLocal ? "Please enter your private key to recover your wallet" : "Please enter your phrase to recover your wallet"
-        
+        let title = coin == Coins.tLocal ? "Enter Private Key" : "Enter Recovery Phrase"
+
+        placeholderText = coin == Coins.tLocal ? "Private key" : "Recovery words"
+
+        titleLabel.text = coin == Coins.tLocal ? "Please enter your private key to recover your wallet" : "Please enter your phrase to recover your wallet"
+
         setNavigation(title: title)
-        
+
         submitButton.setCornerRadius(8)
-        
+
         tapToDismiss()
-        
-        dividerView.backgroundColor = ._E0E0EB
-        
+
+        dividerView.backgroundColor = .e0e0eb
+
         errorLabel.isHidden = true
         clearButton.isHidden = true
-        
+
         scanButton.isHidden = false
         scanButton.setTitle("", for: .normal)
-        scanButton.setImage(UIImage(named: "scan-1")?.tint(with: ._707070), for: .normal)
-        
+        scanButton.setImage(UIImage(named: "scan-1")?.tint(with: .color707070), for: .normal)
+
         DispatchQueue.main.async {
             self.recoveryTextView.textContainerInset.right = 45
             self.recoveryTextView.text = self.placeholderText
@@ -75,62 +74,70 @@ class RecoveryPhraseVC: BaseVC {
             self.recoveryTextView.delegate = self
             self.recoveryTextView.selectedTextRange = self.recoveryTextView.textRange(from: self.recoveryTextView.beginningOfDocument, to: self.recoveryTextView.beginningOfDocument)
         }
-        
+
     }
-    
-    fileprivate func SaveWallet() {
+
+    fileprivate func saveWallet() {
         switch coin {
-        case .Ethereum:
+        case .ethereum:
             createETHWallet()
-        case .TLocal:
+        case .tLocal:
             import2LC()
-        case .Binance, .Bitcoin, .Stellar:
+        case .binance, .bitcoin, .stellar:
             break
         default:
             break
         }
     }
-    
+
     fileprivate func import2LC() {
         guard let privateKey = self.recoveryTextView.text else { return }
         let cleanPK = privateKey.trimmingCharacters(in: .whitespaces)
         do {
             try Web3Service.shared.import2LCBy(privateKey: cleanPK) { [weak self] walletAddress in
                 guard let self = self, let walletAddress = walletAddress else { return }
-                
+
                 userDefaults.setValue(cleanPK, forKey: UserDefaultsKey.TLCWallet.rawValue)
-                
+
                 do {
-                    ///get the 2LC token balance
-                    let tlcBalance = try Web3Service.shared.getBEP20TokenBalance(walletAddress: walletAddress)
-                    
-                    ///add the 2LC token in list
-                    let tlcWallet = Wallets(name: .TLocal, balance: tlcBalance, address: walletAddress, mnemonic: nil, displayName: Coins.TLocal.rawValue)
-                    
+                    /// get the 2LC token balance
+                    let tlcBalance = try Web3Service.shared.getBEP20TokenBalance(walletAddress: walletAddress) ?? "0"
+
+                    /// add the 2LC token in list
+                    let tlcWallet = Wallets(name: .tLocal,
+                                            balance: tlcBalance,
+                                            address: walletAddress,
+                                            mnemonic: "",
+                                            displayName: Coins.tLocal.rawValue)
+
                     DataProvider.shared.wallets.append(tlcWallet)
                     self.goToSuccessView()
-                    
+
                 } catch {
                     print("2LC balance error")
                 }
-                
+
                 do {
-                    ///get the BNB token balance
+                    /// get the BNB token balance
                     let bnbBalance = try Web3Service.shared.getBNBBalance(walletAddress: walletAddress)
-                    
-                    ///add the BNB token in list
-                    let bnbWallet = Wallets(name: .Binance, balance: bnbBalance, address: walletAddress, mnemonic: nil, displayName: Coins.Binance.rawValue)
+
+                    /// add the BNB token in list
+                    let bnbWallet = Wallets(name: .binance,
+                                            balance: bnbBalance,
+                                            address: walletAddress,
+                                            mnemonic: "",
+                                            displayName: Coins.binance.rawValue)
                     DataProvider.shared.wallets.append(bnbWallet)
                 } catch {
                     print("BNB balance error")
                 }
-                
+
             }
         } catch {
             print("Import 2lc token error")
         }
     }
-    
+
     fileprivate func goToSuccessView() {
         NotificationCenter.default.post(name: Notification.Name.wallet, object: nil)
         let vc = UIStoryboard.wallet.instantiate(viewController: SuccessfulCreateWalletVC.self)
@@ -139,10 +146,10 @@ class RecoveryPhraseVC: BaseVC {
             navigation.pushViewController(vc, animated: true)
         }
     }
-    
+
     fileprivate func createETHWallet() {
         guard let mnemonics = self.recoveryTextView.text else { return }
-        
+
         userDefaults.setValue(mnemonics, forKey: UserDefaultsKey.ETHWallet.rawValue)
 
         guard let address = Web3Service.currentAddress else {
@@ -151,27 +158,29 @@ class RecoveryPhraseVC: BaseVC {
             return
         }
 
-        
         Web3Service.getETHBalance { (balance) in
-            let ethWallet = Wallets(name: .Ethereum, balance: balance, address: address, mnemonic: mnemonics, displayName: Coins.Ethereum.rawValue)
+            let ethWallet = Wallets(name: .ethereum,
+                                    balance: balance ?? "0",
+                                    address: address,
+                                    mnemonic: mnemonics,
+                                    displayName: Coins.ethereum.rawValue)
             DataProvider.shared.wallets.append(ethWallet)
             NotificationCenter.default.post(name: Notification.Name.wallet, object: nil)
-            userDefaults.setValue(Coins.Ethereum.rawValue, forKey: Coins.Ethereum.rawValue)
+            userDefaults.setValue(Coins.ethereum.rawValue, forKey: Coins.ethereum.rawValue)
         }
-        
+
         let vc = UIStoryboard.wallet.instantiate(viewController: SuccessfulCreateWalletVC.self)
         vc.initWith(true)
         if let navigation = navigationController {
             navigation.pushViewController(vc, animated: true)
         }
     }
-    
-    
-    //MARK: - Actions
+
+    // MARK: - Actions
     @IBAction func continueTapped(_ sender: UIButton) {
-        SaveWallet()
+        saveWallet()
     }
-    
+
     @IBAction func scanTapped(_ sender: UIButton) {
         let vc = UIStoryboard.scan.instantiate(viewController: ScanViewController.self)
         vc.modalPresentationStyle = .fullScreen
@@ -179,14 +188,14 @@ class RecoveryPhraseVC: BaseVC {
         vc.initWith(false)
         present(vc, animated: true)
     }
-    
+
     @IBAction func clearTapped(_ sender: UIButton) {
         recoveryTextView.text = ""
         clearButton.isHidden = true
         errorLabel.isHidden = true
-        
+
         scanButton.isHidden = false
-        
+
         DispatchQueue.main.async {
             self.recoveryTextView.text = self.placeholderText
             self.recoveryTextView.textColor = self.placeholderColor
@@ -197,7 +206,7 @@ class RecoveryPhraseVC: BaseVC {
 
 }
 
-//MARK: - Text view delegate
+// MARK: - Text view delegate
 extension RecoveryPhraseVC: UITextViewDelegate {
 //    func textViewDidBeginEditing(_ textView: UITextView) {
 //        if textView.textColor == placeholderColor {
@@ -214,12 +223,12 @@ extension RecoveryPhraseVC: UITextViewDelegate {
 //            clearButton.isHidden = true
 //        }
 //    }
-    
+
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
 
         // Combine the textView text and the replacement text to
         // create the updated text string
-        let currentText:String = textView.text
+        let currentText: String = textView.text
         let updatedText = (currentText as NSString).replacingCharacters(in: range, with: text)
 
         // If updated text view will be empty, add the placeholder
@@ -239,9 +248,9 @@ extension RecoveryPhraseVC: UITextViewDelegate {
         // the text color to black then set its text to the
         // replacement string
          else if textView.textColor == placeholderColor && !text.isEmpty {
-            textView.textColor = ._202020
+            textView.textColor = .color202020
             textView.text = text
-            
+
             clearButton.isHidden = false
             scanButton.isHidden = true
         }
@@ -256,8 +265,7 @@ extension RecoveryPhraseVC: UITextViewDelegate {
         // been made
         return false
     }
-    
-    
+
     func textViewDidChangeSelection(_ textView: UITextView) {
         if self.view.window != nil {
             if textView.textColor == placeholderColor {

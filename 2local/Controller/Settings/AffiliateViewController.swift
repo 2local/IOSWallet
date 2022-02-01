@@ -12,7 +12,7 @@ class AffiliateViewController: BaseVC {
 
     @IBOutlet var shareBTN: TLButton! {
         didSet {
-            shareBTN.layer.borderColor = UIColor._flamenco.cgColor
+            shareBTN.layer.borderColor = UIColor.flamenco.cgColor
             shareBTN.layer.borderWidth = 1
         }
     }
@@ -27,18 +27,18 @@ class AffiliateViewController: BaseVC {
         super.viewDidLoad()
 
     }
-    
+
     @IBAction func copyLink(_ sender: Any) {
         UIPasteboard.general.string = linkLabel.text
         KVNProgress.showSuccess(withStatus: "Refferal link copied to clipboard")
     }
-    
+
     @IBAction func share(_ sender: Any) {
         let text = linkLabel.text
         let textShare = [ text ]
-        let activityViewController = UIActivityViewController(activityItems: textShare as [Any] , applicationActivities: nil)
+        let activityViewController = UIActivityViewController(activityItems: textShare as [Any], applicationActivities: nil)
         activityViewController.popoverPresentationController?.sourceView = self.view
         self.present(activityViewController, animated: true, completion: nil)
     }
-    
+
 }

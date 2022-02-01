@@ -8,7 +8,6 @@
 
 import Foundation
 
-
 struct TransactionHistoryModel: Codable {
     var blockNumber: String?
     var timeStamp: String?
@@ -28,7 +27,7 @@ struct TransactionHistoryModel: Codable {
     var cumulativeGasUsed: String?
     var gasUsed: String?
     var confirmations: String?
-    
+
     enum CodingKeys: String, CodingKey {
         case blockNumber
         case timeStamp

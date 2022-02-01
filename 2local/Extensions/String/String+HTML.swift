@@ -9,7 +9,7 @@
 import Foundation
 
 extension String {
-  
+
   /// Convert the HTML string to string
   func HTMLToString() -> String {
     let data = Data(self.utf8)

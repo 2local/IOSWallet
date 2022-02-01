@@ -14,7 +14,7 @@ class SettingsTableViewCell: UITableViewCell {
     @IBOutlet var titleLabel: UILabel!
     @IBOutlet var descLabel: UILabel!
     @IBOutlet var footerView: UIView!
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

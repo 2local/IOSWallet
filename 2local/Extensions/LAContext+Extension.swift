@@ -16,14 +16,14 @@ enum BiometricType: String, CaseIterable {
 }
 
 extension LAContext {
-    
+
     var biometricType: BiometricType {
         var error: NSError?
-        
+
         guard self.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) else {
             return .none
         }
-        
+
         switch self.biometryType {
             case .none:
                 return .none
@@ -34,7 +34,7 @@ extension LAContext {
             @unknown default:
                 #warning("Handle new Biometric type")
         }
-        
+
         return  self.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: nil) ? .touchID : .none
     }
 }

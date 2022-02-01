@@ -9,7 +9,7 @@
 import UIKit
 
 class TransactionChartCollectionViewCell: UICollectionViewCell {
-    
+
     @IBOutlet var monthLabel: UILabel!
     @IBOutlet var barView: UIView!
     @IBOutlet var incomeView: UIView!
@@ -17,7 +17,7 @@ class TransactionChartCollectionViewCell: UICollectionViewCell {
     @IBOutlet var incomeHeightConst: NSLayoutConstraint!
     @IBOutlet var expenseHeightConst: NSLayoutConstraint!
     @IBOutlet weak var indicatorView: UIView!
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
         incomeHeightConst.constant = 0
@@ -27,11 +27,11 @@ class TransactionChartCollectionViewCell: UICollectionViewCell {
         expenseView.layer.cornerRadius = 3
         expenseView.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
     }
-    
+
     override func layoutSubviews() {
         super.layoutSubviews()
-        //expenseView.roundCorners(corners: [.bottomLeft,.bottomRight], radius: 4)
-        //incomeView.roundCorners(corners: [.topLeft,.topRight], radius: 4)
+        // expenseView.roundCorners(corners: [.bottomLeft,.bottomRight], radius: 4)
+        // incomeView.roundCorners(corners: [.topLeft,.topRight], radius: 4)
     }
-    
+
 }

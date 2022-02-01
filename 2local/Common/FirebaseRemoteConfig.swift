@@ -12,16 +12,15 @@ import FirebaseRemoteConfig
 
 class FBRemoteConfig {
   static let shared = FBRemoteConfig()
-  
+
   var loadingDoneCallback: (() -> Void)?
   var fetchComplete = false
-  
+
   private init() {
     loadDefaultValues()
     fetchCloudValue()
   }
-  
-  
+
   func loadDefaultValues() {
     let defaultValue: [String: Any?] = [
       ValueKey.announcementMessage.rawValue: "",
@@ -33,27 +32,26 @@ class FBRemoteConfig {
     ]
     remoteConfig.setDefaults(defaultValue as? [String: NSObject])
   }
-  
+
   private func activateDebugMode() {
     let settings = RemoteConfigSettings()
-    
+
     // WARNING: Don't actually do this in production!
     settings.minimumFetchInterval = 0
     remoteConfig.configSettings = settings
   }
-  
+
   // get data from cloud
-  func fetchCloudValue(){
-    
-    
+  func fetchCloudValue() {
+
 #if DEBUG
-    //this function only works in Debug mode
+    // this function only works in Debug mode
     activateDebugMode()
 #endif
-    
+
     remoteConfig.fetch { [weak self] _, error in
       guard let self = self else { return }
-      if let error = error  {
+      if let error = error {
         print("Uh-oh. Got an error fetching remote values \(error)")
         return
       }
@@ -66,17 +64,17 @@ class FBRemoteConfig {
       }
     }
   }
-  
+
   func bool(forKey key: ValueKey) -> Bool {
     remoteConfig[key.rawValue].boolValue
   }
-  
+
   func string(forKey key: ValueKey) -> String {
     remoteConfig[key.rawValue].stringValue ?? ""
   }
 }
 
-//enum value keys
+// enum value keys
 enum ValueKey: String {
   case announcementMessage = "anouncement_msg"
   case showAnnouncement = "show_anouncement"

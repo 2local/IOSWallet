@@ -10,34 +10,34 @@ import UIKit
 
 class AddNewWalletCollectionViewCell: UICollectionViewCell {
 
-    //MARK: - Outlets
+    // MARK: - Outlets
     @IBOutlet weak var placeholderImageView: UIImageView!
     @IBOutlet weak var addNewWalletButton: UIButton!
     @IBOutlet weak var itemWidth: NSLayoutConstraint!
-    
-    //MARK: - properties
+
+    // MARK: - properties
     var addNewWalletButtonCallback: SimpleAction = nil
-    
-    //MARK: - cycle
+
+    // MARK: - cycle
     override func awakeFromNib() {
         super.awakeFromNib()
-        
+
         placeholderImageView.image = UIImage(named: "placeholder")
         placeholderImageView.contentMode = .scaleToFill
         placeholderImageView.setCornerRadius(10)
-        
+
         addNewWalletButton.setImage(UIImage(named: "add"), for: .normal)
         addNewWalletButton.setTitle("Add new wallet", for: .normal)
         addNewWalletButton.titleLabel?.font = .TLFont(weight: .medium, size: 16, style: .body)
-        addNewWalletButton.titleLabel?.textColor = ._9796AE
+        addNewWalletButton.titleLabel?.textColor = .color9796AE
         addNewWalletButton.titleEdgeInsets.left = 8
-        
+
         itemWidth.constant = UIScreen.main.bounds.width - 24
     }
 
-    //MARK: - functions
+    // MARK: - functions
     @IBAction func addNewWalletTapped(_ sender: UIButton) {
         addNewWalletButtonCallback?()
     }
-    
+
 }

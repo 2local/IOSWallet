@@ -9,32 +9,32 @@
 import Foundation
 
 struct Endpoints {
-    
-    //MARK: - Auth
+
+    // MARK: - Auth
     static let login = "auth/login"
     static let register = "auth/register"
     static let validate = "auth/validate-twofa"
-    
-    //MARK: - Transfer
+
+    // MARK: - Transfer
     static let makeTrust = "transfer/make-trust"
     static let getTransferOrderDetail = "transfer/get-transfer-order-details"
     static let getOrders = "order/get-orders"
     static let transferOrder = "transfer/transfer-order"
-    
-    //MARK: - Profile
+
+    // MARK: - Profile
     static let getProfile = "profile/get-profile"
     static let updateProfile = "profile/update-profile"
-    
-    //MARK: - Exchange
+
+    // MARK: - Exchange
     static let getExchangeRate = "get-exchange-rates"
-    static let _121ExchangeRate = "l2l-exchange-rate"
-    
-    //MARK: - Order
+    static let L2LExchangeRate = "l2l-exchange-rate"
+
+    // MARK: - Order
     static let addOrder = "order/add"
     static let mobile = "mollie"
     static let getBalance = "order/get-balance"
-    
-    //MARK: - Company
+
+    // MARK: - Company
     static let createCompany = "create-company"
     static let getCompany = "get-companies"
 }

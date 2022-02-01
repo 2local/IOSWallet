@@ -9,54 +9,51 @@
 import Foundation
 
 enum Coins: String, Codable, CaseIterable {
-    case Bitcoin, Ethereum, Stellar, Binance
-    case TLocal = "2local"
-    
-    
+    case bitcoin, ethereum, stellar, binance
+    case tLocal = "2local"
+
     func symbol() -> String {
         switch self {
-        case .Bitcoin:
+        case .bitcoin:
             return "BTC"
-        case .Ethereum:
+        case .ethereum:
             return "ETH"
-        case .Stellar:
+        case .stellar:
             return "XLM"
-        case .TLocal:
+        case .tLocal:
             return "2LC"
-        case .Binance:
+        case .binance:
             return "BNB"
         }
     }
-    
+
     func icon() -> String {
         switch self {
-        case .Bitcoin:
+        case .bitcoin:
             return ""
-        case .Ethereum:
+        case .ethereum:
             return "ethereum"
-        case .Stellar:
+        case .stellar:
             return ""
-        case .TLocal:
+        case .tLocal:
             return "logo"
-        case .Binance:
+        case .binance:
             return "binance"
         }
     }
-    
+
     func name() -> String {
         switch self {
-        case .Bitcoin:
-            return userDefaults.string(forKey: Coins.Bitcoin.rawValue) ?? "Bitcoin"
-        case .Ethereum:
-            return userDefaults.string(forKey: Coins.Bitcoin.rawValue) ?? "Ethereum"
-        case .Stellar:
-            return userDefaults.string(forKey: Coins.Bitcoin.rawValue) ?? "Stellar"
-        case .TLocal:
-            return userDefaults.string(forKey: Coins.Bitcoin.rawValue) ?? "2local"
-        case .Binance:
-            return userDefaults.string(forKey: Coins.Bitcoin.rawValue) ?? "Binance"
+        case .bitcoin:
+            return userDefaults.string(forKey: Coins.bitcoin.rawValue) ?? "Bitcoin"
+        case .ethereum:
+            return userDefaults.string(forKey: Coins.bitcoin.rawValue) ?? "Ethereum"
+        case .stellar:
+            return userDefaults.string(forKey: Coins.bitcoin.rawValue) ?? "Stellar"
+        case .tLocal:
+            return userDefaults.string(forKey: Coins.bitcoin.rawValue) ?? "2local"
+        case .binance:
+            return userDefaults.string(forKey: Coins.bitcoin.rawValue) ?? "Binance"
         }
     }
 }
-
-

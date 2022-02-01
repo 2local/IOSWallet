@@ -10,27 +10,27 @@ import UIKit
 import SROTPView
 import KVNProgress
 protocol TwoVerificationDelegate: AnyObject {
-    func verificationStatus(_ status:Bool)
+    func verificationStatus(_ status: Bool)
 }
 
 class LoginTFAViewController: UIViewController {
-    
+
     @IBOutlet var codeTXF: SROTPView!
     @IBOutlet var popUpView: UIView!
-    
+
     var code = ""
-    weak var delegate : TwoVerificationDelegate?
+    weak var delegate: TwoVerificationDelegate?
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.tapToDismissKeyboard()
         self.popUpView.tapToDismissKeyboard()
         codeTXF.otpTextFieldsCount = 6
-        codeTXF.otpTextFieldActiveBorderColor = ._blueHaze
-        codeTXF.otpTextFieldDefaultBorderColor = ._solitude
-        codeTXF.otpTextFieldFontColor = UIColor._404040
+        codeTXF.otpTextFieldActiveBorderColor = .blueHaze
+        codeTXF.otpTextFieldDefaultBorderColor = .solitude
+        codeTXF.otpTextFieldFontColor = UIColor.color404040
         codeTXF.otpTextFieldFont = .TLFont(weight: .medium,
                                            size: 19)
-        codeTXF.cursorColor = ._flamenco
+        codeTXF.cursorColor = .flamenco
         codeTXF.otpTextFieldBorderWidth = 1
         codeTXF.otpTextFieldActiveBorderWidth = 1
         codeTXF.otpEnteredString = { pin in
@@ -41,22 +41,22 @@ class LoginTFAViewController: UIViewController {
             }
         }
     }
-    
+
     override func viewDidLayoutSubviews() {
         codeTXF.initializeUI()
     }
-    
+
     @IBAction func confirm(_ sender: Any) {
         self.verfyCode()
     }
-    
+
     @IBAction func close(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }
-    
+
     func verfyCode() {
         KVNProgress.show()
-        APIManager.shared.verifyTwoVerification(code: code) { (data, response, error) in
+        APIManager.shared.verifyTwoVerification(code: code) { (data, response, _) in
             let result = APIManager.processResponse(response: response, data: data)
             if result.status {
                 do {
@@ -69,26 +69,22 @@ class LoginTFAViewController: UIViewController {
                                     })
                                 }
                             }
-                        }
-                        else {
+                        } else {
                             DispatchQueue.main.async {
                                 KVNProgress.showError(withStatus: result.message)
                             }
                         }
-                    }
-                    else {
+                    } else {
                         DispatchQueue.main.async {
                             KVNProgress.showError(withStatus: "There is a problem in verification")
                         }
                     }
-                }
-                catch {
+                } catch {
                     DispatchQueue.main.async {
                         KVNProgress.showError(withStatus: "Failed To Parse Data From Server")
                     }
                 }
-            }
-            else {
+            } else {
                 DispatchQueue.main.async {
                     KVNProgress.showError(withStatus: result.message)
                 }

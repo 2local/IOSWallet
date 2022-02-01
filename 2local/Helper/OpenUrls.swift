@@ -19,11 +19,11 @@ public func openUrl(_ url: String, viewController: UIViewController) {
         }
         urlAdrs = URL(string: "\("https://2local.io/")\(url)")!
     }
-    
+
     if !UIApplication.shared.canOpenURL(urlAdrs) {
         return
     }
-    
+
     let vc = SFSafariViewController(url: urlAdrs)
     viewController.present(vc, animated: true, completion: nil)
 }

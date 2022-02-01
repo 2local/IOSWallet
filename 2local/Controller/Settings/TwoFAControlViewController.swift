@@ -10,67 +10,74 @@ import UIKit
 import KVNProgress
 class TwoFAControlViewController: BaseVC {
 
-    @IBOutlet var twoFABTN: UIButton! {
-        didSet {
-            if let user = user, (user.twofaStatus ?? false) == false {
-                twoFABTN.backgroundColor = ._shamrock
-                twoFABTN.setTitle("Enable 2FA", for: .normal)
-            }
-            else {
-                twoFABTN.backgroundColor = ._bittersweet
-                twoFABTN.setTitle("Disable 2FA", for: .normal)
-            }
-        }
+  @IBOutlet var twoFABTN: UIButton! {
+    didSet {
+      if let user = user, (user.twofaStatus ?? false) == false {
+        twoFABTN.backgroundColor = .shamrock
+        twoFABTN.setTitle("Enable 2FA", for: .normal)
+      } else {
+        twoFABTN.backgroundColor = .bittersweet
+        twoFABTN.setTitle("Disable 2FA", for: .normal)
+      }
     }
-    let user = DataProvider.shared.user
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
+  }
+  let user = DataProvider.shared.user
 
+  override func viewDidLoad() {
+    super.viewDidLoad()
+
+  }
+
+  @IBAction func twoFA(_ sender: Any) {
+
+    if user?.twofaStatus == false {
+      user?.twofaStatus = true
+      UIView.transition(with: self.twoFABTN, duration: 0.2, options: .transitionCrossDissolve, animations: {
+        self.twoFABTN.backgroundColor = .bittersweet
+        self.twoFABTN.setTitle("Disable 2FA", for: .normal)
+      }, completion: nil)
+    } else if user?.twofaStatus == true {
+      user?.twofaStatus = false
+      UIView.transition(with: self.twoFABTN, duration: 0.2, options: .transitionCrossDissolve, animations: {
+        self.twoFABTN.backgroundColor = .shamrock
+        self.twoFABTN.setTitle("Enable 2FA", for: .normal)
+      }, completion: nil)
     }
-    
-    @IBAction func twoFA(_ sender: Any) {
-        
-        if user?.twofaStatus == false {
-            user?.twofaStatus = true
-            UIView.transition(with: self.twoFABTN, duration: 0.2, options: .transitionCrossDissolve, animations: {
-                self.twoFABTN.backgroundColor = ._bittersweet
-                self.twoFABTN.setTitle("Disable 2FA", for: .normal)
-            }, completion: nil)
+
+    let name = user?.name ?? ""
+    let email = user?.email ?? ""
+    let mobileNumber = "\(user?.mobileNumber ?? "0")"
+    let firstName = user?.firstName ?? ""
+    let lastName = user?.lastName ?? ""
+    let birthday = ""
+    let countryCode = "\(user?.countryCode ?? "-1")"
+    let country = user?.country ?? ""
+    let city = user?.city ?? ""
+    let state = user?.state ?? ""
+    let postCode = ""
+    let address = user?.address ?? ""
+    let password = ""
+    let image = Data()
+    let userId = DataProvider.shared.user!.id!
+    let twofaStatus = user?.twofaStatus ?? false
+
+    let parameters = "name=\(name)&email=\(email)&mobile_number=\(mobileNumber)&" +
+    "first_name=\(firstName)&last_name=\(lastName)&" +
+    "birthday=\(birthday)&country=\(country)&country_code=\(countryCode)&" +
+    "city=\(city)&state=\(state)&post_code=\(postCode)&" +
+    "address=\(address)&password=\(password)&" +
+    "user_id=\(userId)&image=\(image)&twofa_status=\(twofaStatus)"
+
+    APIManager.shared.updateProfile(parameter: parameters) { (data, response, _) in
+      let result = APIManager.processResponse(response: response, data: data)
+      if result.status {
+        DataProvider.shared.user = self.user
+      } else {
+        DispatchQueue.main.async {
+          KVNProgress.showError(withStatus: result.message)
         }
-        else if user?.twofaStatus == true {
-            user?.twofaStatus = false
-            UIView.transition(with: self.twoFABTN, duration: 0.2, options: .transitionCrossDissolve, animations: {
-                self.twoFABTN.backgroundColor = ._shamrock
-                self.twoFABTN.setTitle("Enable 2FA", for: .normal)
-            }, completion: nil)
-        }
-        APIManager.shared.updateProfile(name: user?.name ?? "" ,
-                                        email: user?.email ?? "",
-                                        mobileNumber: "\(user?.mobileNumber ?? "0")",
-                                        firstName: user?.firstName ?? "",
-                                        lastName: user?.lastName ?? "",
-                                        birthday: "",
-                                        countryCode:  "\(user?.countryCode ?? "-1")",
-                                        country: user?.country ?? "",
-                                        city: user?.city ?? "",
-                                        state: user?.state ?? "",
-                                        postCode: "",
-                                        address: user?.address ?? "",
-                                        password: "",
-                                        image: nil,
-                                        userId: DataProvider.shared.user!.id!,
-                                        twofaStatus: user?.twofaStatus ?? false) { (data, response, error) in
-            let result = APIManager.processResponse(response: response, data: data)
-            if result.status {
-                DataProvider.shared.user = self.user
-            }
-            else {
-                DispatchQueue.main.async {
-                    KVNProgress.showError(withStatus: result.message)
-                }
-            }
-        }
+      }
     }
-    
+  }
+
 }

@@ -9,9 +9,9 @@
 import UIKit
 
 class TLTabBarView: UIView {
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.setShadow(color: UIColor._002CA4, opacity: 1, offset: CGSize(width: 0, height: -3), radius: 10)
+        self.setShadow(color: UIColor.color002CA4, opacity: 1, offset: CGSize(width: 0, height: -3), radius: 10)
     }
 }

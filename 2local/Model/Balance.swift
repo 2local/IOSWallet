@@ -13,8 +13,7 @@ class Balance: Codable {
     var balance: Double?
     var code: String?
 
-    
-    enum CodingKeys : String , CodingKey {
+    enum CodingKeys: String, CodingKey {
         case currency = "currency"
         case balance = "balance"
         case code = "code"
@@ -27,31 +26,29 @@ class Balance: Codable {
                 return money
             }
             return 0.0
-        }
-        else {
+        } else {
             return 0.0
         }
     }
-    
+
     static func monetaryValue(of ico: Coins, amount: String?) -> Double {
         if (amount != nil) && amount != "" {
             if Double(amount!) != nil {
                 switch ico {
-                case .TLocal:
+                case .tLocal:
                     return Double(Double(DataProvider.shared.exchangeRate?.defaultExR ?? "0")! * Double(amount ?? "0")!)
-                case .Ethereum:
+                case .ethereum:
                     return Double(truncating: (DataProvider.shared.exchangeRate?.ethereum?.defaultExchangeRate ?? 0) as NSDecimalNumber) * Double(amount ?? "0")!
-                case .Bitcoin:
+                case .bitcoin:
                     return Double(truncating: (DataProvider.shared.exchangeRate?.bitcoin?.defaultExchangeRate ?? 0) as NSDecimalNumber) * Double(amount ?? "0")!
-                case .Stellar:
+                case .stellar:
                     return Double(truncating: (DataProvider.shared.exchangeRate?.stellar?.defaultExchangeRate ?? 0) as NSDecimalNumber) * Double(amount ?? "0")!
-                case .Binance:
+                case .binance:
                     return 0
                 }
             }
             return 0.0
-        }
-        else {
+        } else {
             return 0.0
         }
     }

@@ -9,5 +9,5 @@
 import UIKit
 
 class TwoVerification: Codable {
-    var valid:Bool = false
+    var valid: Bool = false
 }

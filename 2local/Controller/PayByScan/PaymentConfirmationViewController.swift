@@ -9,16 +9,16 @@
 import UIKit
 import KVNProgress
 class PaymentConfirmationViewController: BaseVC {
-    
+
     @IBOutlet var walletNumberLabel: UILabel!
     @IBOutlet var costLable: UILabel!
     @IBOutlet var amountLabel: UILabel!
-    
+
     var qrStringData = ""
     var amount = ""
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.parent?.view.setShadow(color: UIColor._002CA4, opacity: 0.1, offset: CGSize(width: 0, height: -3), radius: 10)
+        self.parent?.view.setShadow(color: UIColor.color002CA4, opacity: 0.1, offset: CGSize(width: 0, height: -3), radius: 10)
         let stringData  = qrStringData.split(separator: ",")
         if stringData.count == 2 {
             walletNumberLabel.text = stringData.first?.description
@@ -26,45 +26,43 @@ class PaymentConfirmationViewController: BaseVC {
             let cost = Balance.monetaryValue(amount: amount)
             amountLabel.text = (amount.convertToPriceType()) + " " + "2LC"
             costLable.text = (DataProvider.shared.exchangeRate?.defaultSym ?? "") + "\(cost)".convertToPriceType()
-        }
-        else {
+        } else {
             KVNProgress.showError(withStatus: "Qr code format is not valid") {
                 self.dismiss(animated: true, completion: nil)
             }
         }
     }
-    
+
     @IBAction func confirm(_ sender: Any) {
-        //checkTrust()
+        // checkTrust()
         self.transfer()
     }
-    
+
     @IBAction func back(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }
-    
+
     @IBAction func close(_ sender: Any) {
         self.performSegue(withIdentifier: "goToHome", sender: nil)
     }
-    
+
     func checkTrust() {
         KVNProgress.show()
-        APIManager.shared.checkTrust(publicKey: "nil", issuer: DataProvider.shared.issuer) { (data, response, error) in
+        APIManager.shared.checkTrust(publicKey: "nil", issuer: DataProvider.shared.issuer) { (data, response, _) in
          let result = APIManager.processResponse(response: response, data: data)
             if result.status {
                 self.transfer()
-            }
-            else {
+            } else {
                 DispatchQueue.main.async {
                     KVNProgress.showError(withStatus: result.message)
                 }
             }
         }
     }
-    
+
     func transfer() {
         KVNProgress.show()
-        APIManager.shared.transfer(amount: (self.amount), walletNumber: (self.walletNumberLabel.text)!) { (data, response, error) in
+        APIManager.shared.transfer(amount: (self.amount), walletNumber: (self.walletNumberLabel.text)!) { (data, response, _) in
             let result = APIManager.processResponse(response: response, data: data)
             if result.status {
                 self.getBalance()
@@ -74,17 +72,16 @@ class PaymentConfirmationViewController: BaseVC {
                         self.performSegue(withIdentifier: "goToReceipt", sender: nil)
                     }
                 }
-            }
-            else {
+            } else {
                 DispatchQueue.main.async {
                     KVNProgress.showError(withStatus: result.message)
                 }
             }
         }
     }
-    
+
     func getTransferOrder() {
-        APIManager.shared.getTransferOrderDetail(userId: "\(DataProvider.shared.user!.id ?? 0)") { (data, response, error) in
+        APIManager.shared.getTransferOrderDetail(userId: "\(DataProvider.shared.user!.id ?? 0)") { (data, response, _) in
             let result = APIManager.processResponse(response: response, data: data)
             if result.status {
                 do {
@@ -94,23 +91,21 @@ class PaymentConfirmationViewController: BaseVC {
                         localTransfer.source = localTransfer.source!.lowercased()
                         return localTransfer
                     }))!
-                    
+
                     DataProvider.shared.transfers = transfers!
-                }
-                catch {
+                } catch {
                     DispatchQueue.main.async {
                         KVNProgress.showError(withStatus: "Failed to parse transfers history data\nPlease contact us.")
                     }
                 }
-            }
-            else {
+            } else {
                 DispatchQueue.main.async {
                     KVNProgress.showError(withStatus: result.message)
                 }
             }
         }
     }
-    
+
     func getBalance() {/*
         guard let user = DataProvider.shared.user, let publicKey = user.publicKey, let email = user.email else { return }
         APIManager.shared.getBalance(publicKey: publicKey, email: email) { (data, response, error) in

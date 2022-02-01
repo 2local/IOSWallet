@@ -59,7 +59,7 @@ class WalletDetailsVC: BaseVC {
     super.viewDidLoad()
     setupView()
     setupTable()
-    setupSegmant()
+    setupSegment()
 
     NotificationCenter.default.addObserver(self,
                                            selector: #selector(refreshView),
@@ -191,7 +191,6 @@ class WalletDetailsVC: BaseVC {
     viewController.modalPresentationStyle = .popover
     viewController.preferredContentSize = CGSize(width: 180, height: 100)
     viewController.delegate = self
-    //        vc.enableRemoveButton = wallet?.name == .tLocal ? false : true
     if let popoverPresentationController = viewController.popoverPresentationController {
       popoverPresentationController.barButtonItem = sender
       popoverPresentationController.sourceRect = CGRect(x: 0, y: 0, width: 180, height: 100)
@@ -281,15 +280,13 @@ extension WalletDetailsVC: PopupActions {
 // MARK: - Segment
 extension WalletDetailsVC: SegmentedControlDelegate {
 
-  func setupSegmant() {
+  func setupSegment() {
     self.transactionSegmentedControl.setTitles(
       [NSAttributedString(string: "All", attributes: attributes),
-       //             NSAttributedString(string: "Purchase", attributes: attributes),
        NSAttributedString(string: "Received", attributes: attributes),
        NSAttributedString(string: "Sent", attributes: attributes)],
       selectedTitles:
         [NSAttributedString(string: "All", attributes: selectedAttributes),
-         //                 NSAttributedString(string: "Purchase", attributes: selectedAttributes),
          NSAttributedString(string: "Received", attributes: selectedAttributes),
          NSAttributedString(string: "Sent", attributes: selectedAttributes)])
     self.transactionSegmentedControl.delegate = self

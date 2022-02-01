@@ -59,24 +59,32 @@ class SendViewController: BaseVC, ScanWalletNumberDelegate, UIGestureRecognizerD
   @IBOutlet var scanBTN: UIButton!
   @IBOutlet weak var sendButton: UIButton!
 
-  @IBOutlet var addressbookHeight: NSLayoutConstraint!
+  @IBOutlet var addressBookHeight: NSLayoutConstraint!
   @IBOutlet var addressBookTableView: UITableView! {
     didSet {
       addressBookTableView.delegate = self
       addressBookTableView.dataSource = self
       addressBookTableView.layer.cornerRadius = 8
-      addressBookTableView.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner, .layerMinXMinYCorner]
+      addressBookTableView.layer.maskedCorners = [.layerMinXMaxYCorner,
+                                                  .layerMaxXMaxYCorner,
+                                                  .layerMinXMinYCorner]
     }
   }
   @IBOutlet var moreTableContainerView: UIView! {
     didSet {
-      moreTableContainerView.setShadow(color: UIColor.color000372, opacity: 1, offset: CGSize(width: 0, height: 0), radius: 10)
+      moreTableContainerView.setShadow(color: UIColor.color000372,
+                                       opacity: 1,
+                                       offset: CGSize(width: 0, height: 0),
+                                       radius: 10)
       moreTableContainerView.alpha = 0
     }
   }
   @IBOutlet var addressBookContainerView: UIView! {
     didSet {
-      addressBookContainerView.setShadow(color: UIColor.color000372, opacity: 1, offset: CGSize(width: 0, height: 0), radius: 10)
+      addressBookContainerView.setShadow(color: UIColor.color000372,
+                                         opacity: 1,
+                                         offset: CGSize(width: 0, height: 0),
+                                         radius: 10)
       addressBookContainerView.alpha = 0
     }
   }
@@ -85,19 +93,19 @@ class SendViewController: BaseVC, ScanWalletNumberDelegate, UIGestureRecognizerD
       moreTableView.delegate = self
       moreTableView.dataSource = self
       moreTableView.layer.cornerRadius = 8
-      moreTableView.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner, .layerMinXMinYCorner]
+      moreTableView.layer.maskedCorners = [.layerMinXMaxYCorner,
+                                           .layerMaxXMaxYCorner,
+                                           .layerMinXMinYCorner]
     }
   }
 
   // MARK: - Properties
   let moreTitles = ["Paste", "Address book"]
-  var addressbook = [Contact]()
+  var addressBook = [Contact]()
   var calculationActive = false
   var walletNumber = ""
   var currentWallet: WalletProtocol!
-
   var fee: Double = 0
-
   private var wallet: Wallets?
 
   func initWith(_ wallet: Wallets) {
@@ -114,7 +122,7 @@ class SendViewController: BaseVC, ScanWalletNumberDelegate, UIGestureRecognizerD
     self.amountTXF.delegate = self
     if let contactsData = UserDefaults.standard.object(forKey: "contacts") {
       let contactsItems = try? PropertyListDecoder().decode([Contact].self, from: (contactsData as? Data)!)
-      self.addressbook = contactsItems!
+      self.addressBook = contactsItems!
     }
     let tapGesture = UITapGestureRecognizer(target: self, action: #selector(closeTable(_:)))
     tapGesture.cancelsTouchesInView = false
@@ -146,32 +154,27 @@ class SendViewController: BaseVC, ScanWalletNumberDelegate, UIGestureRecognizerD
   }
 
   @IBAction func scan(_ sender: Any) {
-    //        self.performSegue(withIdentifier: "goToScan", sender: nil)
-    let vc = UIStoryboard.scan.instantiate(viewController: ScanViewController.self)
-    vc.initWith(false)
-    vc.scannerDelegate = self
-    vc.modalPresentationStyle = .fullScreen
-    present(vc, animated: true, completion: nil)
+    let viewController = UIStoryboard.scan.instantiate(viewController: ScanViewController.self)
+    viewController.initWith(false)
+    viewController.scannerDelegate = self
+    viewController.modalPresentationStyle = .fullScreen
+    present(viewController, animated: true, completion: nil)
   }
 
   @IBAction func send(_ sender: Any) {
     if self.walletNumberTXF.text! != currentWallet.address {
 
       guard let wallet = wallet else { return }
-
-      //            if wallet.name == .tLocal {
-      //                self.transfer()
-      //            }
-
-      //            if wallet.name == .Ethereum {
-      let vc = UIStoryboard.transaction.instantiate(viewController: TransactionConfirmVC.self)
-      let navc = TLNavigationController(rootViewController: vc)
-      navc.modalPresentationStyle = .overFullScreen
-      if let amount = amountTXF.text, !amount.isEmpty, let to = walletNumberTXF.text, !to.isEmpty {
-        vc.initWith(amount, to: to, wallet: wallet)
-        present(navc, animated: true)
+      let viewController = UIStoryboard.transaction.instantiate(viewController: TransactionConfirmVC.self)
+      let navigationController = TLNavigationController(rootViewController: viewController)
+      navigationController.modalPresentationStyle = .overFullScreen
+      if let amount = amountTXF.text,
+         !amount.isEmpty,
+         let toAddress = walletNumberTXF.text,
+         !toAddress.isEmpty {
+        viewController.initWith(amount, to: toAddress, wallet: wallet)
+        present(navigationController, animated: true)
       }
-      //            }
     } else {
       KVNProgress.showError(withStatus: "You cannot send \(currentWallet.symbol) to your wallet!")
     }
@@ -212,10 +215,8 @@ class SendViewController: BaseVC, ScanWalletNumberDelegate, UIGestureRecognizerD
       return
     }
     let cost = doubleAmount * fee
-    UIView.transition(with: self.costLabel, duration: 0.3, options: .transitionFlipFromTop, animations: { [self] in
+    UIView.transition(with: self.costLabel, duration: 0.3, options: .transitionFlipFromTop) { [self] in
       self.costLabel.text = String(cost).convertToPriceType()
-    }) { (_) in
-      // self.calculationActive = false
     }
   }
 
@@ -232,7 +233,8 @@ class SendViewController: BaseVC, ScanWalletNumberDelegate, UIGestureRecognizerD
 
   func transfer() {
     KVNProgress.show()
-    APIManager.shared.transfer(amount: (self.amountTXF.text)!, walletNumber: (self.walletNumberTXF.text)!) { (data, response, _) in
+    APIManager.shared.transfer(amount: (self.amountTXF.text)!,
+                               walletNumber: (self.walletNumberTXF.text)!) { (data, response, _) in
       let result = APIManager.processResponse(response: response, data: data)
       if result.status {
         self.getBalance()
@@ -309,19 +311,25 @@ extension SendViewController: UITableViewDelegate, UITableViewDataSource {
     if tableView == moreTableView {
       return 2
     }
-    return addressbook.count
+    return addressBook.count
   }
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     if tableView == moreTableView {
-      guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as? PaymentMethodTableViewCell else { return UITableViewCell() }
+      guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as? PaymentMethodTableViewCell
+      else { return UITableViewCell() }
+
       cell.titleLabel.text = self.moreTitles[indexPath.row]
       cell.selectionStyle = .none
+
       return cell
     } else {
-      guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as? AddressBookTableViewCell else { return UITableViewCell() }
-      cell.nameLabel.text = self.addressbook[indexPath.row].name
-      cell.walletNumberLabel.text = self.addressbook[indexPath.row].walletNumber
+      guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as? AddressBookTableViewCell
+      else { return UITableViewCell() }
+
+      cell.nameLabel.text = self.addressBook[indexPath.row].name
+      cell.walletNumberLabel.text = self.addressBook[indexPath.row].walletNumber
       cell.selectionStyle = .none
+
       return cell
     }
   }
@@ -333,9 +341,9 @@ extension SendViewController: UITableViewDelegate, UITableViewDataSource {
         self.handleClearBTN()
       } else {
         addressBookTableView.reloadData()
-        self.addressbookHeight.constant = CGFloat(56 * self.addressbook.count)
-        if self.addressbookHeight.constant >= 168 {
-          self.addressbookHeight.constant = 168
+        self.addressBookHeight.constant = CGFloat(56 * self.addressBook.count)
+        if self.addressBookHeight.constant >= 168 {
+          self.addressBookHeight.constant = 168
         }
         UIView.animate(withDuration: 0.2, animations: {
           self.moreTableContainerView.alpha = 0
@@ -344,7 +352,7 @@ extension SendViewController: UITableViewDelegate, UITableViewDataSource {
         }, completion: nil)
       }
     } else {
-      self.walletNumberTXF.text = self.addressbook[indexPath.row].walletNumber
+      self.walletNumberTXF.text = self.addressBook[indexPath.row].walletNumber
       self.handleClearBTN()
     }
   }
@@ -352,7 +360,9 @@ extension SendViewController: UITableViewDelegate, UITableViewDataSource {
 
 // MARK: - UITextField Delegation
 extension SendViewController: UITextFieldDelegate {
-  func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+  func textField(_ textField: UITextField,
+                 shouldChangeCharactersIn range: NSRange,
+                 replacementString string: String) -> Bool {
     if string != "" && textField.text!.count > 5 {
       return false
     }

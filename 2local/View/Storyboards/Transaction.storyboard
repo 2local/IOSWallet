@@ -708,8 +708,8 @@
                     </navigationItem>
                     <connections>
                         <outlet property="addressBookContainerView" destination="5nt-la-xmo" id="MYS-gy-QeU"/>
+                        <outlet property="addressBookHeight" destination="5K7-pL-xZa" id="car-SE-9BE"/>
                         <outlet property="addressBookTableView" destination="97j-mc-wtv" id="ddd-yf-8zL"/>
-                        <outlet property="addressbookHeight" destination="5K7-pL-xZa" id="car-SE-9BE"/>
                         <outlet property="amountTXF" destination="jXC-ej-UG0" id="WxY-zO-qSV"/>
                         <outlet property="balanceLabel" destination="t0o-jE-HGZ" id="vqw-c3-tNR"/>
                         <outlet property="costLabel" destination="rkH-Cz-iuT" id="y42-Kb-aIQ"/>

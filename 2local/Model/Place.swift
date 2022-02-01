@@ -11,7 +11,7 @@ import UIKit
 struct Place: Codable {
     var companies: [Companies]?
 }
-    
+
 struct Companies: Codable {
     var id: Int?
     var name: String?
@@ -50,4 +50,3 @@ struct Companies: Codable {
         case updatedAt = "updated_at"
     }
 }
-

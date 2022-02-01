@@ -8,7 +8,6 @@
 
 import UIKit
 
-
 class ReceiveReceiptViewController: BaseVC {
 
     @IBOutlet var qrCodeIMG: UIImageView! {
@@ -17,7 +16,7 @@ class ReceiveReceiptViewController: BaseVC {
             qrCodeIMG.image = generateQRCode(from: walletNumber)
         }
     }
-    
+
     @IBOutlet var walletLabel: UILabel! {
         didSet {
             walletLabel.text = walletNumber
@@ -39,38 +38,36 @@ class ReceiveReceiptViewController: BaseVC {
             walletSymbolLabel.text = walletTypeName.symbol()
         }
     }
-    
-    //MARK: - properties
+
+    // MARK: - properties
     private var walletNumber = ""
     private var amount = ""
     private var cost = ""
-    private var walletTypeName: Coins = .TLocal
-    
+    private var walletTypeName: Coins = .tLocal
+
     func initWith(_ walletNumber: String, amount: String, cost: String, walletTypeName: Coins) {
         self.walletNumber = walletNumber
         self.amount = amount
         self.cost = cost
         self.walletTypeName = walletTypeName
     }
-    
-    //MARK: - view cycle
+
+    // MARK: - view cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
     }
-    
+
     @IBAction func share(_ sender: Any) {
         let text = walletNumber
         let textShare = [ text ]
-        let activityViewController = UIActivityViewController(activityItems: textShare as [Any] , applicationActivities: nil)
+        let activityViewController = UIActivityViewController(activityItems: textShare as [Any], applicationActivities: nil)
         activityViewController.popoverPresentationController?.sourceView = self.view
         self.present(activityViewController, animated: true, completion: nil)
     }
-    
+
     @IBAction func close(_ sender: Any) {
         performSegue(withIdentifier: "goToHome", sender: nil)
     }
-    
-    
-    
+
 }

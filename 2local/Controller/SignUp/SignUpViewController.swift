@@ -10,7 +10,7 @@ import UIKit
 import SkyFloatingLabelTextField
 import KVNProgress
 class SignUpViewController: BaseVC {
-    
+
     @IBOutlet var scrollView: UIScrollView!
     @IBOutlet var emailTXF: SkyFloatingLabelTextField! {
         didSet {
@@ -36,25 +36,25 @@ class SignUpViewController: BaseVC {
             usernameTXF.font = .TLFont()
         }
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.setShadow(color: UIColor._002CA4, opacity: 0.1, offset: CGSize(width: 0, height: -3), radius: 10)
+        self.view.setShadow(color: UIColor.color002CA4, opacity: 0.1, offset: CGSize(width: 0, height: -3), radius: 10)
         self.view.tapToDismissKeyboard()
         self.scrollView.handleKeyboard()
         // Do any additional setup after loading the view.
     }
-    
+
     @IBAction func createAccount(_ sender: Any) {
         self.register()
     }
-    
+
     func register() {
         if emailTXF.text != "" && passwordTXF.text != "" && usernameTXF.text != ""{
             DispatchQueue.main.async {
                 KVNProgress.show()
             }
-            APIManager.shared.signup(name: self.usernameTXF.text!, email: emailTXF.text!, password: passwordTXF.text!) { (data, response, error) in
+            APIManager.shared.signup(name: self.usernameTXF.text!, email: emailTXF.text!, password: passwordTXF.text!) { (data, response, _) in
                 let result = APIManager.processResponse(response: response, data: data)
                 if result.status {
                     DispatchQueue.main.async {
@@ -62,26 +62,23 @@ class SignUpViewController: BaseVC {
                             self.navigationController?.popViewController(animated: true)
                         }
                     }
-                }
-                else {
+                } else {
                     DispatchQueue.main.async {
                         KVNProgress.showError(withStatus: "Sign up failed, seems like your username or email is already in use.")
                     }
                 }
             }
-        }
-        else if usernameTXF.text == "" {
+        } else if usernameTXF.text == "" {
             DispatchQueue.main.async {
                 KVNProgress.showError(withStatus: "The username field is required")
             }
-        }
-        else {
+        } else {
             DispatchQueue.main.async {
                 KVNProgress.showError(withStatus: (self.emailTXF.text! == "") ? "The email field is required" : "The password field is required")
             }
         }
     }
-    
+
     @IBAction func goToLogin(_ sender: Any) {
 //        self.navigationController?.popViewController(animated: true)
         dismiss(animated: true, completion: nil)

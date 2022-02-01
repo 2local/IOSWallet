@@ -88,7 +88,7 @@
 		4F318BC723C55087001DABA9 /* AffiliateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F318BC623C55087001DABA9 /* AffiliateViewController.swift */; };
 		4F318BCA23C60A98001DABA9 /* AddressBookViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F318BC923C60A98001DABA9 /* AddressBookViewController.swift */; };
 		4F3B44982531B75200734886 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F3B44972531B75200734886 /* SignUpViewController.swift */; };
-		4F3B449B2531F23100734886 /* addMarketplaceVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F3B449A2531F23100734886 /* addMarketplaceVC.swift */; };
+		4F3B449B2531F23100734886 /* AddMarketplaceVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F3B449A2531F23100734886 /* AddMarketplaceVC.swift */; };
 		4F4988AA23B786620015B2B8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4988A923B786620015B2B8 /* AppDelegate.swift */; };
 		4F4988AE23B786620015B2B8 /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4988AD23B786620015B2B8 /* SplashViewController.swift */; };
 		4F4988B123B786620015B2B8 /* BuyTokens.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4F4988AF23B786620015B2B8 /* BuyTokens.storyboard */; };
@@ -125,8 +125,6 @@
 		4F49890323B7FB880015B2B8 /* Lato-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4F4988FA23B7FB870015B2B8 /* Lato-Regular.ttf */; };
 		4F49890523B7FB880015B2B8 /* Lato-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4F4988FC23B7FB870015B2B8 /* Lato-Light.ttf */; };
 		4F49890823B7FB880015B2B8 /* Lato-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4F4988FF23B7FB880015B2B8 /* Lato-Medium.ttf */; };
-		4F58138C23BA92CF00672C8D /* HSLayoutHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F58138B23BA92CF00672C8D /* HSLayoutHelper.swift */; };
-		4F58138E23BA933A00672C8D /* DeviceHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F58138D23BA933900672C8D /* DeviceHelper.swift */; };
 		4F58139223BAB8A400672C8D /* MarketplaceVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F58139123BAB8A400672C8D /* MarketplaceVC.swift */; };
 		4F58139523BAC0E500672C8D /* ScanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F58139423BAC0E500672C8D /* ScanViewController.swift */; };
 		4F66678D2544F1B100DD0BE5 /* AddMarketplaceLocationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F66678C2544F1B100DD0BE5 /* AddMarketplaceLocationVC.swift */; };
@@ -304,7 +302,7 @@
 		4F318BC623C55087001DABA9 /* AffiliateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AffiliateViewController.swift; sourceTree = "<group>"; };
 		4F318BC923C60A98001DABA9 /* AddressBookViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressBookViewController.swift; sourceTree = "<group>"; };
 		4F3B44972531B75200734886 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
-		4F3B449A2531F23100734886 /* addMarketplaceVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = addMarketplaceVC.swift; sourceTree = "<group>"; };
+		4F3B449A2531F23100734886 /* AddMarketplaceVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMarketplaceVC.swift; sourceTree = "<group>"; };
 		4F4988A623B786620015B2B8 /* 2local.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = 2local.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F4988A923B786620015B2B8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4F4988AD23B786620015B2B8 /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
@@ -343,8 +341,6 @@
 		4F4988FA23B7FB870015B2B8 /* Lato-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Regular.ttf"; sourceTree = "<group>"; };
 		4F4988FC23B7FB870015B2B8 /* Lato-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Light.ttf"; sourceTree = "<group>"; };
 		4F4988FF23B7FB880015B2B8 /* Lato-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Medium.ttf"; sourceTree = "<group>"; };
-		4F58138B23BA92CF00672C8D /* HSLayoutHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HSLayoutHelper.swift; sourceTree = "<group>"; };
-		4F58138D23BA933900672C8D /* DeviceHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceHelper.swift; sourceTree = "<group>"; };
 		4F58139123BAB8A400672C8D /* MarketplaceVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketplaceVC.swift; sourceTree = "<group>"; };
 		4F58139423BAC0E500672C8D /* ScanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanViewController.swift; sourceTree = "<group>"; };
 		4F66678C2544F1B100DD0BE5 /* AddMarketplaceLocationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMarketplaceLocationVC.swift; sourceTree = "<group>"; };
@@ -747,7 +743,7 @@
 		4F3B449D253223C100734886 /* AddCompany */ = {
 			isa = PBXGroup;
 			children = (
-				4F3B449A2531F23100734886 /* addMarketplaceVC.swift */,
+				4F3B449A2531F23100734886 /* AddMarketplaceVC.swift */,
 				4F66678C2544F1B100DD0BE5 /* AddMarketplaceLocationVC.swift */,
 			);
 			path = AddCompany;
@@ -959,7 +955,6 @@
 				4F9961CE23BA4BBF009F6486 /* TLNavigationBar.swift */,
 				4FBDD5AD23BA736A000732FD /* TLTabBarView.swift */,
 				4FC24CD123D89768009B81A3 /* SegmentedControl */,
-				4FF46A8D23BB9D1400F71B6D /* HSConstraintHelper */,
 				4FF46A8C23BB9D0600F71B6D /* QRCode */,
 			);
 			path = CustomClasses;
@@ -1043,15 +1038,6 @@
 				4FF46A8923BB9D0100F71B6D /* QRScannerView.swift */,
 			);
 			path = QRCode;
-			sourceTree = "<group>";
-		};
-		4FF46A8D23BB9D1400F71B6D /* HSConstraintHelper */ = {
-			isa = PBXGroup;
-			children = (
-				4F58138D23BA933900672C8D /* DeviceHelper.swift */,
-				4F58138B23BA92CF00672C8D /* HSLayoutHelper.swift */,
-			);
-			path = HSConstraintHelper;
 			sourceTree = "<group>";
 		};
 		4FF6283223E1CEE6002B17D1 /* Charts */ = {
@@ -1360,6 +1346,7 @@
 			buildConfigurationList = 4F4988BA23B786680015B2B8 /* Build configuration list for PBXNativeTarget "2local" */;
 			buildPhases = (
 				297E9A37BD187DEAA55780C6 /* [CP] Check Pods Manifest.lock */,
+				0361773E27A6D430004AC79C /* Run SwiftLint */,
 				4F4988A223B786620015B2B8 /* Sources */,
 				4F4988A323B786620015B2B8 /* Frameworks */,
 				4F4988A423B786620015B2B8 /* Resources */,
@@ -1480,6 +1467,24 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		0361773E27A6D430004AC79C /* Run SwiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Run SwiftLint";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\n\nif which swiftlint >/dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
 		297E9A37BD187DEAA55780C6 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1520,7 +1525,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\"${PROJECT_DIR}/Pods/Fabric/run\"\n";
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\"${PODS_ROOT}/FirebaseCrashlytics/run\"\n";
 		};
 		75B4A381B90F0DA71106A128 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1578,7 +1583,7 @@
 				4F9990D223C688BB0096BE38 /* Contact.swift in Sources */,
 				03394B4F2625CEB9009098E0 /* App.swift in Sources */,
 				4F4988EB23B79A780015B2B8 /* Order.swift in Sources */,
-				4F3B449B2531F23100734886 /* addMarketplaceVC.swift in Sources */,
+				4F3B449B2531F23100734886 /* AddMarketplaceVC.swift in Sources */,
 				A501CBAB260A12300050AF49 /* Endpoints.swift in Sources */,
 				A501CB73260A08090050AF49 /* AddNewWalletVC.swift in Sources */,
 				037EE0C12631AF9700A81AC1 /* WalletDetailsVC+Network.swift in Sources */,
@@ -1627,7 +1632,6 @@
 				4F4988EE23B79A780015B2B8 /* TwoVerification.swift in Sources */,
 				A501CB85260A08F00050AF49 /* UICollectionView+RegisterCell.swift in Sources */,
 				A501CAF426098F790050AF49 /* UIColor.swift in Sources */,
-				4F58138E23BA933A00672C8D /* DeviceHelper.swift in Sources */,
 				4F4988F623B79CA30015B2B8 /* Extensions.swift in Sources */,
 				4F7E93CE23BBE90000D14BD2 /* SendViewController.swift in Sources */,
 				03226D0A2668EFDF0007945B /* TransactionConfirmVC.swift in Sources */,
@@ -1681,7 +1685,6 @@
 				03699DEA2643151000B98E80 /* EthereumWallet.swift in Sources */,
 				03B3D35226AFEB60000FCCFB /* TabbarVC.swift in Sources */,
 				031288CA2621911C006B0F95 /* UIColor+GenerateImage.swift in Sources */,
-				4F58138C23BA92CF00672C8D /* HSLayoutHelper.swift in Sources */,
 				0307D3A126F9CFCD004497CC /* LAContext+Extension.swift in Sources */,
 				03C2CD2526FB0FD70048192A /* Storage.swift in Sources */,
 				03ECED9A2713320900B2B532 /* WalletListSectionTableViewCell.swift in Sources */,
@@ -1910,13 +1913,9 @@
 					"-framework",
 					"\"CoreText\"",
 					"-framework",
-					"\"Crashlytics\"",
-					"-framework",
 					"\"CryptoSwift\"",
 					"-framework",
 					"\"FBLPromises\"",
-					"-framework",
-					"\"Fabric\"",
 					"-framework",
 					"\"FirebaseAnalytics\"",
 					"-framework",
@@ -2041,13 +2040,9 @@
 					"-framework",
 					"\"CoreText\"",
 					"-framework",
-					"\"Crashlytics\"",
-					"-framework",
 					"\"CryptoSwift\"",
 					"-framework",
 					"\"FBLPromises\"",
-					"-framework",
-					"\"Fabric\"",
 					"-framework",
 					"\"FirebaseAnalytics\"",
 					"-framework",

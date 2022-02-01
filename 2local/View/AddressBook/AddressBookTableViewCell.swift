@@ -13,7 +13,7 @@ class AddressBookTableViewCell: UITableViewCell {
     @IBOutlet var removeBTN: UIButton!
     @IBOutlet var nameLabel: UILabel!
     @IBOutlet var walletNumberLabel: UILabel!
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

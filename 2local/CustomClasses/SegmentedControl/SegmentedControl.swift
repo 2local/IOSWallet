@@ -641,7 +641,7 @@ public extension SegmentedControl {
         }()
 
         let boxRect: CGRect = {
-            switch layoutPolicy  {
+            switch layoutPolicy {
             case .fixed:
                 let fullRect = CGRect(x: xPosition, y: 0, width: singleSegmentWidth(), height: frame.height)
                 return CGRect(x: fullRect.origin.x + selectionBoxEdgeInsets.left,

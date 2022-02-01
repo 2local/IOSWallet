@@ -11,12 +11,12 @@ import KeychainSwift
 
 class DataProvider: NSObject {
     static let shared = DataProvider()
-    
+
     var wallets: [Wallets] = []
     let keychain = KeychainSwift()
     var user: User?
     var exchangeRate: ExchangeRate?
-    var defaultEx : String?
+    var defaultEx: String?
     var orders = [Order]()
     var transfers = [Transfer]()
     var transactions = [Transfer]()
@@ -27,7 +27,6 @@ class DataProvider: NSObject {
     let stellarWalletNumber = Configuration.shared.stellarWalletNumber
     let etheriumWalletNumber = Configuration.shared.etheriumWalletNumber
     let bitcoinWalletNumber = Configuration.shared.bitcoinWalletNumber
-    
+
     var places = [Companies]()
 }
-

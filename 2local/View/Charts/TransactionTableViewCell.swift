@@ -17,12 +17,12 @@ class TransactionTableViewCell: UITableViewCell {
     @IBOutlet var costLabel: UILabel!
     @IBOutlet var amountLabel: UILabel!
     @IBOutlet var stateLabel: UILabel!
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
         topView.alpha = 0
         dotView.layer.cornerRadius = dotView.frame.width / 2
-        dotView.layer.borderColor = UIColor._linkWater.cgColor
+        dotView.layer.borderColor = UIColor.linkWater.cgColor
         dotView.layer.borderWidth = 1.5
     }
 

@@ -10,20 +10,20 @@ import UIKit
 import KVNProgress
 
 class DashboardVC: BaseVC {
-  
-  //MARK: - Outlets
+
+  // MARK: - Outlets
   @IBOutlet weak var tableView: UITableView!
   @IBOutlet weak var transactionButton: UIButton!
-  
-  //MARK: - Properties
+
+  // MARK: - Properties
   let months = Date().getLast12Month.0
   var transfers = [Transfer]()
   var transactionsChart = [TransactionChartModel]()
   var transactions = [TransactionHistoryModel]()
-  var maxIncome : Float?
-  var maxExpense : Float?
+  var maxIncome: Float?
+  var maxExpense: Float?
   var invisible = false
-  
+
   var wallets: [Wallets] = []
   var walletBalance: String = "0"
   var defaultSymbol: String = ""
@@ -31,16 +31,16 @@ class DashboardVC: BaseVC {
   var totalTokenWithSymbol: String = "0 2LC"
   var ethTransactionHistory: [TransactionHistoryModel] = []
   var userData: User?
-  
+
   var showInfo = false
   var infoText = ""
   let config = FBRemoteConfig.shared
-  
+
   enum SectionNames: CaseIterable {
     case info, balance, wallets, chart
   }
-  
-  //MARK: - View cycle
+
+  // MARK: - View cycle
   override func viewDidLoad() {
     super.viewDidLoad()
     setupView()
@@ -49,32 +49,32 @@ class DashboardVC: BaseVC {
     KVNProgress.show(withStatus: "", on: self.view)
     generateWalets()
   }
-  
+
   override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
   }
-  
+
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     generateWalets()
   }
-  
+
   deinit {
     NotificationCenter.default.removeObserver(self)
   }
-  
-  //MARK: - Functions
-  
+
+  // MARK: - Functions
+
   func updateCloudData() {
-    
+
     /// announcement message
     let announcementMessage = config.string(forKey: .announcementMessage)
     let showAnnouncementMessage = config.bool(forKey: .showAnnouncement)
-    
+
     /// maintenance mode status
     let maintenanceModeMessage = config.string(forKey: .maintenanceMessage)
     let maintenanceMode = config.bool(forKey: .maintenanceMode)
-    
+
     if maintenanceMode {
       showInfo = true
       infoText = maintenanceModeMessage
@@ -84,14 +84,14 @@ class DashboardVC: BaseVC {
     }
     tableView.reloadData()
   }
-  
+
   /// If balance == 0 and no wallet added, show a popup message to user
   private func checkEnableInstruction(_ balance: Double) {
-    
+
     /// Instruction status and message
     let enableInstruction = config.bool(forKey: .enableInstructionWhenNoWalletAddedAndBalanceIsZero)
     let enableInstructionMessage = config.string(forKey: .enableInstructionWhenNoWalletAddedAndBalanceIsZeroMessage)
-    
+
     if wallets.isEmpty,
        balance == 0,
        enableInstruction {
@@ -100,77 +100,76 @@ class DashboardVC: BaseVC {
       }
     }
   }
-  
+
   private func showAlert(_ title: String? = nil, message: String) {
     let alert = UIAlertController(title: title,
                                   message: message,
                                   preferredStyle: .alert)
-    
+
     let OKAction = UIAlertAction(title: "OK", style: .default)
     alert.addAction(OKAction)
     present(alert, animated: true)
   }
-  
-  
+
   fileprivate func setupView() {
     if UserDefaults.standard.bool(forKey: "invisible") {
       self.invisible = true
     } else {
       self.invisible = false
     }
-    
+
     if config.fetchComplete {
       updateCloudData()
     }
     config.loadingDoneCallback = updateCloudData
-    
+
     tableView.reloadData()
     setNavigation(title: "Total 2LC Balance", largeTitle: true)
-    
+
     settingsBarButtonItem()
   }
-  
+
   fileprivate func getWalletByPublicKey() {
     guard let userData = DataProvider.shared.user else { return }
     var wallets: [Wallets] = []
-    let tlc = Wallets(name: .TLocal,
+    let tlc = Wallets(name: .tLocal,
                       balance: "\(userData.balance2lc)",
-                      address: userData.wallet,
+                      address: userData.wallet ?? "",
                       mnemonic: "",
-                      displayName: Coins.TLocal.name())
+                      displayName: Coins.tLocal.name())
     wallets.append(tlc)
-    
-    let bnb = Wallets(name: .Binance,
+
+    let bnb = Wallets(name: .binance,
                       balance: "\(userData.balanceBnb)",
-                      address: userData.wallet,
+                      address: userData.wallet ?? "",
                       mnemonic: "",
-                      displayName: Coins.Binance.name())
+                      displayName: Coins.binance.name())
     wallets.append(bnb)
-    
+
     refreshView(wallets)
   }
-  
+
   func setupNotifications() {
     NotificationCenter.default.addObserver(self,
                                            selector: #selector(generateWalets),
                                            name: Notification.Name.wallet,
                                            object: nil)
-    
+
     NotificationCenter.default.addObserver(self,
                                            selector: #selector(generateWalets),
                                            name: Notification.Name.walletRemove,
                                            object: nil)
   }
-  
+
   func showTransfer(_ transfers: [Transfer]) {
     let months = Date().getLast12Month.1
-    
+
     for month in months {
       let transaction = TransactionChartModel()
       transaction.date = month.prefix(7).description
       transactionsChart.append(transaction)
     }
-    
+
     for month in transactionsChart {
       for transfer in transfers {
         if month.date == transfer.date?.prefix(7).description {
@@ -182,11 +181,11 @@ class DashboardVC: BaseVC {
         }
       }
     }
-    
+
     maxIncome = transactionsChart.map({$0.income}).max()
     maxExpense = transactionsChart.map({$0.expenses}).max()
   }
-  
+
   fileprivate func refreshView(_ wallets: [Wallets]) {
     walletQueue.async {
       self.getTotalFiat(wallets) { totalFiat in
@@ -195,7 +194,7 @@ class DashboardVC: BaseVC {
           self.tableView.reloadRows(at: self.indexPath(at: 0), with: .automatic)
         }
       }
-      
+
       self.get2localBalance(wallets) { tlcBalance in
         self.checkEnableInstruction(tlcBalance)
         self.totalTokenWithSymbol = "\(tlcBalance)".convertToPriceType() + " 2LC"
@@ -203,10 +202,10 @@ class DashboardVC: BaseVC {
           self.tableView.reloadRows(at: self.indexPath(at: 0), with: .automatic)
         }
       }
-      
+
       self.getTransactions(wallets) { transfers in
         self.transfers = transfers
-        
+
         DispatchQueue.main.async {
           self.tableView.reloadRows(at: self.indexPath(at: 2), with: .automatic)
         }
@@ -216,7 +215,7 @@ class DashboardVC: BaseVC {
       }
     }
   }
-  
+
   @objc func generateWalets() {
     wallets.removeAll()
     defaultSymbol = DataProvider.shared.exchangeRate?.defaultSym ?? "$"
@@ -228,34 +227,34 @@ class DashboardVC: BaseVC {
       getWalletByPublicKey()
     }
   }
-  
+
   func indexPath(at row: Int) -> [IndexPath] {
     return [IndexPath(row: row, section: 0)]
   }
-  
+
   fileprivate func settingsBarButtonItem() {
-    let settingButtonItem = createButtonItems("settings", colorIcon: ._707070, action: #selector(goToSettings))
+    let settingButtonItem = createButtonItems("settings", colorIcon: .color707070, action: #selector(goToSettings))
     navigationItem.rightBarButtonItem = settingButtonItem
   }
-  
+
   fileprivate func notificationBarButtonItem() {
-    let settingButtonItem = createButtonItems("notification", colorIcon: ._707070, action: #selector(goToNotification))
+    let settingButtonItem = createButtonItems("notification", colorIcon: .color707070, action: #selector(goToNotification))
     navigationItem.leftBarButtonItem = settingButtonItem
   }
-  
+
   @objc fileprivate func goToSettings() {
     let vc = UIStoryboard.settings.instantiate(viewController: SettingsViewController.self)
     let navc = TLNavigationController(rootViewController: vc)
     present(navc, animated: true)
   }
-  
+
   @objc fileprivate func goToNotification() {
     let vc = UIStoryboard.notification.instantiate(viewController: NotificationViewController.self)
     let navc = TLNavigationController(rootViewController: vc)
     present(navc, animated: true)
   }
-  
-  //MARK: - actions
+
+  // MARK: - actions
   @IBAction func goToTransaction(_ sender: Any) {
     let vc = UIStoryboard.dashboard.instantiate(viewController: TransactionsViewController.self)
     vc.initWith(self.transfers)
@@ -263,6 +262,5 @@ class DashboardVC: BaseVC {
       navigation.pushViewController(vc, animated: true)
     }
   }
-  
-  
+
 }

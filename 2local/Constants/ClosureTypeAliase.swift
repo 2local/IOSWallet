@@ -8,6 +8,5 @@
 
 import Foundation
 
-public typealias SimpleAction = (() -> ())?
-public typealias DataAction<T> = ((T?) -> ())?
-
+public typealias SimpleAction = (() -> Void)?
+public typealias DataAction<T> = ((T?) -> Void)?

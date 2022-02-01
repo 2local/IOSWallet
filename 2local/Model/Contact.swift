@@ -9,6 +9,6 @@
 import UIKit
 
 class Contact: Codable {
-    var name:String?
-    var walletNumber:String?
+    var name: String?
+    var walletNumber: String?
 }

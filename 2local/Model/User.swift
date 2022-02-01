@@ -40,8 +40,8 @@ class User: Codable {
     var balanceBnb: Double = 0
     var balance2lc: Double = 0
     var balanceLocked2lc: Double = 0
-    
-    enum CodingKeys : String , CodingKey {
+
+    enum CodingKeys: String, CodingKey {
         case id = "id"
         case name = "name"
         case userType = "user_type"
@@ -73,7 +73,7 @@ class User: Codable {
         case balance2lc = "balance_2lc"
         case balanceLocked2lc = "balance_locked_2lc"
     }
-    
+
 //    required init(from decoder: Decoder) throws {
 //        let container = try decoder.container(keyedBy: CodingKeys.self)
 //        

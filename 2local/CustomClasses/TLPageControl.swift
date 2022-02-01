@@ -10,7 +10,7 @@ import UIKit
 
 class TLPageControl: UIPageControl {
 
-    var borderColor: UIColor = UIColor._404040
+    var borderColor: UIColor = UIColor.color404040
 
     override var currentPage: Int {
         didSet {

@@ -8,20 +8,20 @@
 
 import UIKit
 
-class NotificationViewController: BaseVC,UITableViewDelegate,UITableViewDataSource {
-    
+class NotificationViewController: BaseVC, UITableViewDelegate, UITableViewDataSource {
+
     @IBOutlet var tableView: UITableView! {
         didSet {
             tableView.delegate = self
             tableView.dataSource = self
         }
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
     }
-    
+
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -43,20 +43,20 @@ class NotificationViewController: BaseVC,UITableViewDelegate,UITableViewDataSour
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch indexPath.row {
         case 0:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "loginCell") as! LoginNotificationTableViewCell
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "loginCell") as? LoginNotificationTableViewCell else { return UITableViewCell() }
             cell.selectionStyle = .none
             return cell
         case 1:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "recievedCell") as! RecievedNotificationTableViewCell
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "recievedCell") as? RecievedNotificationTableViewCell else { return UITableViewCell() }
             cell.selectionStyle = .none
             return cell
         case 2:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "sentCell") as! SentNotificationTableViewCell
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "sentCell") as? SentNotificationTableViewCell else { return UITableViewCell() }
             cell.selectionStyle = .none
             return cell
         default:
             return UITableViewCell()
         }
     }
-    
+
 }

@@ -12,20 +12,20 @@ class ExchangeRate: Codable {
     var bitcoin: ExchangeRateSubject?
     var ethereum: ExchangeRateSubject?
     var stellar: ExchangeRateSubject?
-    
+
     var usd: String?
     var eur: String?
     var defaultExR: String?
     var defaultSym: String?
-    
-    enum CodingKeys : String, CodingKey {
+
+    enum CodingKeys: String, CodingKey {
         case bitcoin = "bitcoin"
         case ethereum = "ethereum"
         case stellar = "stellar"
         case usd = "USD"
         case eur = "EUR"
     }
-    
+
 }
 
 class ExchangeRateSubject: Codable {

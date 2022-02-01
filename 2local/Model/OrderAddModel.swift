@@ -13,8 +13,8 @@ class AddOrderModel: Codable {
     var stellar: ExchangeRateSubject?
     var bitcoin: ExchangeRateSubject?
     var ethereum: ExchangeRateSubject?
-    
-    enum CodingKeys : String , CodingKey {
+
+    enum CodingKeys: String, CodingKey {
         case firstRecord = "0"
         case stellar, bitcoin, ethereum
     }

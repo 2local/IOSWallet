@@ -31,7 +31,7 @@ extension WalletDetailsVC {
                     self.allTransactions.append(result)
                 }
             }
-            
+
             self.transactionHistory = self.allTransactions
             DispatchQueue.main.async {
                 self.tableView.reloadData()

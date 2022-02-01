@@ -14,38 +14,38 @@ enum WalletAction {
 
 class PopoverMenuVC: BaseVC {
 
-    //MARK: - Outlets
+    // MARK: - Outlets
     @IBOutlet weak var renameButton: UIButton!
     @IBOutlet weak var removeButton: UIButton!
-    
-    //MARK: - Properties
-    var delegate: PopupActions? = nil
+
+    // MARK: - Properties
+    var delegate: PopupActions?
     var enableRemoveButton = true
-    
-    //MARK: - View cycle
+
+    // MARK: - View cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
     }
-    
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
     }
-    
-    //MARK: - Functions
+
+    // MARK: - Functions
     fileprivate func setupView() {
         ([renameButton, removeButton]).forEach { (button) in
             button?.titleEdgeInsets.left = 8
         }
         removeButton.isEnabled = enableRemoveButton
-        let color = enableRemoveButton ? UIColor._bittersweet : UIColor._FE6C6C
+        let color = enableRemoveButton ? UIColor.bittersweet : UIColor.FE6C6C
         removeButton.setTitleColor(color, for: .normal)
     }
-    
+
     @IBAction func renameTapped(_ sender: UIButton) {
         if let delegate = self.delegate {
             dismiss(animated: false) {
@@ -53,7 +53,7 @@ class PopoverMenuVC: BaseVC {
             }
         }
     }
-    
+
     @IBAction func removeTapped(_ sender: UIButton) {
         if let delegate = self.delegate {
             dismiss(animated: false) {
@@ -61,5 +61,5 @@ class PopoverMenuVC: BaseVC {
             }
         }
     }
-    
+
 }

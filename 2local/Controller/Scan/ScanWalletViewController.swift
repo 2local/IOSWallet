@@ -9,13 +9,13 @@
 import UIKit
 
 protocol ScanWalletNumberDelegate: AnyObject {
-    func walletDidScan(str:String?)
+    func walletDidScan(str: String?)
 }
 
 class ScanWalletViewController: ScanViewController {
-    
-    weak var delegate : ScanWalletNumberDelegate?
-    
+
+    weak var delegate: ScanWalletNumberDelegate?
+
     override func qrScanningSucceededWithCode(_ str: String?) {
         self.dismiss(animated: true) {
             self.delegate?.walletDidScan(str: str)

@@ -10,6 +10,6 @@ import UIKit
 
 extension UITableView {
     func dequeue<T: UITableViewCell>(_ cell: T.Type) -> T {
-        self.dequeueReusableCell(withIdentifier: String(describing: cell)) as! T
+        (self.dequeueReusableCell(withIdentifier: String(describing: cell)) as? T)!
     }
 }

@@ -10,7 +10,7 @@ import UIKit
 import KVNProgress
 
 class Buy2LCReceiptViewController: BaseVC {
- 
+
     @IBOutlet var qrCode: UIImageView! {
         didSet {
             qrCode.setCornerRadius(5)
@@ -36,12 +36,12 @@ class Buy2LCReceiptViewController: BaseVC {
     }
     @IBOutlet var copyAmountBTN: TLButton! {
         didSet {
-            copyAmountBTN.layer.borderColor = UIColor._flamenco.cgColor
+            copyAmountBTN.layer.borderColor = UIColor.flamenco.cgColor
             copyAmountBTN.layer.borderWidth = 1
             copyAmountBTN.layer.cornerRadius = 8
         }
     }
-    
+
     @IBOutlet var coinWalletTitle: UILabel! {
         didSet {
             coinWalletTitle.text = "\(type) wallet address"
@@ -53,19 +53,19 @@ class Buy2LCReceiptViewController: BaseVC {
     var walletNumber = ""
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
     }
-    
+
     @IBAction func copyAddress(_ sender: Any) {
         UIPasteboard.general.string = self.btcWalletNumberLabel.text
         KVNProgress.showSuccess(withStatus: "Wallet number copied to clipboard")
     }
-    
+
     @IBAction func copyAmount(_ sender: Any) {
         UIPasteboard.general.string = String(format: "%.6f", ceil(Double(amount)! * 1000000.0)/1000000.0)
         KVNProgress.showSuccess(withStatus: "Wallet number copied to clipboard")
     }
-    
+
     @IBAction func closeLabel(_ sender: Any) {
         self.performSegue(withIdentifier: "goHome", sender: nil)
     }

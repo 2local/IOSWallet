@@ -12,7 +12,7 @@ class WebViewViewController: BaseVC {
 
     @IBOutlet var webView: WKWebView!
     var url = "https://2local.io"
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         if url.hasPrefix("http") {

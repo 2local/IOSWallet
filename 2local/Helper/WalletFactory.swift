@@ -9,18 +9,18 @@
 import Foundation
 
 struct WalletFactory {
-    static func getWallets(wallet: Wallets) -> WalletProtocol {
-        switch wallet.name {
-        case .TLocal:
-            return TLocalWallet(wallet: wallet)
-        case .Ethereum:
-            return EthereumWallet(wallet: wallet)
-        case .Bitcoin:
-             return BitcoinWallet(wallet: wallet)
-        case .Stellar:
-            return StellarWallet(wallet: wallet)
-        case .Binance:
-            return BinanceWallet(wallet: wallet)
-        }
+  static func getWallets(wallet: Wallets) -> WalletProtocol {
+    switch wallet.name {
+    case .tLocal:
+      return TLocalWallet(wallet: wallet)
+    case .ethereum:
+      return EthereumWallet(wallet: wallet)
+    case .bitcoin:
+      return BitcoinWallet(wallet: wallet)
+    case .stellar:
+      return StellarWallet(wallet: wallet)
+    case .binance:
+      return BinanceWallet(wallet: wallet)
     }
+  }
 }

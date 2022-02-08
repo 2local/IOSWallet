@@ -38,7 +38,8 @@ class DeletionViewController: BaseVC {
   // MARK: - Functions
 
   fileprivate func setupView() {
-    titleLabel.text = "Delete Account"
+    let user = DataProvider.shared.user?.name ?? "your account"
+    titleLabel.text = "This will delete \(user)"
     titleLabel.textColor = .color707070
     titleLabel.font = .TLFont(weight: .bold,
                               size: 20,
@@ -46,12 +47,14 @@ class DeletionViewController: BaseVC {
 
     descriptionLabel.text = "After delete account"
     descriptionLabel.textColor = .color919191
+    descriptionLabel.numberOfLines = 0
     descriptionLabel.font = .TLFont(weight: .regular,
                                     size: 14,
                                     style: .body)
-    
+
     cancelButton.setTitle("Cancel", for: .normal)
     cancelButton.backgroundColor = .color575757
+    cancelButton.setTitleColor(.white, for: .normal)
     cancelButton.setCornerRadius(5)
 
     deleteAccountButton.setTitle("Delete Account", for: .normal)
@@ -61,6 +64,7 @@ class DeletionViewController: BaseVC {
 
     imageView.image = UIImage(named: "")
     imageView.contentMode = .scaleAspectFill
+    imageView.isHidden = true
   }
 
   private func deleteAccount() {
@@ -68,8 +72,8 @@ class DeletionViewController: BaseVC {
   }
 
   private func showDeleteAccountAlert() {
-    let title = ""
-    let message = ""
+    let title = "Password"
+    let message = "Enter password to delete account"
     let alertViewController = UIAlertController(title: title,
                                                 message: message,
                                                 preferredStyle: .alert)
@@ -77,8 +81,7 @@ class DeletionViewController: BaseVC {
     let cancelAction = UIAlertAction(title: "Cancel",
                                      style: .cancel)
 
-    let user = DataProvider.shared.user?.name ?? ""
-    let deleteAction = UIAlertAction(title: "Delete account \(user)",
+    let deleteAction = UIAlertAction(title: "Delete account",
                                      style: .destructive) { [weak self] _ in
       guard let self = self else { return }
       self.deleteAccount()

@@ -2971,63 +2971,74 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="32" translatesAutoresizingMaskIntoConstraints="NO" id="lf2-nt-XTx">
-                                <rect key="frame" x="76" y="282" width="262" height="332"/>
+                                <rect key="frame" x="110.5" y="76" width="193" height="396"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ioH-GD-KGa">
-                                        <rect key="frame" x="56" y="0.0" width="150" height="150"/>
+                                        <rect key="frame" x="21.5" y="0.0" width="150" height="150"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="150" id="9UM-9q-pId"/>
                                             <constraint firstAttribute="height" constant="150" id="b3N-qd-tT9"/>
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Delete" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kYL-oz-N9r">
-                                        <rect key="frame" x="106.5" y="182" width="49.5" height="20.5"/>
+                                        <rect key="frame" x="72" y="182" width="49.5" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="After delete your account" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vpu-hh-KuG">
-                                        <rect key="frame" x="34.5" y="234.5" width="193" height="20.5"/>
+                                        <rect key="frame" x="0.0" y="234.5" width="193" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="ZLo-sS-f55">
-                                        <rect key="frame" x="0.0" y="287" width="262" height="45"/>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AOG-5A-dSF">
+                                        <rect key="frame" x="35" y="287" width="123" height="109"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cQs-2C-DVj">
-                                                <rect key="frame" x="0.0" y="0.0" width="123" height="45"/>
+                                            <stackView opaque="NO" contentMode="scaleToFill" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="ZLo-sS-f55">
+                                                <rect key="frame" x="0.0" y="64" width="123" height="45"/>
+                                                <subviews>
+                                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cQs-2C-DVj">
+                                                        <rect key="frame" x="0.0" y="0.0" width="0.0" height="45"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="45" id="nVZ-JL-XbC"/>
+                                                        </constraints>
+                                                        <state key="normal" title="Button"/>
+                                                        <buttonConfiguration key="configuration" style="plain" title="Cancel"/>
+                                                        <connections>
+                                                            <action selector="cancelTapped:" destination="mxg-pH-nuh" eventType="touchUpInside" id="2J8-A5-ccy"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4yz-tF-iS0">
+                                                        <rect key="frame" x="0.0" y="0.0" width="123" height="45"/>
+                                                        <color key="tintColor" name="FE6C6C"/>
+                                                        <state key="normal" title="Button"/>
+                                                        <buttonConfiguration key="configuration" style="plain" title="Delete Account"/>
+                                                        <connections>
+                                                            <action selector="deleteAccountTapped:" destination="mxg-pH-nuh" eventType="touchUpInside" id="I52-F6-0Z0"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="45" id="nVZ-JL-XbC"/>
+                                                    <constraint firstItem="cQs-2C-DVj" firstAttribute="height" secondItem="4yz-tF-iS0" secondAttribute="height" id="VRu-3t-MgS"/>
                                                 </constraints>
-                                                <state key="normal" title="Button"/>
-                                                <buttonConfiguration key="configuration" style="plain" title="Cancel"/>
-                                                <connections>
-                                                    <action selector="cancelTapped:" destination="mxg-pH-nuh" eventType="touchUpInside" id="2J8-A5-ccy"/>
-                                                </connections>
-                                            </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4yz-tF-iS0">
-                                                <rect key="frame" x="139" y="0.0" width="123" height="45"/>
-                                                <color key="tintColor" name="FE6C6C"/>
-                                                <state key="normal" title="Button"/>
-                                                <buttonConfiguration key="configuration" style="plain" title="Delete Account"/>
-                                                <connections>
-                                                    <action selector="deleteAccountTapped:" destination="mxg-pH-nuh" eventType="touchUpInside" id="I52-F6-0Z0"/>
-                                                </connections>
-                                            </button>
+                                            </stackView>
                                         </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstItem="cQs-2C-DVj" firstAttribute="width" secondItem="4yz-tF-iS0" secondAttribute="width" id="Ecn-cT-NOk"/>
-                                            <constraint firstItem="cQs-2C-DVj" firstAttribute="height" secondItem="4yz-tF-iS0" secondAttribute="height" id="VRu-3t-MgS"/>
+                                            <constraint firstItem="ZLo-sS-f55" firstAttribute="leading" secondItem="AOG-5A-dSF" secondAttribute="leading" id="3B7-Ci-Cdh"/>
+                                            <constraint firstAttribute="bottom" secondItem="ZLo-sS-f55" secondAttribute="bottom" id="6rM-ay-gpG"/>
+                                            <constraint firstAttribute="trailing" secondItem="ZLo-sS-f55" secondAttribute="trailing" id="q7e-dY-pJ1"/>
+                                            <constraint firstItem="ZLo-sS-f55" firstAttribute="top" secondItem="AOG-5A-dSF" secondAttribute="top" constant="64" id="uAY-TS-jgn"/>
                                         </constraints>
-                                    </stackView>
+                                    </view>
                                 </subviews>
                             </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="QgA-xl-FPI"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="lf2-nt-XTx" firstAttribute="centerY" secondItem="58u-yn-PW3" secondAttribute="centerY" id="MgU-Q5-76V"/>
+                            <constraint firstItem="lf2-nt-XTx" firstAttribute="top" secondItem="QgA-xl-FPI" secondAttribute="top" constant="32" id="e9b-GI-YZ8"/>
                             <constraint firstItem="lf2-nt-XTx" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="QgA-xl-FPI" secondAttribute="leading" constant="32" id="gXY-KP-quP"/>
                             <constraint firstItem="lf2-nt-XTx" firstAttribute="centerX" secondItem="58u-yn-PW3" secondAttribute="centerX" id="ieP-3n-8ad"/>
                         </constraints>

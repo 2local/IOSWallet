@@ -10,6 +10,7 @@
 		03016D592750F80400CB4966 /* FirebaseRemoteConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03016D582750F80400CB4966 /* FirebaseRemoteConfig.swift */; };
 		03016D5D2751327900CB4966 /* InfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03016D5B2751327900CB4966 /* InfoTableViewCell.swift */; };
 		03016D5E2751327900CB4966 /* InfoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 03016D5C2751327900CB4966 /* InfoTableViewCell.xib */; };
+		0307341427B2BEE900D5FA4E /* DeletionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0307341327B2BEE900D5FA4E /* DeletionViewController.swift */; };
 		0307D3A126F9CFCD004497CC /* LAContext+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0307D3A026F9CFCD004497CC /* LAContext+Extension.swift */; };
 		03107B33266900CD008DC8B1 /* TransactionConfirmVC+Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03107B32266900CD008DC8B1 /* TransactionConfirmVC+Network.swift */; };
 		03128806261FAB2F006B0F95 /* CreateWalletVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03128805261FAB2F006B0F95 /* CreateWalletVC.swift */; };
@@ -226,6 +227,7 @@
 		03016D582750F80400CB4966 /* FirebaseRemoteConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseRemoteConfig.swift; sourceTree = "<group>"; };
 		03016D5B2751327900CB4966 /* InfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoTableViewCell.swift; sourceTree = "<group>"; };
 		03016D5C2751327900CB4966 /* InfoTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InfoTableViewCell.xib; sourceTree = "<group>"; };
+		0307341327B2BEE900D5FA4E /* DeletionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeletionViewController.swift; sourceTree = "<group>"; };
 		0307D3A026F9CFCD004497CC /* LAContext+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LAContext+Extension.swift"; sourceTree = "<group>"; };
 		03107B32266900CD008DC8B1 /* TransactionConfirmVC+Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TransactionConfirmVC+Network.swift"; sourceTree = "<group>"; };
 		03128805261FAB2F006B0F95 /* CreateWalletVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateWalletVC.swift; sourceTree = "<group>"; };
@@ -923,16 +925,17 @@
 		4F86873223C4A675008AF6D9 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
-				4F86873323C4A811008AF6D9 /* SettingsViewController.swift */,
-				4F318BC223C4D82E001DABA9 /* AccountInfoViewController.swift */,
-				4F318BC423C53599001DABA9 /* CurrencyViewController.swift */,
-				4F318BC623C55087001DABA9 /* AffiliateViewController.swift */,
-				4F318BC823C60A88001DABA9 /* AddressBook */,
 				4F9990D923C7B10D0096BE38 /* AboutViewController.swift */,
-				4F9990DB23C7B7930096BE38 /* WebViewViewController.swift */,
-				4F9990DD23C7BCAC0096BE38 /* ChangePassword */,
-				4FC24CCF23D7C53B009B81A3 /* TwoFAControlViewController.swift */,
+				4F318BC223C4D82E001DABA9 /* AccountInfoViewController.swift */,
 				4F3B449D253223C100734886 /* AddCompany */,
+				4F318BC823C60A88001DABA9 /* AddressBook */,
+				4F318BC623C55087001DABA9 /* AffiliateViewController.swift */,
+				4F9990DD23C7BCAC0096BE38 /* ChangePassword */,
+				4F318BC423C53599001DABA9 /* CurrencyViewController.swift */,
+				0307341327B2BEE900D5FA4E /* DeletionViewController.swift */,
+				4F86873323C4A811008AF6D9 /* SettingsViewController.swift */,
+				4FC24CCF23D7C53B009B81A3 /* TwoFAControlViewController.swift */,
+				4F9990DB23C7B7930096BE38 /* WebViewViewController.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -1658,6 +1661,7 @@
 				4F9961C523B96855009F6486 /* TLButton.swift in Sources */,
 				4F9961BE23B93A2F009F6486 /* OnBoardingViewController.swift in Sources */,
 				037EE0BB26319FBF00A81AC1 /* TransactionHistoryModel.swift in Sources */,
+				0307341427B2BEE900D5FA4E /* DeletionViewController.swift in Sources */,
 				4F58139223BAB8A400672C8D /* MarketplaceVC.swift in Sources */,
 				03394B552625D2BE009098E0 /* UserDefaultsKey.swift in Sources */,
 				A501CB81260A08DA0050AF49 /* UICollectionView+DequeueCell.swift in Sources */,

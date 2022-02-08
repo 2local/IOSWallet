@@ -64,7 +64,8 @@ class SettingsViewController: BaseVC {
 
   fileprivate func showLogoutAlert() {
     let title = ""
-    let message = "Log out from your account?"
+    let user = DataProvider.shared.user?.name ?? "your account"
+    let message = "Log out of \(user)?"
     let alert = UIAlertController(title: title,
                                   message: message,
                                   preferredStyle: .alert)
@@ -131,10 +132,7 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
   }
 
   func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-    if section == 0 {
-      return 0
-    }
-    return 60
+    60
   }
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     switch section {
@@ -276,14 +274,14 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
       KVNProgress.showError(withStatus: "You can only change the 2-Factor Authentication status from the website")
     } else {
       KVNProgress.showError(withStatus: "Password setting is temporarily unavailable")
-      //                    if DataProvider.shared.user != nil {
-      //                        vc = UIStoryboard.settings.instantiate(viewController: ChangePasswordViewController.self)
-      //                        if let navigation = navigationController {
-      //                            navigation.pushViewController(vc, animated: true)
-      //                        }
-      //                    } else {
-      //                        showLoginView(self)
-      //                    }
+//      if DataProvider.shared.user != nil {
+//        viewController = UIStoryboard.settings.instantiate(viewController: ChangePasswordViewController.self)
+//        if let navigation = navigationController {
+//          navigation.pushViewController(vc, animated: true)
+//        }
+//      } else {
+//        showLoginView(self)
+//      }
     }
   }
 
@@ -303,7 +301,10 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
   fileprivate func didSelectDeletionSection(at row: Int) {
     switch row {
     case 0:
-      break // TODO: show delete account view
+      let viewController = UIStoryboard.settings.instantiate(viewController: DeletionViewController.self)
+      if let navigation = navigationController {
+        navigation.pushViewController(viewController, animated: true)
+      }
     default: break
     }
   }

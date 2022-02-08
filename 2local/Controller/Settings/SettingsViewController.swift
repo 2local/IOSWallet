@@ -117,11 +117,10 @@ class SettingsViewController: BaseVC {
 extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
 
   func numberOfSections(in tableView: UITableView) -> Int {
-    return sectionTitles.count
+    sectionTitles.count
   }
 
   func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-
     if let headerView = Bundle.main.loadNibNamed("SettingsSectionHeader",
                                                  owner: self,
                                                  options: nil)?.first as? SettingsSectionHeaderView {
@@ -139,93 +138,102 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
   }
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     switch section {
-    case 0:
-      return firstSectionTitles.count
-    case 1:
-      return secondSectionTitles.count
-    case 2:
-      return thirdSectionTitles.count
-    case 3:
-      return forthSectionTitles.count
-    default:
-      return 0
+    case 0: return firstSectionTitles.count
+    case 1: return secondSectionTitles.count
+    case 2: return thirdSectionTitles.count
+    case 3: return forthSectionTitles.count
+    default: return 0
     }
   }
 
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-    return 58
+    58
   }
 
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as? SettingsTableViewCell
     else { return UITableViewCell() }
-    cell.selectionStyle = .none
-    let row = indexPath.row
-    switch indexPath.section {
-    case 0:
-      cell.titleLabel.text = firstSectionTitles[row]
-      cell.iconIMG.image = firstSectionIcons[row]
-      if row == 2 {
-        cell.descLabel.alpha = 1
-        cell.descLabel.text = "USD"// DataProvider.shared.defaultEx
-        cell.descLabel.textColor = .white
-      } else {
-        cell.descLabel.alpha = 0
-      }
-    case 1:
-      cell.titleLabel.text = secondSectionTitles[row]
-      cell.iconIMG.image = secondSectionIcons[row]
-      if row == 0 {
-        cell.descLabel.alpha = 1
-        cell.descLabel.text = "OFF"
-        cell.descLabel.textColor = .white
-        if let user = DataProvider.shared.user, (user.twofaStatus ?? false == false) {
-          cell.descLabel.text = "OFF"
-        } else if let user = DataProvider.shared.user, (user.twofaStatus ?? false == true) {
-          cell.descLabel.text = "ON"
-        } else {
-          cell.descLabel.text = "ON"
-        }
 
-      } else {
-        cell.descLabel.alpha = 0
-        //                    cell.titleLabel.textColor = ._solitude
-      }
-    case 2:
-      cell.titleLabel.text = thirdSectionTitles[row]
-      cell.iconIMG.image = thirdSectionIcons[row]
-      cell.descLabel.alpha = 0
-    case 3:
-      cell.titleLabel.text = forthSectionTitles[row]
-      cell.iconIMG.image = forthSectionIcons[row].tint(with: .color707070)
-      cell.descLabel.alpha = 0
-    default: return cell
-    }
+    cell.selectionStyle = .none
+
+    let row = indexPath.row
+
     if row == tableView.numberOfRows(inSection: indexPath.section) - 1 {
       cell.footerView.alpha = 0
     } else {
       cell.footerView.alpha = 1
     }
 
-    return cell
+    switch indexPath.section {
+    case 0: return cellForRowAtAccountSection(at: row, cell: cell)
+    case 1: return cellForRowAtSecuritySection(at: row, cell: cell)
+    case 2: return cellForRowAtMoreSection(at: row, cell: cell)
+    case 3: return cellForRowAtDeletionSection(at: row, cell: cell)
+    default: return cell
+    }
+  }
 
+  /// Implement cell for row at index
+  func cellForRowAtAccountSection(at row: Int, cell: SettingsTableViewCell) -> SettingsTableViewCell {
+    cell.titleLabel.text = firstSectionTitles[row]
+    cell.iconIMG.image = firstSectionIcons[row]
+    if row == 2 {
+      cell.descLabel.alpha = 1
+      cell.descLabel.text = "USD" // DataProvider.shared.defaultEx
+      cell.descLabel.textColor = .white
+    } else {
+      cell.descLabel.alpha = 0
+    }
+    return cell
+  }
+
+  func cellForRowAtSecuritySection(at row: Int, cell: SettingsTableViewCell) -> SettingsTableViewCell {
+    cell.titleLabel.text = secondSectionTitles[row]
+    cell.iconIMG.image = secondSectionIcons[row]
+    if row == 0 {
+      cell.descLabel.alpha = 1
+      cell.descLabel.text = "OFF"
+      cell.descLabel.textColor = .white
+      if let user = DataProvider.shared.user, (user.twofaStatus ?? false == false) {
+        cell.descLabel.text = "OFF"
+      } else if let user = DataProvider.shared.user, (user.twofaStatus ?? false == true) {
+        cell.descLabel.text = "ON"
+      } else {
+        cell.descLabel.text = "ON"
+      }
+
+    } else {
+      cell.descLabel.alpha = 0
+    }
+    return cell
+  }
+
+  func cellForRowAtMoreSection(at row: Int, cell: SettingsTableViewCell) -> SettingsTableViewCell {
+    cell.titleLabel.text = thirdSectionTitles[row]
+    cell.iconIMG.image = thirdSectionIcons[row]
+    cell.descLabel.alpha = 0
+    return cell
+  }
+
+  func cellForRowAtDeletionSection(at row: Int, cell: SettingsTableViewCell) -> SettingsTableViewCell {
+    cell.titleLabel.text = forthSectionTitles[row]
+    cell.iconIMG.image = forthSectionIcons[row].tint(with: .solitude)
+    cell.descLabel.alpha = 0
+    return cell
   }
 
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     let row = indexPath.row
     switch indexPath.section {
-    case 0:
-      didSelectAccountSection(at: row)
-    case 1:
-      didSelectSecuritySection(at: row)
-    case 2:
-      didSelectMoreSection(at: row)
-    case 3:
-      didSelectDeletionSection(at: row)
+    case 0: didSelectAccountSection(at: row)
+    case 1: didSelectSecuritySection(at: row)
+    case 2: didSelectMoreSection(at: row)
+    case 3: didSelectDeletionSection(at: row)
     default: break
     }
   }
 
+  /// implementation did select row at index functions
   fileprivate func didSelectAccountSection(at row: Int) {
     var viewController: UIViewController!
     switch row {

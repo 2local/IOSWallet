@@ -48,6 +48,7 @@
 		036D024A26AABDDF001E861E /* Web3Service+ETH.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036D024926AABDDF001E861E /* Web3Service+ETH.swift */; };
 		036D024D26AABE09001E861E /* Web3Service+2LC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036D024C26AABE09001E861E /* Web3Service+2LC.swift */; };
 		036D025126AABE2D001E861E /* Web3Service+BNB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036D025026AABE2D001E861E /* Web3Service+BNB.swift */; };
+		036E972E27B3BE6D007BD672 /* DeletionConfirmationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036E972D27B3BE6D007BD672 /* DeletionConfirmationViewController.swift */; };
 		037EE0B4263198AA00A81AC1 /* TransactionHistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 037EE0B2263198AA00A81AC1 /* TransactionHistoryTableViewCell.swift */; };
 		037EE0B5263198AA00A81AC1 /* TransactionHistoryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 037EE0B3263198AA00A81AC1 /* TransactionHistoryTableViewCell.xib */; };
 		037EE0B826319CCD00A81AC1 /* TransactionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 037EE0B726319CCD00A81AC1 /* TransactionType.swift */; };
@@ -265,6 +266,7 @@
 		036D024926AABDDF001E861E /* Web3Service+ETH.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Web3Service+ETH.swift"; sourceTree = "<group>"; };
 		036D024C26AABE09001E861E /* Web3Service+2LC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Web3Service+2LC.swift"; sourceTree = "<group>"; };
 		036D025026AABE2D001E861E /* Web3Service+BNB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Web3Service+BNB.swift"; sourceTree = "<group>"; };
+		036E972D27B3BE6D007BD672 /* DeletionConfirmationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeletionConfirmationViewController.swift; sourceTree = "<group>"; };
 		037EE0B2263198AA00A81AC1 /* TransactionHistoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionHistoryTableViewCell.swift; sourceTree = "<group>"; };
 		037EE0B3263198AA00A81AC1 /* TransactionHistoryTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TransactionHistoryTableViewCell.xib; sourceTree = "<group>"; };
 		037EE0B726319CCD00A81AC1 /* TransactionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionType.swift; sourceTree = "<group>"; };
@@ -936,6 +938,7 @@
 				4F86873323C4A811008AF6D9 /* SettingsViewController.swift */,
 				4FC24CCF23D7C53B009B81A3 /* TwoFAControlViewController.swift */,
 				4F9990DB23C7B7930096BE38 /* WebViewViewController.swift */,
+				036E972D27B3BE6D007BD672 /* DeletionConfirmationViewController.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -1718,6 +1721,7 @@
 				4F9990D623C693460096BE38 /* AddContactViewController.swift in Sources */,
 				A57C66A9261C36B500FF1240 /* CustomNibView.swift in Sources */,
 				A5D6BB492618DB7D00F7B6B5 /* BaseVC.swift in Sources */,
+				036E972E27B3BE6D007BD672 /* DeletionConfirmationViewController.swift in Sources */,
 				4F4988F823B7D7010015B2B8 /* DataProvider.swift in Sources */,
 				4F9990CF23C60F920096BE38 /* AddressBookTableViewCell.swift in Sources */,
 				031B9D212663A00E0060A7DA /* Date+String.swift in Sources */,

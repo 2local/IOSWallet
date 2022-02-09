@@ -14,9 +14,7 @@ class DeletionViewController: BaseVC {
 
   @IBOutlet weak var titleLabel: UILabel!
   @IBOutlet weak var descriptionLabel: UILabel!
-  @IBOutlet weak var cancelButton: UIButton!
   @IBOutlet weak var deleteAccountButton: UIButton!
-  @IBOutlet weak var imageView: UIImageView!
 
   // MARK: - Properties
 
@@ -52,56 +50,21 @@ class DeletionViewController: BaseVC {
                                     size: 14,
                                     style: .body)
 
-    cancelButton.setTitle("Cancel", for: .normal)
-    cancelButton.backgroundColor = .color575757
-    cancelButton.setTitleColor(.white, for: .normal)
-    cancelButton.setCornerRadius(5)
-
     deleteAccountButton.setTitle("Delete Account", for: .normal)
     deleteAccountButton.setTitleColor(.white, for: .normal)
     deleteAccountButton.backgroundColor = .FE6C6C
     deleteAccountButton.setCornerRadius(5)
 
-    imageView.image = UIImage(named: "")
-    imageView.contentMode = .scaleAspectFill
-    imageView.isHidden = true
-  }
-
-  private func deleteAccount() {
-    // TODO: CALL DELETE ACCOUNT API
-  }
-
-  private func showDeleteAccountAlert() {
-    let title = "Password"
-    let message = "Enter password to delete account"
-    let alertViewController = UIAlertController(title: title,
-                                                message: message,
-                                                preferredStyle: .alert)
-
-    let cancelAction = UIAlertAction(title: "Cancel",
-                                     style: .cancel)
-
-    let deleteAction = UIAlertAction(title: "Delete account",
-                                     style: .destructive) { [weak self] _ in
-      guard let self = self else { return }
-      self.deleteAccount()
-    }
-
-    alertViewController.addAction(cancelAction)
-    alertViewController.addAction(deleteAction)
-
-    present(alertViewController, animated: true)
+    setNavigation(title: "Delete your account",
+                  largeTitle: true)
   }
 
   // MARK: - Actions
 
   @IBAction func deleteAccountTapped(_ sender: UIButton) {
-    showDeleteAccountAlert()
-  }
-
-  @IBAction func cancelTapped(_ sender: UIButton) {
+    let viewController = UIStoryboard.settings.instantiate(viewController: DeletionConfirmationViewController.self)
     if let navigation = navigationController {
-      navigation.popViewController(animated: true)
+      navigation.pushViewController(viewController, animated: true)
     }
   }
 }
